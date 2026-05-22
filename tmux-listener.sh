@@ -13,7 +13,7 @@ Usage: $(basename "$0") [OPTIONS] <port>
 Options:
   -p, --port <port>       Port to listen on
   --logdir <dir>          Log directory (default: ~/tmuxer-logs)
-  --init-cmds <cmds>      Semicolon-separated commands sent on connect
+  --init-cmds <cmds>      Semicolon-separated commands mapped to F5 in each window
                           (default: id;uname -a;w;netstat -tulip;ip a;arp -a;ip r;ps ax)
                           Pass empty string to disable: --init-cmds ""
 
@@ -80,20 +80,15 @@ if [[ "$MODE" == "handler" ]]; then
     touch "$LOGFILE"
   fi
 
+  INIT_DISPLAY=$(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')
+  F5_HINT=""
+  [[ -n "$INIT_CMDS" ]] && F5_HINT="; echo '[F5] autorun: $INIT_DISPLAY'"
+
   WIN_ID=$(tmux new-window -P -F "#{window_id}" -n "$REMOTE_IP" \
-    "echo '[*] connection from $REMOTE_IP'; trap 'rm -f $IN $OUT' EXIT; cat <$IN & cat >$OUT; wait")
+    "echo '[*] connection from $REMOTE_IP'$F5_HINT; trap 'rm -f $IN $OUT' EXIT; cat <$IN & cat >$OUT; wait")
 
   sleep 0.1
   NEW_PANE_TTY=$(tmux display-message -p -t "$WIN_ID" "#{pane_tty}")
-
-  # send init commands to remote shell stdin
-  if [[ -n "$INIT_CMDS" ]]; then
-    while IFS= read -r cmd; do
-      [[ -z "$cmd" ]] && continue
-      printf '%s\n' "$cmd"
-      [[ -n "$LOGFILE" ]] && printf '%s INIT:   %s\n' "$(date '+%H:%M:%S')" "$cmd" >>"$LOGFILE"
-    done <<< "$INIT_CMDS"
-  fi
 
   # remote -> log + tmux pane
   if [[ -n "$LOGFILE" ]]; then
@@ -132,11 +127,26 @@ export LISTENER_TTY=$(tty)
 export LOGDIR
 export INIT_CMDS
 
+# ── F5 keybinding ─────────────────────────────────────────────────────────────
+if [[ -n "$INIT_CMDS" ]]; then
+  INIT_SCRIPT=$(mktemp /tmp/tmuxer_f5_XXXXXX)
+  {
+    printf '#!/usr/bin/env bash\n'
+    while IFS= read -r cmd; do
+      [[ -z "$cmd" ]] && continue
+      printf 'tmux send-keys %q Enter\nsleep 0.3\n' "$cmd"
+    done <<< "$INIT_CMDS"
+  } > "$INIT_SCRIPT"
+  chmod +x "$INIT_SCRIPT"
+  tmux bind-key -n F5 run-shell "$INIT_SCRIPT"
+  trap 'rm -f "$INIT_SCRIPT"; tmux unbind-key -n F5 2>/dev/null' EXIT
+fi
+
 SELF="$(
   cd "$(dirname "$0")"
   pwd
 )/$(basename "$0")"
 echo "[*] Listening on :$PORT"
 [[ -n "$LOGDIR" ]] && echo "[*] Logging to $LOGDIR"
-[[ -n "$INIT_CMDS" ]] && echo "[*] Init cmds: $(tr '\n' ';' <<< "$INIT_CMDS" | sed 's/;$//')"
+[[ -n "$INIT_CMDS" ]] && echo "[*] F5 autorun: $(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')"
 socat TCP4-LISTEN:${PORT},reuseaddr,fork EXEC:"$SELF handler $LOGDIR",nofork
