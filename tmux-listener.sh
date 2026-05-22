@@ -59,10 +59,22 @@ done
 
 [[ -z "$PORT" ]] && [[ "$MODE" != "handler" ]] && { echo "error: port required"; usage; }
 
-# ── auto-start tmux if not already inside ────────────────────────────────────
-[[ -z "$TMUX" ]] && [[ "$MODE" != "handler" ]] && {
-  exec tmux new-session -- "$0" "${ORIG_ARGS[@]}"
-}
+# ── tmux enforcement ─────────────────────────────────────────────────────────
+if [[ "$MODE" != "handler" ]]; then
+  if [[ -n "$TMUX" ]] && [[ -z "$TMUXER_OWNED_SESSION" ]]; then
+    echo "error: refusing to run inside an existing tmux session"
+    echo "       run from a plain terminal instead"
+    exit 1
+  fi
+  if [[ -z "$TMUX" ]]; then
+    export TMUXER_OWNED_SESSION=1
+    exec tmux new-session -- "$0" "${ORIG_ARGS[@]}"
+  fi
+  # inside our own freshly created session — apply settings
+  tmux set-option -g history-limit 100000
+  tmux set-option -g mouse on
+  tmux set-window-option -g mode-keys vi
+fi
 
 # ── handler mode (invoked by socat) ──────────────────────────────────────────
 if [[ "$MODE" == "handler" ]]; then
@@ -146,6 +158,14 @@ SELF="$(
   cd "$(dirname "$0")"
   pwd
 )/$(basename "$0")"
+cat <<'HELP'
+┌─ tmux tips ────────────────────────────────────────────────────────────────┐
+│  Mouse     scroll to enter copy mode · click to focus pane                 │
+│  Vi keys   in copy mode: hjkl move · Space start sel · Enter copy · q quit │
+│  Paste     Ctrl-b ]                                                         │
+│  Windows   Ctrl-b c new · Ctrl-b n/p next/prev · Ctrl-b & kill             │
+└────────────────────────────────────────────────────────────────────────────┘
+HELP
 echo "[*] Listening on :$PORT"
 [[ -n "$LOGDIR" ]] && echo "[*] Logging to $LOGDIR"
 [[ -n "$INIT_CMDS" ]] && echo "[*] F5 autorun: $(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')"
