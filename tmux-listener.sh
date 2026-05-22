@@ -74,6 +74,9 @@ if [[ "$MODE" != "handler" ]]; then
   tmux set-option -g history-limit 100000
   tmux set-option -g mouse on
   tmux set-window-option -g mode-keys vi
+  tmux set-option -g monitor-activity on
+  tmux set-option -g visual-activity off
+  tmux set-option -g window-status-activity-style 'fg=black,bg=yellow,bold'
 fi
 
 # ── handler mode (invoked by socat) ──────────────────────────────────────────
@@ -164,6 +167,7 @@ cat <<'HELP'
 │  Vi keys   in copy mode: hjkl move · Space start sel · Enter copy · q quit │
 │  Paste     Ctrl-b ]                                                         │
 │  Windows   Ctrl-b c new · Ctrl-b n/p next/prev · Ctrl-b & kill             │
+│  Activity  inactive windows turn yellow in the status bar on new output     │
 └────────────────────────────────────────────────────────────────────────────┘
 HELP
 echo "[*] Listening on :$PORT"
