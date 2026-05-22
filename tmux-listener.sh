@@ -3,7 +3,7 @@
 # ── parse args ────────────────────────────────────────────────────────────────
 PORT=""
 LOGDIR="$HOME/tmuxer-logs"
-INIT_CMDS=$'id\nip a\nw\nps ax\nss -tulip'
+INIT_CMDS=$'id\nuname -a\nw\nnetstat -tulip\nip a\narp -a\nip r\nps ax'
 ORIG_ARGS=("$@")
 
 usage() {
@@ -14,7 +14,7 @@ Options:
   -p, --port <port>       Port to listen on
   --logdir <dir>          Log directory (default: ~/tmuxer-logs)
   --init-cmds <cmds>      Semicolon-separated commands sent on connect
-                          (default: id;ip a;w;ps ax;ss -tulip)
+                          (default: id;uname -a;w;netstat -tulip;ip a;arp -a;ip r;ps ax)
                           Pass empty string to disable: --init-cmds ""
 
 Examples:
