@@ -1,13 +1,37 @@
 #!/usr/bin/env bash
 
 # ── parse args ────────────────────────────────────────────────────────────────
-PORT=4444
+PORT=""
 LOGDIR="$HOME/tmuxer-logs"
 INIT_CMDS=$'id\nip a\nw\nps ax\nss -tulip'
 ORIG_ARGS=("$@")
 
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS] <port>
+
+Options:
+  -p, --port <port>       Port to listen on
+  --logdir <dir>          Log directory (default: ~/tmuxer-logs)
+  --init-cmds <cmds>      Semicolon-separated commands sent on connect
+                          (default: id;ip a;w;ps ax;ss -tulip)
+                          Pass empty string to disable: --init-cmds ""
+
+Examples:
+  $(basename "$0") 4444
+  $(basename "$0") --port 4444 --logdir /tmp/logs
+  $(basename "$0") 4444 --init-cmds "id;uname -a;hostname"
+EOF
+  exit 0
+}
+
+[[ $# -eq 0 ]] && usage
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
+  -h | --help)
+    usage
+    ;;
   handler)
     MODE=handler
     shift
@@ -32,6 +56,8 @@ while [[ $# -gt 0 ]]; do
     ;;
   esac
 done
+
+[[ -z "$PORT" ]] && [[ "$MODE" != "handler" ]] && { echo "error: port required"; usage; }
 
 # ── auto-start tmux if not already inside ────────────────────────────────────
 [[ -z "$TMUX" ]] && [[ "$MODE" != "handler" ]] && {
