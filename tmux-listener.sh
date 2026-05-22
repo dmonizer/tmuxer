@@ -169,6 +169,12 @@ cat <<'HELP'
 │  Activity  inactive windows turn yellow in the status bar on new output     │
 └────────────────────────────────────────────────────────────────────────────┘
 HELP
+if ss -tlnH "sport = :$PORT" 2>/dev/null | grep -q .; then
+  echo "error: port $PORT is already in use"
+  ss -tlnpH "sport = :$PORT" 2>/dev/null | awk '{print "       " $0}'
+  exit 1
+fi
+
 echo "[*] Listening on :$PORT"
 [[ -n "$LOGDIR" ]] && echo "[*] Logging to $LOGDIR"
 [[ -n "$INIT_CMDS" ]] && echo "[*] F5 autorun: $(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')"
