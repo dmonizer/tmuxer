@@ -75,7 +75,7 @@ bind_keys() {
 │  Activity  inactive windows turn yellow in the status bar on new output     │
 │  F1        show this help                                                   │
 │  F5        send recon commands to active shell                              │
-│  Ctrl-c    in window 0: exit tmuxer and kill all connections                │
+│  Ctrl-c    window 0: exit tmuxer · other windows: confirm before sending    │
 └────────────────────────────────────────────────────────────────────────────┘
   Press any key to close
 EOF
@@ -95,7 +95,13 @@ EOF
     tmux bind-key -n F5 run-shell "$f5_script"
   fi
 
+  # Ctrl-c: confirm before sending to remote shells; pass through in window 0
+  tmux bind-key -n C-c if-shell -F '#{!=:#{window_index},0}' \
+    'confirm-before -p "Send Ctrl-C to remote shell? (y/n)" "send-keys C-c"' \
+    'send-keys C-c'
+
   trap 'rm -f "$help_file" ${f5_script:+"$f5_script"}
+        tmux unbind-key -n C-c 2>/dev/null
         tmux unbind-key -n F1 2>/dev/null
         tmux unbind-key -n F5 2>/dev/null' EXIT
 }
@@ -110,7 +116,7 @@ print_tips() {
 │  Activity  inactive windows turn yellow in the status bar on new output     │
 │  F1        show this help                                                   │
 │  F5        send recon commands to active shell                              │
-│  Ctrl-c    in window 0: exit tmuxer and kill all connections                │
+│  Ctrl-c    window 0: exit tmuxer · other windows: confirm before sending    │
 └────────────────────────────────────────────────────────────────────────────┘
 EOF
 }

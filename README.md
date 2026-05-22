@@ -49,7 +49,7 @@ Must be run from a plain terminal, not from inside an existing tmux session. tmu
 |---------|---------------------------------------------|
 | F1      | Show help popup                             |
 | F5      | Send recon commands to active shell         |
-| Ctrl-c  | In window 0: exit tmuxer, kill all sessions |
+| Ctrl-c  | Window 0: exit tmuxer and kill all connections. Other windows: confirmation prompt before sending to remote shell. |
 
 ## Log format
 
