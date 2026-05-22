@@ -75,8 +75,9 @@ bind_keys() {
 │  Windows   Ctrl-b c new · Ctrl-b n/p next/prev · Ctrl-b & kill             │
 │  Activity  inactive windows turn yellow in the status bar on new output     │
 │  F1        show this help                                                   │
+│  F2        toggle raw mode (use when remote has pty.spawn)                  │
 │  F5        send recon commands to active shell                              │
-│  Ctrl-c    window 0: exit tmuxer · other windows: confirm before sending    │
+│  Ctrl-c    window 0: exit · raw mode: send directly · cooked: confirm first │
 └────────────────────────────────────────────────────────────────────────────┘
 EOF
   {
@@ -101,14 +102,35 @@ EOF
     tmux bind-key -n F5 run-shell "$f5_script"
   fi
 
-  # Ctrl-c: confirm before sending to remote shells; pass through in window 0
-  tmux bind-key -n C-c if-shell -F '#{!=:#{window_index},0}' \
-    'confirm-before -p "Send Ctrl-C to remote shell? (y/n)" "send-keys C-c"' \
-    'send-keys C-c'
+  # F2: toggle raw mode for pty.spawn connections (off by default)
+  #     operates directly on the pane tty so the stty command is not sent to remote
+  tmux bind-key -n F2 if-shell -F '#{==:#{@raw_mode},1}' \
+    'run-shell "stty sane < #{pane_tty}"; set-option -w @raw_mode 0; display-message "raw mode OFF — cooked restored"' \
+    'run-shell "stty raw -echo < #{pane_tty}"; set-option -w @raw_mode 1; display-message "raw mode ON — pty.spawn active"'
 
-  trap 'rm -f "$help_file" ${f5_script:+"$f5_script"}
+  # Ctrl-c: write \003 directly to the out-fifo so the local cat is not SIGINTed.
+  #   raw mode (pty.spawn): no confirmation — safe, only kills remote foreground process.
+  #   cooked mode: confirm first.
+  #   window 0: pass through normally to kill socat/listener.
+  local ctrlc_script
+  ctrlc_script=$(mktemp /tmp/tmuxer_ctrlc_XXXXXX)
+  cat > "$ctrlc_script" <<'CTRLC'
+#!/usr/bin/env bash
+fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
+[[ -p "$fifo" ]] && printf '\003' >> "$fifo"
+CTRLC
+  chmod +x "$ctrlc_script"
+
+  tmux bind-key -n C-c if-shell -F '#{==:#{window_index},0}' \
+    'send-keys C-c' \
+    "if-shell -F '#{==:#{@raw_mode},1}' \
+      'run-shell \"$ctrlc_script\"' \
+      'confirm-before -p \"Ctrl-C → remote? (y/n)\" \"run-shell \\\"$ctrlc_script\\\"\"'"
+
+  trap 'rm -f "$help_file" "$ctrlc_script" ${f5_script:+"$f5_script"}
         tmux unbind-key -n C-c 2>/dev/null
         tmux unbind-key -n F1 2>/dev/null
+        tmux unbind-key -n F2 2>/dev/null
         tmux unbind-key -n F5 2>/dev/null' EXIT
 }
 
@@ -131,8 +153,9 @@ print_tips() {
 │  Windows   Ctrl-b c new · Ctrl-b n/p next/prev · Ctrl-b & kill             │
 │  Activity  inactive windows turn yellow in the status bar on new output     │
 │  F1        show this help                                                   │
+│  F2        toggle raw mode (use when remote has pty.spawn)                  │
 │  F5        send recon commands to active shell                              │
-│  Ctrl-c    window 0: exit tmuxer · other windows: confirm before sending    │
+│  Ctrl-c    window 0: exit · raw mode: send directly · cooked: confirm first │
 └────────────────────────────────────────────────────────────────────────────┘
 EOF
   printf 'Reverse shells:\n'
@@ -169,8 +192,9 @@ handle_connection() {
   [[ -n "$INIT_CMDS" ]] && f5_hint="; echo '[F5] autorun: $init_display'"
 
   win_id=$(tmux new-window -P -F "#{window_id}" -n "$remote_ip" \
-    "echo '[*] connection from $remote_ip'$f5_hint; stty raw -echo; trap 'stty sane; rm -f $in $out' EXIT; cat <$in & cat >$out; wait")
+    "echo '[*] connection from $remote_ip'$f5_hint; echo '[F2] toggle raw mode (enable after pty.spawn for arrow keys / tab)'; trap 'stty sane; rm -f $in $out' EXIT; cat <$in & cat >$out; wait")
 
+  tmux set-option -w -t "$win_id" @out_fifo "$out"
   sleep 0.1
   new_pane_tty=$(tmux display-message -p -t "$win_id" "#{pane_tty}")
 
