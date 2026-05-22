@@ -3,6 +3,7 @@
 # ── parse args ────────────────────────────────────────────────────────────────
 PORT=4444
 LOGDIR="$HOME/tmuxer-logs"
+INIT_CMDS=$'id\nip a\nw\nps ax\nss -tulip'
 ORIG_ARGS=("$@")
 
 while [[ $# -gt 0 ]]; do
@@ -15,6 +16,10 @@ while [[ $# -gt 0 ]]; do
     ;;
   --logdir)
     LOGDIR="$2"
+    shift 2
+    ;;
+  --init-cmds)
+    INIT_CMDS="${2//;/$'\n'}"
     shift 2
     ;;
   --port | -p)
@@ -55,6 +60,15 @@ if [[ "$MODE" == "handler" ]]; then
   sleep 0.1
   NEW_PANE_TTY=$(tmux display-message -p -t "$WIN_ID" "#{pane_tty}")
 
+  # send init commands to remote shell stdin
+  if [[ -n "$INIT_CMDS" ]]; then
+    while IFS= read -r cmd; do
+      [[ -z "$cmd" ]] && continue
+      printf '%s\n' "$cmd"
+      [[ -n "$LOGFILE" ]] && printf '%s INIT:   %s\n' "$(date '+%H:%M:%S')" "$cmd" >>"$LOGFILE"
+    done <<< "$INIT_CMDS"
+  fi
+
   # remote -> log + tmux pane
   if [[ -n "$LOGFILE" ]]; then
     cat <&0 | tee >(while IFS= read -r line; do printf '%s REMOTE: %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$LOGFILE") >"$IN" &
@@ -90,6 +104,7 @@ command -v socat &>/dev/null || {
 
 export LISTENER_TTY=$(tty)
 export LOGDIR
+export INIT_CMDS
 
 SELF="$(
   cd "$(dirname "$0")"
@@ -97,4 +112,5 @@ SELF="$(
 )/$(basename "$0")"
 echo "[*] Listening on :$PORT"
 [[ -n "$LOGDIR" ]] && echo "[*] Logging to $LOGDIR"
+[[ -n "$INIT_CMDS" ]] && echo "[*] Init cmds: $(tr '\n' ';' <<< "$INIT_CMDS" | sed 's/;$//')"
 socat TCP4-LISTEN:${PORT},reuseaddr,fork EXEC:"$SELF handler $LOGDIR",nofork
