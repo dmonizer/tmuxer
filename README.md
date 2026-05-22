@@ -39,6 +39,8 @@ Must be run from a plain terminal, not from inside an existing tmux session. tmu
 
 **Recon via F5** — pressing F5 sends a configurable set of recon commands to the active shell (id, uname -a, w, netstat -tulip, ip a, arp -a, ip r, ps ax by default). Each window shows the command list on connect.
 
+**Mouse support** — mouse is enabled: scroll to enter copy mode, click to focus panes, select text to copy.
+
 **Activity indicator** — tmux window tabs turn yellow when a non-active window receives output.
 
 **Keybindings** (active for the duration of the listener):
