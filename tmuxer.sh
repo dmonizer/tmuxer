@@ -61,20 +61,43 @@ apply_tmux_settings() {
   tmux set-option -g window-status-activity-style 'fg=black,bg=yellow,bold'
 }
 
-bind_f5() {
-  [[ -z "$INIT_CMDS" ]] && return
-  local script
-  script=$(mktemp /tmp/tmuxer_f5_XXXXXX)
-  {
-    printf '#!/usr/bin/env bash\n'
-    while IFS= read -r cmd; do
-      [[ -z "$cmd" ]] && continue
-      printf 'tmux send-keys %q Enter\nsleep 0.3\n' "$cmd"
-    done <<< "$INIT_CMDS"
-  } > "$script"
-  chmod +x "$script"
-  tmux bind-key -n F5 run-shell "$script"
-  trap 'rm -f "$script"; tmux unbind-key -n F5 2>/dev/null' EXIT
+bind_keys() {
+  local help_file f5_script=""
+
+  # F1: help popup
+  help_file=$(mktemp /tmp/tmuxer_help_XXXXXX)
+  cat > "$help_file" <<'EOF'
+┌─ tmux tips ────────────────────────────────────────────────────────────────┐
+│  Mouse     scroll to enter copy mode · click to focus pane                 │
+│  Vi keys   in copy mode: hjkl move · Space start sel · Enter copy · q quit │
+│  Paste     Ctrl-b ]                                                         │
+│  Windows   Ctrl-b c new · Ctrl-b n/p next/prev · Ctrl-b & kill             │
+│  Activity  inactive windows turn yellow in the status bar on new output     │
+│  F1        show this help                                                   │
+│  F5        send recon commands to active shell                              │
+│  Ctrl-c    in window 0: exit tmuxer and kill all connections                │
+└────────────────────────────────────────────────────────────────────────────┘
+  Press any key to close
+EOF
+  tmux bind-key -n F1 display-popup -E -w 80 -h 13 "cat $help_file; read -rsk1 2>/dev/null || read -rs -n1"
+
+  # F5: recon commands
+  if [[ -n "$INIT_CMDS" ]]; then
+    f5_script=$(mktemp /tmp/tmuxer_f5_XXXXXX)
+    {
+      printf '#!/usr/bin/env bash\n'
+      while IFS= read -r cmd; do
+        [[ -z "$cmd" ]] && continue
+        printf 'tmux send-keys %q Enter\nsleep 0.3\n' "$cmd"
+      done <<< "$INIT_CMDS"
+    } > "$f5_script"
+    chmod +x "$f5_script"
+    tmux bind-key -n F5 run-shell "$f5_script"
+  fi
+
+  trap 'rm -f "$help_file" ${f5_script:+"$f5_script"}
+        tmux unbind-key -n F1 2>/dev/null
+        tmux unbind-key -n F5 2>/dev/null' EXIT
 }
 
 print_tips() {
@@ -85,6 +108,9 @@ print_tips() {
 │  Paste     Ctrl-b ]                                                         │
 │  Windows   Ctrl-b c new · Ctrl-b n/p next/prev · Ctrl-b & kill             │
 │  Activity  inactive windows turn yellow in the status bar on new output     │
+│  F1        show this help                                                   │
+│  F5        send recon commands to active shell                              │
+│  Ctrl-c    in window 0: exit tmuxer and kill all connections                │
 └────────────────────────────────────────────────────────────────────────────┘
 EOF
 }
@@ -157,7 +183,7 @@ start_listener() {
 
   enforce_tmux
   apply_tmux_settings
-  bind_f5
+  bind_keys
   print_tips
   check_port
 
