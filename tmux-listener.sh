@@ -67,8 +67,7 @@ if [[ "$MODE" != "handler" ]]; then
     exit 1
   fi
   if [[ -z "$TMUX" ]]; then
-    export TMUXER_OWNED_SESSION=1
-    exec tmux new-session -- "$0" "${ORIG_ARGS[@]}"
+    exec tmux new-session -e TMUXER_OWNED_SESSION=1 -- "$0" "${ORIG_ARGS[@]}"
   fi
   # inside our own freshly created session — apply settings
   tmux set-option -g history-limit 100000
