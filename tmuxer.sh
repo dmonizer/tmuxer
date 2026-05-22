@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-# ── parse args ────────────────────────────────────────────────────────────────
+# ── defaults ──────────────────────────────────────────────────────────────────
 PORT=""
 LOGDIR="$HOME/tmuxer-logs"
 INIT_CMDS=$'id\nuname -a\nw\nnetstat -tulip\nip a\narp -a\nip r\nps ax'
 ORIG_ARGS=("$@")
+
+# ── functions ─────────────────────────────────────────────────────────────────
 
 usage() {
   cat <<EOF
@@ -27,53 +29,19 @@ EOF
   exit 0
 }
 
-[[ $# -eq 0 ]] && usage
+install() {
+  local self dest=/usr/local/bin/tmuxer
+  self="$(cd "$(dirname "$0")"; pwd)/$(basename "$0")"
+  if [[ -e "$dest" ]] || [[ -L "$dest" ]]; then
+    echo "removing existing $dest"
+    rm -f "$dest" || { echo "error: need sudo — run: sudo $0 --install"; exit 1; }
+  fi
+  ln -s "$self" "$dest" || { echo "error: need sudo — run: sudo $0 --install"; exit 1; }
+  echo "installed: $dest -> $self"
+  exit 0
+}
 
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-  -h | --help)
-    usage
-    ;;
-  --install)
-    SELF="$(cd "$(dirname "$0")"; pwd)/$(basename "$0")"
-    DEST=/usr/local/bin/tmuxer
-    if [[ -e "$DEST" ]] || [[ -L "$DEST" ]]; then
-      echo "removing existing $DEST"
-      rm -f "$DEST" || { echo "error: need sudo — run: sudo $0 --install"; exit 1; }
-    fi
-    ln -s "$SELF" "$DEST" || { echo "error: need sudo — run: sudo $0 --install"; exit 1; }
-    echo "installed: $DEST -> $SELF"
-    exit 0
-    ;;
-  handler)
-    MODE=handler
-    shift
-    LOGDIR="${1:-}"
-    shift
-    ;;
-  --logdir)
-    LOGDIR="$2"
-    shift 2
-    ;;
-  --init-cmds)
-    INIT_CMDS="${2//;/$'\n'}"
-    shift 2
-    ;;
-  --port | -p)
-    PORT="$2"
-    shift 2
-    ;;
-  *)
-    PORT="$1"
-    shift
-    ;;
-  esac
-done
-
-[[ -z "$PORT" ]] && [[ "$MODE" != "handler" ]] && { echo "error: port required"; usage; }
-
-# ── tmux enforcement ─────────────────────────────────────────────────────────
-if [[ "$MODE" != "handler" ]]; then
+enforce_tmux() {
   if [[ -n "$TMUX" ]] && [[ -z "$TMUXER_OWNED_SESSION" ]]; then
     echo "error: refusing to run inside an existing tmux session"
     echo "       run from a plain terminal instead"
@@ -82,98 +50,35 @@ if [[ "$MODE" != "handler" ]]; then
   if [[ -z "$TMUX" ]]; then
     exec tmux new-session -e TMUXER_OWNED_SESSION=1 -- "$0" "${ORIG_ARGS[@]}"
   fi
-  # inside our own freshly created session — apply settings
+}
+
+apply_tmux_settings() {
   tmux set-option -g history-limit 100000
   tmux set-option -g mouse on
   tmux set-window-option -g mode-keys vi
   tmux set-option -g monitor-activity on
   tmux set-option -g visual-activity off
   tmux set-option -g window-status-activity-style 'fg=black,bg=yellow,bold'
-fi
-
-# ── handler mode (invoked by socat) ──────────────────────────────────────────
-if [[ "$MODE" == "handler" ]]; then
-  REMOTE_IP="${SOCAT_PEERADDR:-unknown}"
-  echo "[+] incoming connection from $REMOTE_IP" >"$LISTENER_TTY"
-
-  IN=$(mktemp -u /tmp/sock_in_XXXXXX)
-  OUT=$(mktemp -u /tmp/sock_out_XXXXXX)
-  mkfifo "$IN" "$OUT"
-
-  # logging
-  if [[ -n "$LOGDIR" ]]; then
-    mkdir -p "$LOGDIR"
-    LOGFILE="$LOGDIR/${REMOTE_IP}-$(date +%d%m%y-%H%M%S).log"
-    touch "$LOGFILE"
-  fi
-
-  INIT_DISPLAY=$(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')
-  F5_HINT=""
-  [[ -n "$INIT_CMDS" ]] && F5_HINT="; echo '[F5] autorun: $INIT_DISPLAY'"
-
-  WIN_ID=$(tmux new-window -P -F "#{window_id}" -n "$REMOTE_IP" \
-    "echo '[*] connection from $REMOTE_IP'$F5_HINT; trap 'rm -f $IN $OUT' EXIT; cat <$IN & cat >$OUT; wait")
-
-  sleep 0.1
-  NEW_PANE_TTY=$(tmux display-message -p -t "$WIN_ID" "#{pane_tty}")
-
-  # remote -> log + tmux pane
-  if [[ -n "$LOGFILE" ]]; then
-    cat <&0 | tee >(while IFS= read -r line; do printf '%s REMOTE: %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$LOGFILE") >"$IN" &
-  else
-    cat <&0 >"$IN" &
-  fi
-  IN_PID=$!
-
-  # tmux pane -> log + remote
-  if [[ -n "$LOGFILE" ]]; then
-    cat <"$OUT" | tee >(while IFS= read -r line; do printf '%s USER:   %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$LOGFILE") >&1 &
-  else
-    cat <"$OUT" >&1 &
-  fi
-  OUT_PID=$!
-
-  wait -n $IN_PID $OUT_PID
-  kill $IN_PID $OUT_PID 2>/dev/null
-
-  echo "[!] connection from $REMOTE_IP closed" >"$LISTENER_TTY"
-  echo "[!] connection closed" >"$NEW_PANE_TTY"
-  [[ -n "$LOGFILE" ]] && echo "[*] log saved to $LOGFILE" >"$LISTENER_TTY"
-
-  rm -f "$IN" "$OUT"
-  exit 0
-fi
-
-# ── listener mode ─────────────────────────────────────────────────────────────
-command -v socat &>/dev/null || {
-  echo "socat required"
-  exit 1
 }
 
-export LISTENER_TTY=$(tty)
-export LOGDIR
-export INIT_CMDS
-
-# ── F5 keybinding ─────────────────────────────────────────────────────────────
-if [[ -n "$INIT_CMDS" ]]; then
-  INIT_SCRIPT=$(mktemp /tmp/tmuxer_f5_XXXXXX)
+bind_f5() {
+  [[ -z "$INIT_CMDS" ]] && return
+  local script
+  script=$(mktemp /tmp/tmuxer_f5_XXXXXX)
   {
     printf '#!/usr/bin/env bash\n'
     while IFS= read -r cmd; do
       [[ -z "$cmd" ]] && continue
       printf 'tmux send-keys %q Enter\nsleep 0.3\n' "$cmd"
     done <<< "$INIT_CMDS"
-  } > "$INIT_SCRIPT"
-  chmod +x "$INIT_SCRIPT"
-  tmux bind-key -n F5 run-shell "$INIT_SCRIPT"
-  trap 'rm -f "$INIT_SCRIPT"; tmux unbind-key -n F5 2>/dev/null' EXIT
-fi
+  } > "$script"
+  chmod +x "$script"
+  tmux bind-key -n F5 run-shell "$script"
+  trap 'rm -f "$script"; tmux unbind-key -n F5 2>/dev/null' EXIT
+}
 
-SELF="$(
-  cd "$(dirname "$0")"
-  pwd
-)/$(basename "$0")"
-cat <<'HELP'
+print_tips() {
+  cat <<'EOF'
 ┌─ tmux tips ────────────────────────────────────────────────────────────────┐
 │  Mouse     scroll to enter copy mode · click to focus pane                 │
 │  Vi keys   in copy mode: hjkl move · Space start sel · Enter copy · q quit │
@@ -181,14 +86,112 @@ cat <<'HELP'
 │  Windows   Ctrl-b c new · Ctrl-b n/p next/prev · Ctrl-b & kill             │
 │  Activity  inactive windows turn yellow in the status bar on new output     │
 └────────────────────────────────────────────────────────────────────────────┘
-HELP
-if ss -tlnH "sport = :$PORT" 2>/dev/null | grep -q .; then
-  echo "error: port $PORT is already in use"
-  ss -tlnpH "sport = :$PORT" 2>/dev/null | awk '{print "       " $0}'
-  exit 1
-fi
+EOF
+}
 
-echo "[*] Listening on :$PORT"
-[[ -n "$LOGDIR" ]] && echo "[*] Logging to $LOGDIR"
-[[ -n "$INIT_CMDS" ]] && echo "[*] F5 autorun: $(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')"
-socat TCP4-LISTEN:${PORT},reuseaddr,fork EXEC:"$SELF handler $LOGDIR",nofork
+check_port() {
+  if ss -tlnH "sport = :$PORT" 2>/dev/null | grep -q .; then
+    echo "error: port $PORT is already in use"
+    ss -tlnpH "sport = :$PORT" 2>/dev/null | awk '{print "       " $0}'
+    exit 1
+  fi
+}
+
+handle_connection() {
+  local remote_ip="${SOCAT_PEERADDR:-unknown}"
+  local in out logfile win_id new_pane_tty in_pid out_pid
+
+  echo "[+] incoming connection from $remote_ip" >"$LISTENER_TTY"
+
+  in=$(mktemp -u /tmp/sock_in_XXXXXX)
+  out=$(mktemp -u /tmp/sock_out_XXXXXX)
+  mkfifo "$in" "$out"
+
+  if [[ -n "$LOGDIR" ]]; then
+    mkdir -p "$LOGDIR"
+    logfile="$LOGDIR/${remote_ip}-$(date +%d%m%y-%H%M%S).log"
+    touch "$logfile"
+  fi
+
+  local init_display f5_hint=""
+  init_display=$(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')
+  [[ -n "$INIT_CMDS" ]] && f5_hint="; echo '[F5] autorun: $init_display'"
+
+  win_id=$(tmux new-window -P -F "#{window_id}" -n "$remote_ip" \
+    "echo '[*] connection from $remote_ip'$f5_hint; trap 'rm -f $in $out' EXIT; cat <$in & cat >$out; wait")
+
+  sleep 0.1
+  new_pane_tty=$(tmux display-message -p -t "$win_id" "#{pane_tty}")
+
+  if [[ -n "$logfile" ]]; then
+    cat <&0 | tee >(while IFS= read -r line; do printf '%s REMOTE: %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$logfile") >"$in" &
+  else
+    cat <&0 >"$in" &
+  fi
+  in_pid=$!
+
+  if [[ -n "$logfile" ]]; then
+    cat <"$out" | tee >(while IFS= read -r line; do printf '%s USER:   %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$logfile") >&1 &
+  else
+    cat <"$out" >&1 &
+  fi
+  out_pid=$!
+
+  wait -n $in_pid $out_pid
+  kill $in_pid $out_pid 2>/dev/null
+
+  echo "[!] connection from $remote_ip closed" >"$LISTENER_TTY"
+  echo "[!] connection closed" >"$new_pane_tty"
+  [[ -n "$logfile" ]] && echo "[*] log saved to $logfile" >"$LISTENER_TTY"
+
+  rm -f "$in" "$out"
+}
+
+start_listener() {
+  local self
+  self="$(cd "$(dirname "$0")"; pwd)/$(basename "$0")"
+
+  export LISTENER_TTY=$(tty)
+  export LOGDIR
+  export INIT_CMDS
+
+  enforce_tmux
+  apply_tmux_settings
+  bind_f5
+  print_tips
+  check_port
+
+  echo "[*] Listening on :$PORT"
+  [[ -n "$LOGDIR" ]] && echo "[*] Logging to $LOGDIR"
+  [[ -n "$INIT_CMDS" ]] && echo "[*] F5 autorun: $(printf '%s\n' "$INIT_CMDS" | paste -sd '|' | sed 's/|/ | /g')"
+
+  socat TCP4-LISTEN:${PORT},reuseaddr,fork EXEC:"$self handler $LOGDIR",nofork
+}
+
+# ── parse args ────────────────────────────────────────────────────────────────
+[[ $# -eq 0 ]] && usage
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -h | --help)   usage ;;
+  --install)     install ;;
+  handler)
+    MODE=handler
+    shift
+    LOGDIR="${1:-}"
+    shift
+    ;;
+  --logdir)      LOGDIR="$2";                    shift 2 ;;
+  --init-cmds)   INIT_CMDS="${2//;/$'\n'}";      shift 2 ;;
+  --port | -p)   PORT="$2";                      shift 2 ;;
+  *)             PORT="$1";                      shift   ;;
+  esac
+done
+
+# ── dispatch ──────────────────────────────────────────────────────────────────
+if [[ "$MODE" == "handler" ]]; then
+  handle_connection
+else
+  [[ -z "$PORT" ]] && { echo "error: port required"; usage; }
+  start_listener
+fi
