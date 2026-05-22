@@ -16,11 +16,13 @@ Options:
   --init-cmds <cmds>      Semicolon-separated commands mapped to F5 in each window
                           (default: id;uname -a;w;netstat -tulip;ip a;arp -a;ip r;ps ax)
                           Pass empty string to disable: --init-cmds ""
+  --install               Install as 'tmuxer' symlink in /usr/local/bin
 
 Examples:
   $(basename "$0") 4444
   $(basename "$0") --port 4444 --logdir /tmp/logs
   $(basename "$0") 4444 --init-cmds "id;uname -a;hostname"
+  $(basename "$0") --install
 EOF
   exit 0
 }
@@ -31,6 +33,17 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
   -h | --help)
     usage
+    ;;
+  --install)
+    SELF="$(cd "$(dirname "$0")"; pwd)/$(basename "$0")"
+    DEST=/usr/local/bin/tmuxer
+    if [[ -e "$DEST" ]] || [[ -L "$DEST" ]]; then
+      echo "removing existing $DEST"
+      rm -f "$DEST" || { echo "error: need sudo — run: sudo $0 --install"; exit 1; }
+    fi
+    ln -s "$SELF" "$DEST" || { echo "error: need sudo — run: sudo $0 --install"; exit 1; }
+    echo "installed: $DEST -> $SELF"
+    exit 0
     ;;
   handler)
     MODE=handler
