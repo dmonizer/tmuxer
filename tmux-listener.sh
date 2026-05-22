@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
 
-[[ -z "$TMUX" ]] && {
-  echo "Must run inside tmux"
-  exit 1
-}
-
 # ── parse args ────────────────────────────────────────────────────────────────
 PORT=4444
-LOGDIR=""
+LOGDIR="$HOME/tmuxer-logs"
+ORIG_ARGS=("$@")
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -31,6 +27,11 @@ while [[ $# -gt 0 ]]; do
     ;;
   esac
 done
+
+# ── auto-start tmux if not already inside ────────────────────────────────────
+[[ -z "$TMUX" ]] && [[ "$MODE" != "handler" ]] && {
+  exec tmux new-session -- "$0" "${ORIG_ARGS[@]}"
+}
 
 # ── handler mode (invoked by socat) ──────────────────────────────────────────
 if [[ "$MODE" == "handler" ]]; then
@@ -56,7 +57,7 @@ if [[ "$MODE" == "handler" ]]; then
 
   # remote -> log + tmux pane
   if [[ -n "$LOGFILE" ]]; then
-    cat <&0 | tee >(sed 's/^/REMOTE: /' >>"$LOGFILE") >"$IN" &
+    cat <&0 | tee >(while IFS= read -r line; do printf '%s REMOTE: %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$LOGFILE") >"$IN" &
   else
     cat <&0 >"$IN" &
   fi
@@ -64,7 +65,7 @@ if [[ "$MODE" == "handler" ]]; then
 
   # tmux pane -> log + remote
   if [[ -n "$LOGFILE" ]]; then
-    cat <"$OUT" | tee >(sed 's/^/USER: /' >>"$LOGFILE") >&1 &
+    cat <"$OUT" | tee >(while IFS= read -r line; do printf '%s USER:   %s\n' "$(date '+%H:%M:%S')" "$line"; done >>"$LOGFILE") >&1 &
   else
     cat <"$OUT" >&1 &
   fi
