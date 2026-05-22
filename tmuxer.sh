@@ -56,6 +56,7 @@ apply_tmux_settings() {
   tmux set-option -g history-limit 100000
   tmux set-option -g mouse on
   tmux set-window-option -g mode-keys vi
+  tmux set-option -g escape-time 10
   tmux set-option -g monitor-activity on
   tmux set-option -g visual-activity off
   tmux set-option -g window-status-activity-style 'fg=black,bg=yellow,bold'
@@ -150,7 +151,7 @@ handle_connection() {
   [[ -n "$INIT_CMDS" ]] && f5_hint="; echo '[F5] autorun: $init_display'"
 
   win_id=$(tmux new-window -P -F "#{window_id}" -n "$remote_ip" \
-    "echo '[*] connection from $remote_ip'$f5_hint; trap 'rm -f $in $out' EXIT; cat <$in & cat >$out; wait")
+    "echo '[*] connection from $remote_ip'$f5_hint; stty raw -echo; trap 'stty sane; rm -f $in $out' EXIT; cat <$in & cat >$out; wait")
 
   sleep 0.1
   new_pane_tty=$(tmux display-message -p -t "$win_id" "#{pane_tty}")
