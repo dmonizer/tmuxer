@@ -201,7 +201,7 @@ parse_gsocket_hosts() {
     name="${line%%|*}"
     rest="${line#*|}"
     description="${rest%%|*}"
-    secret="${rest#*|}"
+    secret="${rest##*|}"
     [[ -z "$name" || -z "$secret" ]] && continue
     GS_ENTRIES+=("$name|$description|$secret")
   done < "$file"
@@ -310,7 +310,7 @@ hosts="$HOSTS_FILE"
 [[ -s "\$hosts" ]] || { echo "No hosts found."; echo "Sources: ~/.ssh/config ~/.gsocket/hosts"; printf '\\nPress Enter...'; head -n 1 >/dev/null; exit 0; }
 sel=\$(awk -F'|' '{print \$1}' "\$hosts" | fzf --color=dark --header='Hosts (type to filter, Enter=connect, Esc=cancel)' --height=20 --border)
 [[ -z "\$sel" ]] && exit 0
-action=\$(grep -m1 -F "\$sel|" "\$hosts" | cut -d'|' -f2)
+action=\$(grep -m1 -F "\$sel|" "\$hosts" | cut -d'|' -f2-)
 type="\${action%%:*}"
 rest="\${action#*:}"
 case "\$type" in
@@ -322,7 +322,7 @@ case "\$type" in
     gs_name="\${rest%%|*}"
     gs_rest="\${rest#*|}"
     gs_desc="\${gs_rest%%|*}"
-    gs_secret="\${gs_rest#*|}"
+    gs_secret="\${gs_rest##*|}"
     tmux display-message "Connecting to GS: \$gs_name..."
     tmux new-window -n "\$gs_name" "gs-netcat -s '\$gs_secret' -i || { echo; echo 'GS failed (press Enter)'; head -n1 >/dev/null; }"
     ;;
@@ -361,7 +361,7 @@ F2EOF
         else
           local gs_name="${rest%%|*}"
           local gs_rest="${rest#*|}"
-          local gs_secret="${gs_rest#*|}"
+          local gs_secret="${gs_rest##*|}"
           printf '  %%q) tmux new-window -n %%q "gs-netcat -s %%s -i || { echo; echo GS failed; printf '"'"'Press Enter...'"'"'; head -n1 >/dev/null; }" ;;\n' "$key" "$gs_name" "$gs_secret"
         fi
         ((i++))
@@ -381,7 +381,7 @@ fifo=\$(tmux show-options -wv @out_fifo 2>/dev/null)
 [[ -s "\$cmds" ]] || { echo "No commands defined in ~/.tmuxer.conf"; printf '\\nPress Enter...'; head -n 1 >/dev/null; exit 0; }
 sel=\$(awk -F'|' '{print \$1}' "\$cmds" | fzf --color=dark --header='Commands (type to filter, Enter=send, Esc=cancel)' --height=20 --border)
 [[ -z "\$sel" ]] && exit 0
-cmd_val=\$(grep -m1 -F "\$sel|" "\$cmds" | cut -d'|' -f2)
+cmd_val=\$(grep -m1 -F "\$sel|" "\$cmds" | cut -d'|' -f2-)
 cmd_name="\$sel"
 if [[ -p "\$fifo" ]]; then
 F5EOF
