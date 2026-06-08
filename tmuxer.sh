@@ -48,10 +48,12 @@ Config: ~/.tmuxer.conf (shell-sourceable)
   listener_port=4444
   logdir=~/tmuxer-logs
   prepend_space=1
-  cmd_1_name="Quick Recon"
-  cmd_1="id; uname -a; hostname"
-  cmd_2_name="Full Recon"
-  cmd_2="id; uname -a; w; netstat -tulip; ip a; arp -a; ip r; ps ax"
+  cmd_1_name="Disable History"
+  cmd_1="unset HISTFILE; export HISTFILESIZE=0; export HISTSIZE=0; set +o history"
+  cmd_2_name="Quick Recon"
+  cmd_2="id; uname -a; hostname"
+  cmd_3_name="Full Recon"
+  cmd_3="id; uname -a; w; netstat -tulip; ip a; arp -a; ip r; ps ax"
 
 Host sources:
   ~/.ssh/config             — SSH Host entries
@@ -71,11 +73,14 @@ logdir=$HOME/tmuxer-logs
 prepend_space=1
 gsocket_hosts=$HOME/.gsocket/hosts
 
-cmd_1_name="Quick Recon"
-cmd_1="id; uname -a; hostname"
+cmd_1_name="Disable History"
+cmd_1="unset HISTFILE; export HISTFILESIZE=0; export HISTSIZE=0; set +o history"
 
-cmd_2_name="Full Recon"
-cmd_2="id; uname -a; w; netstat -tulip; ip a; arp -a; ip r; ps ax"
+cmd_2_name="Quick Recon"
+cmd_2="id; uname -a; hostname"
+
+cmd_3_name="Full Recon"
+cmd_3="id; uname -a; w; netstat -tulip; ip a; arp -a; ip r; ps ax"
 CONFEOF
     echo "created $conf"
   else
@@ -311,7 +316,7 @@ rest="\${action#*:}"
 case "\$type" in
   SSH)
     tmux display-message "Connecting to \$rest..."
-    tmux new-window -n "\$rest" "ssh \$rest"
+    tmux new-window -n "\$rest" "ssh \$rest || { echo; echo 'SSH failed (press Enter)'; head -n1 >/dev/null; }"
     ;;
   GS)
     gs_name="\${rest%%|*}"
@@ -319,7 +324,7 @@ case "\$type" in
     gs_desc="\${gs_rest%%|*}"
     gs_secret="\${gs_rest#*|}"
     tmux display-message "Connecting to GS: \$gs_name..."
-    tmux new-window -n "\$gs_name" "gs-netcat -s '\$gs_secret' -i"
+    tmux new-window -n "\$gs_name" "gs-netcat -s '\$gs_secret' -i || { echo; echo 'GS failed (press Enter)'; head -n1 >/dev/null; }"
     ;;
 esac
 F2EOF
@@ -352,12 +357,12 @@ F2EOF
         local type="${action%%:*}"
         local rest="${action#*:}"
         if [[ "$type" == "SSH" ]]; then
-          printf '  %q) tmux new-window -n %q "ssh %s" ;;\n' "$key" "$rest" "$rest"
+          printf '  %%q) tmux new-window -n %%q "ssh %%s || { echo; echo SSH failed; printf '"'"'Press Enter...'"'"'; head -n1 >/dev/null; }" ;;\n' "$key" "$rest" "$rest"
         else
           local gs_name="${rest%%|*}"
           local gs_rest="${rest#*|}"
           local gs_secret="${gs_rest#*|}"
-          printf '  %q) tmux new-window -n %q "gs-netcat -s %s -i" ;;\n' "$key" "$gs_name" "$gs_secret"
+          printf '  %%q) tmux new-window -n %%q "gs-netcat -s %%s -i || { echo; echo GS failed; printf '"'"'Press Enter...'"'"'; head -n1 >/dev/null; }" ;;\n' "$key" "$gs_name" "$gs_secret"
         fi
         ((i++))
       done < "$HOSTS_FILE"
@@ -388,7 +393,8 @@ F5EOF
     cat >> "$F5_SCRIPT" <<'F5EOF'
   tmux display-message "Sent: $cmd_name"
 else
-  tmux display-message "F5: no active connection (no fifo)"
+  tmux send-keys "$cmd_val" Enter
+  tmux display-message "Sent (keys): $cmd_name"
 fi
 F5EOF
   else
@@ -396,7 +402,7 @@ F5EOF
     cat > "$F5_SCRIPT" <<'F5EOF'
 #!/usr/bin/env bash
 fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
-[[ -p "$fifo" ]] || { tmux display-message "F5: no active connection"; exit 1; }
+[ -p "$fifo" ] || true  # fifo optional; send-keys fallback handled per-item
 # The case body is appended below by build_scripts
 F5EOF
     local keys=(a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4 5 6 7 8 9 0)
