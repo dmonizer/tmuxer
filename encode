@@ -22,23 +22,15 @@ fi
 
 minified=$(sed 's/^[[:space:]]*//' "$FILE" | grep -v '^[[:space:]]*$')
 
-best_len=999999
-best_line=""
-
 try() {
   local cmd="$1" dec="$2"
   command -v "$cmd" &>/dev/null || return
   local payload line
   payload=$(printf '%s\n' "$minified" | "$cmd" -9c | base64 | tr -d '\n')
   line="echo ${payload}|base64 -d|${dec}|sh"
-  if [[ ${#line} -lt $best_len ]]; then
-    best_len=${#line}
-    best_line="$line"
-  fi
+  printf '[%s %d chars] %s\n' "$cmd" "${#line}" "$line"
 }
 
 try gzip  gunzip
 try xz    "xz -d"
 try bzip2 bunzip2
-
-printf '%s\n' "$best_line"
