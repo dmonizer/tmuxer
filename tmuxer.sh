@@ -571,7 +571,7 @@ bind_keys() {
   # F4: vertical split → open session notes in $EDITOR; pane auto-closes when editor exits
   # run-shell expands #{session_name} before passing to the shell; split-window does not
   tmux bind-key -n F4 run-shell \
-    'tmux split-window -h "mkdir -p ~/notes && \${EDITOR:-vi} ~/notes/#{session_name}-notes.md"'
+    'tmux split-window -h "mkdir -p ~/notes && \${EDITOR:-vi} ~/notes/#{window_name}-notes.md"'
 
   tmux bind-key -n F5 display-popup -E -w 80% -h 80% "$SELF --popup f5"
   tmux bind-key -n F9 run-shell -b "$SELF --popup f9"

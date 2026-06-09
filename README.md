@@ -43,7 +43,7 @@ my-box|home desktop|mysecretkey
 | F1  | Help + reverse shell one-liners for current IP:port |
 | F2  | Host connector — SSH and GSocket hosts (fzf or numbered) |
 | F3  | Toggle raw mode (for pty.spawn connections) |
-| F4  | Open session notes (`~/notes/<tmux-session-name>-notes.md`) in `$EDITOR` — splits vertically, pane closes on exit |
+| F4  | Open host notes (`~/notes/<window-name>-notes.md`) in `$EDITOR` — splits vertically, pane closes on exit |
 | F5  | Send command from config to active shell |
 | F9  | Toggle reverse shell listener on/off |
 | Ctrl-C | Send to remote (with confirmation) or kill local shell on window 0 |
@@ -69,7 +69,7 @@ The local shell is also logged on startup. Override the directory with `--logdir
 
 ## Session notes
 
-F4 splits the window vertically and opens `~/notes/<tmux-session-name>-notes.md` in `$EDITOR`. The notes directory is created automatically. The pane closes when the editor exits.
+F4 splits the window vertically and opens `~/notes/<window-name>-notes.md` in `$EDITOR`. Since each connection window is named after the host (e.g. `my-box`, `192.168.1.5`), notes are per-host and reopen the same file each time you connect. The notes directory is created automatically. The pane closes when the editor exits.
 
 ## encode / revshell
 
