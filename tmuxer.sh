@@ -365,7 +365,6 @@ rest="\${action#*:}"
 case "\$type" in
   SSH)
     tmux display-message "Connecting to \$rest..."
-    # S3: GS secret via env var; M1: quote hostname properly
     tmux new-window -n "\$rest" "ssh \$rest || { echo; echo 'SSH failed (press Enter)'; read -r _; }"
     ;;
   GS)
@@ -374,10 +373,9 @@ case "\$type" in
     gs_desc="\${gs_rest%%|*}"
     gs_secret="\${gs_rest##*|}"
     tmux display-message "Connecting to GS: \$gs_name..."
-    tmux new-window -n "\$gs_name" 'export GS_SECRET="'\$gs_secret"'"; gs-netcat -s "\$GS_SECRET" -i || { echo; echo "GS failed (press Enter)"; read -r _; }'
+    tmux new-window -n "\$gs_name" "gs-netcat -s '\$gs_secret' -i || { echo; echo 'GS failed (press Enter)'; read -r _; }"
     ;;
 esac
-    read -r _;
 F2EOF
   else
     # S1: Non-fzf fallback — use numbered menu with read (works in popup pty)
@@ -425,7 +423,7 @@ else
   gs_rest="${rest#*|}"
   gs_secret="${gs_rest##*|}"
   tmux display-message "Connecting to GS: $gs_name..."
-  tmux new-window -n "$gs_name" 'export GS_SECRET="'"$gs_secret"'"; gs-netcat -s "$GS_SECRET" -i || { echo; echo "GS failed (press Enter)"; read -r _; }'
+  tmux new-window -n "$gs_name" "gs-netcat -s '$gs_secret' -i || { echo; echo 'GS failed (press Enter)'; read -r _; }"
 fi
 F2EOF
   fi
