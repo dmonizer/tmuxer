@@ -1,11 +1,11 @@
 # tmuxer
 
-Reverse shell listener that opens each incoming connection in a dedicated tmux window, with session logging and built-in recon shortcuts.
+Pentester toolkit built around tmux. Opens each incoming reverse shell in a dedicated window, manages SSH/GSocket host connections, and provides session logging and command shortcuts.
 
 ## Requirements
 
-- `tmux`
-- `socat`
+- `tmux`, `socat`
+- Optional: `fzf` (better host/command picker), `gs-netcat` (GSocket support)
 
 ## Install
 
@@ -13,49 +13,68 @@ Reverse shell listener that opens each incoming connection in a dedicated tmux w
 sudo ./tmuxer.sh --install
 ```
 
-Creates `/usr/local/bin/tmuxer` as a symlink to the script.
+Creates `~/.tmuxer.conf` with defaults and `/usr/local/bin/tmuxer` symlink.
 
-## Usage
+## Config (`~/.tmuxer.conf`)
 
+```bash
+listener_port=4444
+logdir=~/tmuxer-logs
+prepend_space=1                   # prefix commands with space (hide from history)
+gsocket_hosts=~/.gsocket/hosts    # name|description|secret
+
+cmd_1_name="Disable History"
+cmd_1="unset HISTFILE; export HISTSIZE=0 HISTFILESIZE=0 SAVEHIST=0; set +o history 2>/dev/null; setopt nohistory 2>/dev/null"
+
+cmd_2_name="Quick Recon"
+cmd_2="id; uname -a; hostname"
 ```
-tmuxer [OPTIONS] <port>
 
-Options:
-  -p, --port <port>       Port to listen on
-  --logdir <dir>          Log directory (default: ~/tmuxer-logs)
-  --init-cmds <cmds>      Semicolon-separated commands sent via F5
-                          (default: id;uname -a;w;netstat -tulip;ip a;arp -a;ip r;ps ax)
-                          Pass empty string to disable: --init-cmds ""
-  --install               Install as 'tmuxer' symlink in /usr/local/bin
+GSocket hosts file (`~/.gsocket/hosts`, mode 600):
+```
+# name|description|secret
+my-box|home desktop|mysecretkey
 ```
 
-Must be run from a plain terminal, not from inside an existing tmux session. tmuxer starts its own session automatically.
+## Keybindings
 
-## Features
+| Key | Action |
+|-----|--------|
+| F1  | Help + reverse shell one-liners for current IP:port |
+| F2  | Host connector — SSH and GSocket hosts (fzf or numbered) |
+| F3  | Toggle raw mode (for pty.spawn connections) |
+| F4  | Open session notes (`~/notes/<session>-notes.md`) in `$EDITOR` |
+| F5  | Send command from config to active shell |
+| F9  | Toggle reverse shell listener on/off |
+| Ctrl-C | Send to remote (with confirmation) or kill local shell on window 0 |
 
-**Per-connection windows** — each reverse shell opens in a new tmux window named after the remote IP.
+F2 and F5 include a **[ + Add new ... ]** entry to add hosts/commands on the fly — persisted to config immediately.
 
-**Session logging** — both directions are logged to `~/tmuxer-logs/<IP>-<timestamp>.log` with `HH:MM:SS REMOTE:` / `USER:` prefixes. Override the directory with `--logdir`.
+## Reverse shell listener
 
-**Recon via F5** — pressing F5 sends a configurable set of recon commands to the active shell (id, uname -a, w, netstat -tulip, ip a, arp -a, ip r, ps ax by default). Each window shows the command list on connect.
+F9 starts a `socat` listener on the configured port. Each connection gets its own tmux window named after the remote IP, with PTY auto-detection and optional raw mode. Both directions are logged to `~/tmuxer-logs/<IP>-<timestamp>.log`.
 
-**Mouse support** — mouse is enabled: scroll to enter copy mode, click to focus panes, select text to copy.
+F1 shows ready-to-copy one-liners (bash, nc, python, reconnecting) for both Linux and macOS, pre-filled with your current IP and port.
 
-**Activity indicator** — tmux window tabs turn yellow when a non-active window receives output.
+## encode / revshell
 
-**Keybindings** (active for the duration of the listener):
+Helper scripts for generating and encoding reverse shell payloads:
 
-| Key     | Action                                      |
-|---------|---------------------------------------------|
-| F1      | Show help popup                             |
-| F5      | Send recon commands to active shell         |
-| Ctrl-c  | Window 0: exit tmuxer and kill all connections. Other windows: confirmation prompt before sending to remote shell. |
+```bash
+# Generate and encode in one step
+encode to-be-encoded.sh H=10.0.0.1 P=4444
 
-## Log format
-
+# Or separately
+revshell H=10.0.0.1 P=4444        # writes to-be-encoded.sh
+encode to-be-encoded.sh            # outputs base64 one-liners for all available compressors
 ```
-14:23:01 REMOTE: uid=0(root) gid=0(root) groups=0(root)
-14:23:02 INIT:   uname -a
-14:23:02 REMOTE: Linux target 5.15.0 ...
-14:23:10 USER:   cat /etc/passwd
+
+`encode` tries gzip, xz, bzip2, and zopfli, printing a ready-to-run one-liner with char count for each.
+
+## xz-test
+
+Exhaustive compression benchmark — finds the shortest possible encoded payload across ~22 500 xz `--lzma2` combinations, gzip levels, and zopfli iterations × formats. Reports total one-liner length (payload + decoder overhead) and best pack/unpack commands per compressor.
+
+```bash
+xz-test to-be-encoded.sh
 ```
