@@ -566,8 +566,9 @@ bind_keys() {
     'run-shell "stty raw -echo < #{pane_tty}"; set-option -w @raw_mode 1; display-message "raw mode ON — pty.spawn active"'
 
   # F4: vertical split → open session notes in $EDITOR; pane auto-closes when editor exits
-  tmux bind-key -n F4 split-window -h \
-    'mkdir -p ~/notes && ${EDITOR:-vi} ~/notes/#{session_name}-notes.md'
+  # run-shell expands #{session_name} before passing to the shell; split-window does not
+  tmux bind-key -n F4 run-shell \
+    'tmux split-window -h "mkdir -p ~/notes && \${EDITOR:-vi} ~/notes/#{session_name}-notes.md"'
 
   tmux bind-key -n F5 display-popup -E -w 80% -h 80% "$SELF --popup f5"
   tmux bind-key -n F9 run-shell -b "$SELF --popup f9"

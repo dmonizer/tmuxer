@@ -43,7 +43,7 @@ my-box|home desktop|mysecretkey
 | F1  | Help + reverse shell one-liners for current IP:port |
 | F2  | Host connector — SSH and GSocket hosts (fzf or numbered) |
 | F3  | Toggle raw mode (for pty.spawn connections) |
-| F4  | Open session notes (`~/notes/<session>-notes.md`) in `$EDITOR` |
+| F4  | Open session notes (`~/notes/<tmux-session-name>-notes.md`) in `$EDITOR` — splits vertically, pane closes on exit |
 | F5  | Send command from config to active shell |
 | F9  | Toggle reverse shell listener on/off |
 | Ctrl-C | Send to remote (with confirmation) or kill local shell on window 0 |
@@ -52,9 +52,24 @@ F2 and F5 include a **[ + Add new ... ]** entry to add hosts/commands on the fly
 
 ## Reverse shell listener
 
-F9 starts a `socat` listener on the configured port. Each connection gets its own tmux window named after the remote IP, with PTY auto-detection and optional raw mode. Both directions are logged to `~/tmuxer-logs/<IP>-<timestamp>.log`.
+F9 starts a `socat` listener on the configured port. Each incoming connection opens in a new tmux window named after the remote IP, with PTY auto-detection and optional raw mode toggle (F3).
 
 F1 shows ready-to-copy one-liners (bash, nc, python, reconnecting) for both Linux and macOS, pre-filled with your current IP and port.
+
+## Session logging
+
+Every connection is logged to `~/tmuxer-logs/<IP>-<timestamp>.log` with timestamped, directional prefixes:
+
+```
+14:23:01 REMOTE: uid=0(root) gid=0(root)
+14:23:05 USER:   cat /etc/passwd
+```
+
+The local shell is also logged on startup. Override the directory with `--logdir` or `logdir=` in config.
+
+## Session notes
+
+F4 splits the window vertically and opens `~/notes/<tmux-session-name>-notes.md` in `$EDITOR`. The notes directory is created automatically. The pane closes when the editor exits.
 
 ## encode / revshell
 
