@@ -54,7 +54,7 @@ Config: ~/.tmuxer.conf (shell-sourceable)
   logdir=~/tmuxer-logs
   prepend_space=1
   cmd_1_name="Disable History"
-  cmd_1="unset HISTFILE; export HISTFILESIZE=0; export HISTSIZE=0; set +o history"
+  cmd_1="unset HISTFILE; export HISTSIZE=0 HISTFILESIZE=0 SAVEHIST=0; set +o history 2>/dev/null; setopt nohistory 2>/dev/null"
   cmd_2_name="Quick Recon"
   cmd_2="id; uname -a; hostname"
   cmd_3_name="Full Recon"
@@ -84,7 +84,7 @@ prepend_space=1
 gsocket_hosts=$HOME/.gsocket/hosts
 
 cmd_1_name="Disable History"
-cmd_1="unset HISTFILE; export HISTFILESIZE=0; export HISTSIZE=0; set +o history"
+cmd_1="unset HISTFILE; export HISTSIZE=0 HISTFILESIZE=0 SAVEHIST=0; set +o history 2>/dev/null; setopt nohistory 2>/dev/null"
 
 cmd_2_name="Quick Recon"
 cmd_2="id; uname -a; hostname"
