@@ -513,7 +513,11 @@ popup_f9() {
 popup_ctrlc() {
   local fifo
   fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
-  [[ -p "$fifo" ]] && printf '\003' >> "$fifo"
+  if [[ -p "$fifo" ]]; then
+    printf '\003' >> "$fifo"
+  else
+    tmux send-keys C-c
+  fi
 }
 
 popup_listener() {
