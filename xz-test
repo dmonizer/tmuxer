@@ -1,0 +1,189 @@
+#!/usr/bin/env bash
+# xz-test: exhaustive compression search
+# Reports total one-liner length = b64_payload + 18(fixed) + len(decoder)
+# Fixed overhead: echo (5) + |base64 -d| (10) + |sh (3) = 18
+# Usage: xz-test <file>
+
+FILE="${1:?usage: xz-test <file>}"
+[[ -f "$FILE" ]] || { echo "error: $FILE not found" >&2; exit 1; }
+command -v xz &>/dev/null || { echo "error: xz not found" >&2; exit 1; }
+
+DEC_XZ="xz -d"
+DEC_XZ_RAW="xz -d -Fraw"
+DEC_LZIP="lzip -d"
+DEC_GZ="gunzip"
+DEC_ZLIB='python3 -c "import zlib,sys;sys.stdout.buffer.write(zlib.decompress(sys.stdin.buffer.read()))"'
+DEC_DEFLATE='python3 -c "import zlib,sys;sys.stdout.buffer.write(zlib.decompress(sys.stdin.buffer.read(),-15))"'
+
+OH=18
+
+# results format: "total|group|pack_flags|decoder"
+# group: gzip | xz | xz-lzma | xz-lzip | xz-raw | zopfli-gzip | zopfli-zlib | zopfli-deflate
+results=()
+
+add_result() {
+  local raw="$1" group="$2" flags="$3" dec="$4"
+  local total=$(( (raw + 2) / 3 * 4 + OH + ${#dec} ))
+  results+=("${total}|${group}|${flags}|${dec}")
+}
+
+# ── gzip -6..-9 ───────────────────────────────────────────────────────────────
+printf 'gzip: testing levels 6-9...\n' >&2
+for lvl in 6 7 8 9; do
+  raw=$(gzip -"${lvl}" -c "$FILE" 2>/dev/null | wc -c)
+  [[ ${raw:-0} -gt 0 ]] && add_result "$raw" "gzip" "-${lvl}" "$DEC_GZ"
+done
+
+# ── xz presets ────────────────────────────────────────────────────────────────
+printf 'xz: testing presets and --lzma2 grid...\n' >&2
+for lvl in 6 7 8 9; do
+  raw=$(xz -"${lvl}"  -c "$FILE" 2>/dev/null | wc -c); [[ ${raw:-0} -gt 0 ]] && add_result "$raw" "xz" "-${lvl}"  "$DEC_XZ"
+  raw=$(xz -"${lvl}"e -c "$FILE" 2>/dev/null | wc -c); [[ ${raw:-0} -gt 0 ]] && add_result "$raw" "xz" "-${lvl}e" "$DEC_XZ"
+done
+
+# ── xz --lzma2 grid ───────────────────────────────────────────────────────────
+dicts=(4096 8192 32768 131072 524288 4194304)
+nices=(2 16 64 128 273)
+mfs=(hc3 hc4 bt2 bt3 bt4)
+
+n=0 total_combos=$(( 6 * 15 * 5 * 2 * 5 * 5 ))
+printf 'xz: testing %d --lzma2 combinations...\n' "$total_combos" >&2
+
+for dict in "${dicts[@]}"; do
+  for lc in 0 1 2 3 4; do
+    for lp in 0 1 2 3 4; do
+      (( lc + lp > 4 )) && continue
+      for pb in 0 1 2 3 4; do
+        for mode in fast normal; do
+          for nice in "${nices[@]}"; do
+            for mf in "${mfs[@]}"; do
+              opts="dict=${dict},lc=${lc},lp=${lp},pb=${pb},mode=${mode},nice=${nice},mf=${mf}"
+              raw=$(xz --lzma2="${opts}" -c "$FILE" 2>/dev/null | wc -c)
+              [[ ${raw:-0} -gt 0 ]] && add_result "$raw" "xz" "--lzma2=${opts}" "$DEC_XZ"
+              (( ++n % 1000 == 0 )) && printf '\r  %d / %d' "$n" "$total_combos" >&2
+            done
+          done
+        done
+      done
+    done
+  done
+done
+printf '\r  %d / %d done\n' "$n" "$total_combos" >&2
+
+# ── round 1 results ───────────────────────────────────────────────────────────
+r1_sorted=$(printf '%s\n' "${results[@]}" | sort -t'|' -k1 -n)
+
+echo "── round 1 top 10 (gzip + xz presets + lzma2 grid) ─────────────────────"
+printf '%s\n' "$r1_sorted" | head -10 | while IFS='|' read -r total group flags _dec; do
+  printf '%5d chars  [%-8s] %s\n' "$total" "$group" "$flags"
+done
+echo "── round 1 bottom 10 ────────────────────────────────────────────────────"
+printf '%s\n' "$r1_sorted" | tail -10 | while IFS='|' read -r total group flags _dec; do
+  printf '%5d chars  [%-8s] %s\n' "$total" "$group" "$flags"
+done
+
+# ── round 2: top 10 xz × -F × -C ─────────────────────────────────────────────
+printf '\nxz round 2: top 10 xz × format × check...\n' >&2
+
+r2=()
+while IFS='|' read -r _total _group flags _dec; do
+  for fmt in xz lzma lzip; do
+    dec="$DEC_XZ"; [[ "$fmt" == lzip ]] && dec="$DEC_LZIP"
+    group="xz-${fmt}"
+    for chk in none crc32 crc64 sha256; do
+      raw=$(xz $flags -F "$fmt" -C "$chk" -c "$FILE" 2>/dev/null | wc -c)
+      [[ ${raw:-0} -gt 0 ]] && r2+=("$(( (raw+2)/3*4 + OH + ${#dec} ))|${group}|${flags} -F${fmt} -C${chk}|${dec}")
+    done
+  done
+  raw=$(xz $flags -F raw -c "$FILE" 2>/dev/null | wc -c)
+  [[ ${raw:-0} -gt 0 ]] && r2+=("$(( (raw+2)/3*4 + OH + ${#DEC_XZ_RAW} ))|xz-raw|${flags} -Fraw|${DEC_XZ_RAW}")
+done < <(printf '%s\n' "$r1_sorted" | grep '^[0-9]*|xz|' | head -10)
+
+r2_sorted=$(printf '%s\n' "${r2[@]}" | sort -t'|' -k1 -n)
+echo "── round 2 top 10 ───────────────────────────────────────────────────────"
+printf '%s\n' "$r2_sorted" | head -10 | while IFS='|' read -r total group flags _dec; do
+  printf '%5d chars  [%-8s] %s\n' "$total" "$group" "$flags"
+done
+echo "── round 2 bottom 10 ────────────────────────────────────────────────────"
+printf '%s\n' "$r2_sorted" | tail -10 | while IFS='|' read -r total group flags _dec; do
+  printf '%5d chars  [%-8s] %s\n' "$total" "$group" "$flags"
+done
+
+# ── zopfli ────────────────────────────────────────────────────────────────────
+zr=()
+if ! command -v zopfli &>/dev/null; then
+  printf '\nzopfli: not found — install: apt install zopfli / brew install zopfli\n' >&2
+else
+  printf '\nzopfli: testing iterations × formats...\n' >&2
+  tmp=$(mktemp /tmp/ztest.XXXXXX)
+  cp "$FILE" "$tmp"
+  for iters in 1 10 100 1000; do
+    printf '  i=%d...\n' "$iters" >&2
+    for fmt in --gzip --zlib --deflate; do
+      case "$fmt" in
+        --gzip)    ext=gz    dec="$DEC_GZ"      group="zopfli-gzip"    ;;
+        --zlib)    ext=zlib  dec="$DEC_ZLIB"    group="zopfli-zlib"    ;;
+        --deflate) ext=deflate dec="$DEC_DEFLATE" group="zopfli-deflate" ;;
+      esac
+      rm -f "${tmp}.${ext}"
+      zopfli "$fmt" --i"${iters}" "$tmp" 2>/dev/null
+      raw=$(wc -c < "${tmp}.${ext}" 2>/dev/null)
+      if [[ ${raw:-0} -gt 0 ]]; then
+        total=$(( (raw+2)/3*4 + OH + ${#dec} ))
+        zr+=("${total}|${group}|${fmt} --i${iters}|${dec}")
+      fi
+      rm -f "${tmp}.${ext}"
+    done
+  done
+  rm -f "$tmp"
+
+  zr_sorted=$(printf '%s\n' "${zr[@]}" | sort -t'|' -k1 -n)
+  echo "── zopfli results ────────────────────────────────────────────────────────"
+  printf '%s\n' "$zr_sorted" | while IFS='|' read -r total group flags _dec; do
+    printf '%5d chars  [%-14s] %s\n' "$total" "$group" "$flags"
+  done
+fi
+
+# ── best per packer ───────────────────────────────────────────────────────────
+declare -A best_total best_flags best_dec
+all=("${results[@]}" "${r2[@]}" "${zr[@]}")
+for entry in "${all[@]}"; do
+  IFS='|' read -r total group flags dec <<< "$entry"
+  if [[ -z "${best_total[$group]}" || $total -lt ${best_total[$group]} ]]; then
+    best_total[$group]="$total"
+    best_flags[$group]="$flags"
+    best_dec[$group]="$dec"
+  fi
+done
+
+echo ""
+echo "════════════════════════════════════════════════════════════════════════════"
+echo "  BEST PER PACKER"
+echo "════════════════════════════════════════════════════════════════════════════"
+
+show_best() {
+  local group="$1"
+  [[ -z "${best_total[$group]}" ]] && return
+  local flags="${best_flags[$group]}" dec="${best_dec[$group]}"
+  local pack unpack="echo <B64>|base64 -d|${dec}|sh"
+
+  case "$group" in
+    gzip)
+      pack="gzip ${flags}c <file> | base64 | tr -d '\\n'" ;;
+    xz|xz-xz|xz-lzma|xz-lzip|xz-raw)
+      pack="xz ${flags} -c <file> | base64 | tr -d '\\n'" ;;
+    zopfli-gzip)
+      pack="zopfli ${flags} <file> && base64 <file>.gz | tr -d '\\n'" ;;
+    zopfli-zlib)
+      pack="zopfli ${flags} <file> && base64 <file>.zlib | tr -d '\\n'" ;;
+    zopfli-deflate)
+      pack="zopfli ${flags} <file> && base64 <file>.deflate | tr -d '\\n'" ;;
+  esac
+
+  printf '\n%-16s %d chars\n' "${group}" "${best_total[$group]}"
+  printf '  pack:   %s\n' "$pack"
+  printf '  unpack: %s\n' "$unpack"
+}
+
+groups=(gzip xz xz-xz xz-lzma xz-lzip xz-raw zopfli-gzip zopfli-zlib zopfli-deflate)
+for g in "${groups[@]}"; do show_best "$g"; done

