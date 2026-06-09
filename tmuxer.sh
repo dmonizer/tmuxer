@@ -318,6 +318,7 @@ _help_banner() {
 │  F1   show this help                                                         │
 │  F2   host connector (SSH + GSocket) — type to filter, Enter to connect      │
 │  F3   toggle raw mode (pty.spawn connections)                                │
+│  F4   open session notes (~/notes/<session>-notes.md) in $EDITOR            │
 │  F5   send commands (config-defined) — type to filter, Enter to send         │
 │  F9   toggle reverse shell listener on/off                                   │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -492,6 +493,7 @@ popup_listener() {
 │  F1   full help & shortcuts                                                  │
 │  F2   host connector (SSH + GSocket)                                         │
 │  F3   toggle raw mode (pty.spawn connections)                                │
+│  F4   open session notes in $EDITOR                                          │
 │  F5   send commands to active connection                                     │
 │  F9   stop this listener                                                     │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -536,6 +538,10 @@ bind_keys() {
   tmux bind-key -n F3 if-shell -F '#{==:#{@raw_mode},1}' \
     'run-shell "stty sane < #{pane_tty}"; set-option -w @raw_mode 0; display-message "raw mode OFF — cooked restored"' \
     'run-shell "stty raw -echo < #{pane_tty}"; set-option -w @raw_mode 1; display-message "raw mode ON — pty.spawn active"'
+
+  # F4: vertical split → open session notes in $EDITOR; pane auto-closes when editor exits
+  tmux bind-key -n F4 split-window -h \
+    'mkdir -p ~/notes && ${EDITOR:-vi} ~/notes/#{session_name}-notes.md'
 
   tmux bind-key -n F5 display-popup -E -w 80% -h 80% "$SELF --popup f5"
   tmux bind-key -n F9 run-shell -b "$SELF --popup f9"
