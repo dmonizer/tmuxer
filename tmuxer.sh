@@ -572,10 +572,16 @@ bind_keys() {
     'run-shell "stty sane < #{pane_tty}"; set-option -w @raw_mode 0; display-message "raw mode OFF — cooked restored"' \
     'run-shell "stty raw -echo < #{pane_tty}"; set-option -w @raw_mode 1; display-message "raw mode ON — pty.spawn active"'
 
-  # F4: vertical split → open session notes in $EDITOR; pane auto-closes when editor exits
-  # run-shell expands #{session_name} before passing to the shell; split-window does not
+  # F4: open host notes pane; if already open, focus it instead of splitting again
+  # ##{ escapes format expansion so inner tmux commands expand #{pane_id} themselves
   tmux bind-key -n F4 run-shell \
-    'tmux split-window -h "mkdir -p ~/notes && \${EDITOR:-vi} ~/notes/#{window_name}-notes.md"'
+    'np=$(tmux show-options -wv @notes_pane 2>/dev/null); \
+     if [ -n "$np" ] && tmux list-panes -F "##{pane_id}" | grep -qF "$np"; then \
+       tmux select-pane -t "$np"; \
+     else \
+       np=$(tmux split-window -h -P -F "##{pane_id}" "mkdir -p ~/notes && \${EDITOR:-vi} ~/notes/#{window_name}-notes.md"); \
+       tmux set-option -w @notes_pane "$np"; \
+     fi'
 
   tmux bind-key -n F5 display-popup -E -w 80% -h 80% "$SELF --popup f5"
   tmux bind-key -n F9 run-shell -b "$SELF --popup f9"
