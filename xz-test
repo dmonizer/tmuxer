@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# xz-test: exhaustive xz parameter search — outputs base64 lengths sorted ascending
+# Usage: xz-test <file>
+
+FILE="${1:?usage: xz-test <file>}"
+[[ -f "$FILE" ]] || { echo "error: $FILE not found" >&2; exit 1; }
+command -v xz &>/dev/null || { echo "error: xz not found" >&2; exit 1; }
+
+# base64 length from raw byte count (no need to actually run base64)
+b64len() { echo $(( ($1 + 2) / 3 * 4 )); }
+
+results=()
+
+try() {
+  local label="$1"; shift
+  local raw
+  raw=$(xz "$@" -c "$FILE" 2>/dev/null | wc -c)
+  [[ ${raw:-0} -gt 0 ]] && results+=("$(b64len "$raw") ${label}")
+}
+
+# ── basic presets: -6 .. -9 with and without -e ───────────────────────────────
+for lvl in 6 7 8 9; do
+  try "-${lvl}"  -"${lvl}"
+  try "-${lvl}e" -"${lvl}e"
+done
+
+# ── --lzma2 grid ──────────────────────────────────────────────────────────────
+dicts=(4096 8192 32768 131072 524288 4194304)
+nices=(2 16 64 128 273)
+mfs=(hc3 hc4 bt2 bt3 bt4)
+
+n=0 total=$(( 6 * 15 * 5 * 2 * 5 * 5 ))   # 22500
+printf 'testing %d --lzma2 combinations...\n' "$total" >&2
+
+for dict in "${dicts[@]}"; do
+  for lc in 0 1 2 3 4; do
+    for lp in 0 1 2 3 4; do
+      (( lc + lp > 4 )) && continue
+      for pb in 0 1 2 3 4; do
+        for mode in fast normal; do
+          for nice in "${nices[@]}"; do
+            for mf in "${mfs[@]}"; do
+              opts="dict=${dict},lc=${lc},lp=${lp},pb=${pb},mode=${mode},nice=${nice},mf=${mf}"
+              try "--lzma2=${opts}" --lzma2="${opts}"
+              (( ++n % 1000 == 0 )) && printf '\r  %d / %d' "$n" "$total" >&2
+            done
+          done
+        done
+      done
+    done
+  done
+done
+printf '\r  %d / %d done\n' "$n" "$total" >&2
+
+# ── sort and print top 10 / bottom 10 ────────────────────────────────────────
+sorted=$(printf '%s\n' "${results[@]}" | sort -n)
+total_results=$(printf '%s\n' "${results[@]}" | wc -l)
+
+echo "── top 10 (shortest) ────────────────────────────────────────────────────"
+printf '%s\n' "$sorted" | head -10 | while read -r size label; do
+  printf '%5d  %s\n' "$size" "$label"
+done
+
+echo "── bottom 10 (longest) ──────────────────────────────────────────────────"
+printf '%s\n' "$sorted" | tail -10 | while read -r size label; do
+  printf '%5d  %s\n' "$size" "$label"
+done
