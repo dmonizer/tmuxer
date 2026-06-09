@@ -64,7 +64,12 @@ try_zopfli() {
   printf '[zopfli %d chars] %s\n' "${#line}" "$line"
 }
 
+SEP="==========================================================="
+
 try gzip   gunzip
+echo $SEP
 try xz     "xz -d"
+echo $SEP
 try bzip2  bunzip2
+echo $SEP
 try_zopfli
