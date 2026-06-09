@@ -271,7 +271,10 @@ enforce_tmux() {
     exit 1
   fi
   if [[ -z "$TMUX" ]]; then
-    exec tmux new-session -e TMUXER_OWNED_SESSION=1 -- "$0" "${ORIG_ARGS[@]}"
+    if tmux has-session -t tmuxer 2>/dev/null; then
+      exec tmux attach-session -t tmuxer
+    fi
+    exec tmux new-session -s tmuxer -e TMUXER_OWNED_SESSION=1 -- "$0" "${ORIG_ARGS[@]}"
   fi
 }
 
