@@ -298,6 +298,7 @@ store_tmux_options() {
   tmux set-option -g @tmuxer_logdir        "$LOGDIR"
   tmux set-option -g @tmuxer_pid_file      "$LISTENER_PID_FILE"
   tmux set-option -g @tmuxer_self          "$SELF"
+  tmux set-option -g @tmuxer_gs_hosts_file "$GSOCKET_HOSTS"
 
   # S7: warn on old tmux when fzf is absent
   if [[ -z "$(type -P fzf 2>/dev/null)" ]]; then
@@ -338,32 +339,61 @@ popup_f1() {
   read -r _
 }
 
+_add_gsocket_host() {
+  local hosts_file gs_file name desc secret
+  hosts_file=$(tmux_gopt @tmuxer_hosts_file)
+  gs_file=$(tmux_gopt @tmuxer_gs_hosts_file)
+  [[ -z "$gs_file" ]] && { echo "error: GSocket hosts file not configured" >&2; printf 'Press Enter...'; read -r _; return; }
+  printf '\n── Add GSocket host ──────────────────────\n'
+  printf 'Name (required):   '; read -r name
+  [[ -z "$name" ]] && { echo "cancelled."; return; }
+  [[ "$name" == *'|'* ]] && { echo "error: name cannot contain '|'"; printf 'Press Enter...'; read -r _; return; }
+  printf 'Description:       '; read -r desc
+  [[ "$desc" == *'|'* ]] && { echo "error: description cannot contain '|'"; printf 'Press Enter...'; read -r _; return; }
+  printf 'Secret (required): '; read -r secret
+  [[ -z "$secret" ]] && { echo "cancelled."; return; }
+  [[ "$secret" == *'|'* ]] && { echo "error: secret cannot contain '|'"; printf 'Press Enter...'; read -r _; return; }
+  printf '%s|%s|%s\n' "$name" "$desc" "$secret" >> "$gs_file"
+  printf 'GS: %s (%s)|GS:%s|%s|%s\n' "$name" "$desc" "$name" "$desc" "$secret" >> "$hosts_file"
+  printf 'added: %s\n' "$name"
+  printf 'Press Enter...'; read -r _
+}
+
+_add_command() {
+  local cmds_file name cmd next_n
+  cmds_file=$(tmux_gopt @tmuxer_cmds_file)
+  printf '\n── Add command ───────────────────────────\n'
+  printf 'Name (required): '; read -r name
+  [[ -z "$name" ]] && { echo "cancelled."; return; }
+  [[ "$name" == *'|'* ]] && { echo "error: name cannot contain '|'"; printf 'Press Enter...'; read -r _; return; }
+  printf 'Command:         '; read -r cmd
+  [[ -z "$cmd" ]] && { echo "cancelled."; return; }
+  next_n=$(( $(wc -l < "$cmds_file" 2>/dev/null || echo 0) + 1 ))
+  printf '\ncmd_%d_name=%q\ncmd_%d=%q\n' "$next_n" "$name" "$next_n" "$cmd" >> "$HOME/.tmuxer.conf"
+  printf '%s|%s\n' "$name" "$cmd" >> "$cmds_file"
+  printf 'added: %s\n' "$name"
+  printf 'Press Enter...'; read -r _
+}
+
 popup_f2() {
   local hosts_file fzf_bin sel action type rest
   hosts_file=$(tmux_gopt @tmuxer_hosts_file)
   fzf_bin=$(type -P fzf 2>/dev/null) || fzf_bin=""
-
-  [[ -s "$hosts_file" ]] || {
-    echo "No hosts found."
-    echo "Sources: ~/.ssh/config ~/.gsocket/hosts"
-    printf '\nPress Enter...'
-    read -r _
-    return
-  }
+  local ADD_NEW='[ + Add new GSocket host ]'
 
   if [[ -n "$fzf_bin" ]]; then
-    sel=$(awk -F'|' '{print $1}' "$hosts_file" \
+    sel=$({ [[ -s "$hosts_file" ]] && awk -F'|' '{print $1}' "$hosts_file"; printf '%s\n' "$ADD_NEW"; } \
       | fzf --color=dark --header='Hosts (type to filter, Enter=connect, Esc=cancel)' --height=20 --border)
     [[ -z "$sel" ]] && return
+    if [[ "$sel" == "$ADD_NEW" ]]; then _add_gsocket_host; return; fi
     action=$(grep -m1 -F "$sel|" "$hosts_file" | cut -d'|' -f2-)
   else
     declare -a labels actions
-    while IFS='|' read -r label act; do
+    [[ -s "$hosts_file" ]] && while IFS='|' read -r label act; do
       [[ -z "$label" ]] && continue
-      labels+=("$label")
-      actions+=("$act")
+      labels+=("$label"); actions+=("$act")
     done < "$hosts_file"
-    [[ ${#labels[@]} -eq 0 ]] && { echo "No hosts found."; printf 'Press Enter...'; read -r _; return; }
+    labels+=("$ADD_NEW"); actions+=("ADD_NEW")
     echo "Hosts:"
     for i in "${!labels[@]}"; do printf '  %d) %s\n' $((i+1)) "${labels[$i]}"; done
     printf '\nSelect (1-%d, Enter=cancel): ' ${#labels[@]}
@@ -372,6 +402,7 @@ popup_f2() {
     local idx=$((choice - 1))
     [[ $idx -ge 0 && $idx -lt ${#labels[@]} ]] || return
     action="${actions[$idx]}"
+    if [[ "$action" == "ADD_NEW" ]]; then _add_gsocket_host; return; fi
   fi
 
   type="${action%%:*}"
@@ -397,28 +428,22 @@ popup_f5() {
   prepend_space=$(tmux_gopt @tmuxer_prepend_space)
   fzf_bin=$(type -P fzf 2>/dev/null) || fzf_bin=""
   fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
-
-  [[ -s "$cmds_file" ]] || {
-    echo "No commands defined in ~/.tmuxer.conf"
-    printf '\nPress Enter...'
-    read -r _
-    return
-  }
+  local ADD_NEW='[ + Add new command ]'
 
   if [[ -n "$fzf_bin" ]]; then
-    sel=$(awk -F'|' '{print $1}' "$cmds_file" \
+    sel=$({ [[ -s "$cmds_file" ]] && awk -F'|' '{print $1}' "$cmds_file"; printf '%s\n' "$ADD_NEW"; } \
       | fzf --color=dark --header='Commands (type to filter, Enter=send, Esc=cancel)' --height=20 --border)
     [[ -z "$sel" ]] && return
+    if [[ "$sel" == "$ADD_NEW" ]]; then _add_command; return; fi
     cmd_val=$(grep -m1 -F "$sel|" "$cmds_file" | cut -d'|' -f2-)
     cmd_name="$sel"
   else
     declare -a names vals
-    while IFS='|' read -r name val; do
+    [[ -s "$cmds_file" ]] && while IFS='|' read -r name val; do
       [[ -z "$name" ]] && continue
-      names+=("$name")
-      vals+=("$val")
+      names+=("$name"); vals+=("$val")
     done < "$cmds_file"
-    [[ ${#names[@]} -eq 0 ]] && { echo "No commands defined."; printf 'Press Enter...'; read -r _; return; }
+    names+=("$ADD_NEW"); vals+=("ADD_NEW")
     echo "Commands:"
     for i in "${!names[@]}"; do printf '  %d) %s\n' $((i+1)) "${names[$i]}"; done
     printf '\nSelect (1-%d, Enter=cancel): ' ${#names[@]}
@@ -428,6 +453,7 @@ popup_f5() {
     [[ $idx -ge 0 && $idx -lt ${#names[@]} ]] || return
     cmd_val="${vals[$idx]}"
     cmd_name="${names[$idx]}"
+    if [[ "$cmd_val" == "ADD_NEW" ]]; then _add_command; return; fi
   fi
 
   if [[ -p "$fifo" ]]; then
