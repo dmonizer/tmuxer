@@ -2,7 +2,7 @@
 
 # ── defaults ──────────────────────────────────────────────────────────────────
 PORT=""
-LOGDIR="$HOME/tmuxer-logs"
+LOGDIR="$HOME/.tmuxer/logs"
 TMUXER_LOG="$(date +%d%m%y).log"
 PREPEND_SPACE=1
 ORIG_ARGS=("$@")
@@ -18,7 +18,7 @@ fi
 
 LISTENER_PID_FILE="/tmp/tmuxer_listener.pid"
 
-GSOCKET_HOSTS="$HOME/.gsocket/hosts"
+GSOCKET_HOSTS="$HOME/.tmuxer/gsocket-hosts"
 
 # Config-sourced variables
 listener_port=""
@@ -43,15 +43,15 @@ usage() {
 Usage: $(basename "$0") [OPTIONS] [port]
 
 Options:
-  -p, --port <port>       Port to listen on (overrides ~/.tmuxer.conf)
-  --logdir <dir>          Log directory (default: ~/tmuxer-logs)
+  -p, --port <port>       Port to listen on (overrides ~/.tmuxer/config)
+  --logdir <dir>          Log directory (default: ~/.tmuxer/logs)
   --prepend-space         Prepend commands with a space (default: on)
   --no-prepend-space      Do not prepend commands with a space
   --install               Install as 'tmuxer' symlink in /usr/local/bin
 
-Config: ~/.tmuxer.conf (shell-sourceable)
+Config: ~/.tmuxer/config (shell-sourceable)
   listener_port=4444
-  logdir=~/tmuxer-logs
+  logdir=~/.tmuxer/logs
   prepend_space=1
   cmd_1_name="Disable History"
   cmd_1="unset HISTFILE; export HISTSIZE=0 HISTFILESIZE=0 SAVEHIST=0; set +o history 2>/dev/null; setopt nohistory 2>/dev/null"
@@ -62,7 +62,7 @@ Config: ~/.tmuxer.conf (shell-sourceable)
 
 Host sources:
   ~/.ssh/config             — SSH Host entries
-  \$GSOCKET_HOSTS (default ~/.gsocket/hosts) — name|description|secret
+  \$GSOCKET_HOSTS (default ~/.tmuxer/gsocket-hosts) — name|description|secret
 EOF
   exit 0
 }
@@ -73,15 +73,16 @@ log() {
 
 install() {
   # Create default config if missing (no root needed)
-  local conf="$HOME/.tmuxer.conf"
+  local conf="$HOME/.tmuxer/config"
+  mkdir -p "$HOME/.tmuxer"
   if [[ ! -f "$conf" ]]; then
     # TODO: extract the default config to a variable to use here and also in usage msg
     cat >"$conf" <<'CONFEOF'
 # tmuxer config — shell-sourceable
 listener_port=4444
-logdir=$HOME/tmuxer-logs
+logdir=$HOME/.tmuxer/logs
 prepend_space=1
-gsocket_hosts=$HOME/.gsocket/hosts
+gsocket_hosts=$HOME/.tmuxer/gsocket-hosts
 
 cmd_1_name="Disable History"
 cmd_1="unset HISTFILE; export HISTSIZE=0 HISTFILESIZE=0 SAVEHIST=0; set +o history 2>/dev/null; setopt nohistory 2>/dev/null"
@@ -156,7 +157,7 @@ check_deps() {
 
 # ── config loading ────────────────────────────────────────────────────────────
 load_config() {
-  local config_file="$HOME/.tmuxer.conf"
+  local config_file="$HOME/.tmuxer/config"
   if [[ -f "$config_file" ]]; then
     source "$config_file"
   fi
@@ -271,7 +272,10 @@ enforce_tmux() {
     exit 1
   fi
   if [[ -z "$TMUX" ]]; then
-    exec tmux new-session -e TMUXER_OWNED_SESSION=1 -- "$0" "${ORIG_ARGS[@]}"
+    if tmux has-session -t tmuxer 2>/dev/null; then
+      exec tmux attach-session -t tmuxer
+    fi
+    exec tmux new-session -s tmuxer -e TMUXER_OWNED_SESSION=1 -- "$0" "${ORIG_ARGS[@]}"
   fi
 }
 
@@ -319,7 +323,7 @@ _help_banner() {
 │  F1   show this help                                                         │
 │  F2   host connector (SSH + GSocket) — type to filter, Enter to connect      │
 │  F3   toggle raw mode (pty.spawn connections)                                │
-│  F4   open session notes (~/notes/<session>-notes.md) in $EDITOR            │
+│  F4   open session notes (~/.tmuxer/notes/<session>-notes.md) in $EDITOR    │
 │  F5   send commands (config-defined) — type to filter, Enter to send         │
 │  F9   toggle reverse shell listener on/off                                   │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -369,7 +373,7 @@ _add_command() {
   printf 'Command:         '; read -r cmd
   [[ -z "$cmd" ]] && { echo "cancelled."; return; }
   next_n=$(( $(wc -l < "$cmds_file" 2>/dev/null || echo 0) + 1 ))
-  printf '\ncmd_%d_name=%q\ncmd_%d=%q\n' "$next_n" "$name" "$next_n" "$cmd" >> "$HOME/.tmuxer.conf"
+  printf '\ncmd_%d_name=%q\ncmd_%d=%q\n' "$next_n" "$name" "$next_n" "$cmd" >> "$HOME/.tmuxer/config"
   printf '%s|%s\n' "$name" "$cmd" >> "$cmds_file"
   printf 'added: %s\n' "$name"
   printf 'Press Enter...'; read -r _
@@ -510,7 +514,11 @@ popup_f9() {
 popup_ctrlc() {
   local fifo
   fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
-  [[ -p "$fifo" ]] && printf '\003' >> "$fifo"
+  if [[ -p "$fifo" ]]; then
+    printf '\003' >> "$fifo"
+  else
+    tmux send-keys C-c
+  fi
 }
 
 popup_listener() {
@@ -565,9 +573,16 @@ bind_keys() {
     'run-shell "stty sane < #{pane_tty}"; set-option -w @raw_mode 0; display-message "raw mode OFF — cooked restored"' \
     'run-shell "stty raw -echo < #{pane_tty}"; set-option -w @raw_mode 1; display-message "raw mode ON — pty.spawn active"'
 
-  # F4: vertical split → open session notes in $EDITOR; pane auto-closes when editor exits
-  tmux bind-key -n F4 split-window -h \
-    'mkdir -p ~/notes && ${EDITOR:-vi} ~/notes/#{session_name}-notes.md'
+  # F4: open host notes pane; if already open, focus it instead of splitting again
+  # ##{ escapes format expansion so inner tmux commands expand #{pane_id} themselves
+  tmux bind-key -n F4 run-shell \
+    'np=$(tmux show-options -wv @notes_pane 2>/dev/null); \
+     if [ -n "$np" ] && tmux list-panes -F "##{pane_id}" | grep -qF "$np"; then \
+       tmux select-pane -t "$np"; \
+     else \
+       np=$(tmux split-window -h -P -F "##{pane_id}" "mkdir -p ~/.tmuxer/notes && \${EDITOR:-vi} ~/.tmuxer/notes/#{window_name}-notes.md"); \
+       tmux set-option -w @notes_pane "$np"; \
+     fi'
 
   tmux bind-key -n F5 display-popup -E -w 80% -h 80% "$SELF --popup f5"
   tmux bind-key -n F9 run-shell -b "$SELF --popup f9"
@@ -680,7 +695,7 @@ start_tmuxer() {
 
   if [[ -z "$PORT" ]]; then
     echo "error: no port specified"
-    echo "       set listener_port in ~/.tmuxer.conf or use --port"
+    echo "       set listener_port in ~/.tmuxer/config or use --port"
     exit 1
   fi
 
