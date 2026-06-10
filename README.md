@@ -13,15 +13,15 @@ Pentester toolkit built around tmux. Opens each incoming reverse shell in a dedi
 sudo ./tmuxer.sh --install
 ```
 
-Creates `~/.tmuxer.conf` with defaults and `/usr/local/bin/tmuxer` symlink.
+Creates `~/.tmuxer/config` with defaults and `/usr/local/bin/tmuxer` symlink.
 
-## Config (`~/.tmuxer.conf`)
+## Config (`~/.tmuxer/config`)
 
 ```bash
 listener_port=4444
-logdir=~/tmuxer-logs
+logdir=~/.tmuxer/logs
 prepend_space=1                   # prefix commands with space (hide from history)
-gsocket_hosts=~/.gsocket/hosts    # name|description|secret
+gsocket_hosts=~/.tmuxer/gsocket-hosts    # name|description|secret
 
 cmd_1_name="Disable History"
 cmd_1="unset HISTFILE; export HISTSIZE=0 HISTFILESIZE=0 SAVEHIST=0; set +o history 2>/dev/null; setopt nohistory 2>/dev/null"
@@ -30,7 +30,7 @@ cmd_2_name="Quick Recon"
 cmd_2="id; uname -a; hostname"
 ```
 
-GSocket hosts file (`~/.gsocket/hosts`, mode 600):
+GSocket hosts file (`~/.tmuxer/gsocket-hosts`, mode 600):
 ```
 # name|description|secret
 my-box|home desktop|mysecretkey
@@ -43,7 +43,7 @@ my-box|home desktop|mysecretkey
 | F1  | Help + reverse shell one-liners for current IP:port |
 | F2  | Host connector — SSH and GSocket hosts (fzf or numbered) |
 | F3  | Toggle raw mode (for pty.spawn connections) |
-| F4  | Open host notes (`~/notes/<window-name>-notes.md`) in `$EDITOR` — splits vertically, pane closes on exit |
+| F4  | Open host notes (`~/.tmuxer/notes/<window-name>-notes.md`) in `$EDITOR` — splits vertically, pane closes on exit |
 | F5  | Send command from config to active shell |
 | F9  | Toggle reverse shell listener on/off |
 | Ctrl-C | Send to remote (with confirmation) or kill local shell on window 0 |
@@ -58,7 +58,7 @@ F1 shows ready-to-copy one-liners (bash, nc, python, reconnecting) for both Linu
 
 ## Session logging
 
-Every connection is logged to `~/tmuxer-logs/<IP>-<timestamp>.log` with timestamped, directional prefixes:
+Every connection is logged to `~/.tmuxer/logs/<IP>-<timestamp>.log` with timestamped, directional prefixes:
 
 ```
 14:23:01 REMOTE: uid=0(root) gid=0(root)
@@ -69,7 +69,7 @@ The local shell is also logged on startup. Override the directory with `--logdir
 
 ## Session notes
 
-F4 splits the window vertically and opens `~/notes/<window-name>-notes.md` in `$EDITOR`. Since each connection window is named after the host (e.g. `my-box`, `192.168.1.5`), notes are per-host and reopen the same file each time you connect. The notes directory is created automatically. The pane closes when the editor exits.
+F4 splits the window vertically and opens `~/.tmuxer/notes/<window-name>-notes.md` in `$EDITOR`. Since each connection window is named after the host (e.g. `my-box`, `192.168.1.5`), notes are per-host and reopen the same file each time you connect. The notes directory is created automatically. The pane closes when the editor exits.
 
 ## encode / revshell
 
