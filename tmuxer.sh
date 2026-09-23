@@ -47,7 +47,8 @@ Options:
   --logdir <dir>          Log directory (default: ~/.tmuxer/logs)
   --prepend-space         Prepend commands with a space (default: on)
   --no-prepend-space      Do not prepend commands with a space
-  --install               Install as 'tmuxer' symlink in /usr/local/bin
+  --install               Initialize config and symlink to /usr/local/bin
+  --setup                 Initialize config files only
 
 Config: ~/.tmuxer/config (shell-sourceable)
   listener_port=4444
@@ -71,7 +72,7 @@ log() {
   echo "$@" >>"$LOGDIR/$TMUXER_LOG"
 }
 
-install() {
+setup_user_files() {
   # Create default config if missing (no root needed)
   local conf="$HOME/.tmuxer/config"
   mkdir -p "$HOME/.tmuxer"
@@ -127,6 +128,11 @@ GSEOF
       echo "      run: chmod 600 $gs"
     fi
   fi
+
+}
+
+install() {
+  setup_user_files
 
   # Install symlink (may need sudo)
   local dest=/usr/local/bin/tmuxer
@@ -1004,6 +1010,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
   -h | --help) usage ;;
   --install) install ;;
+  --setup) setup_user_files; exit 0 ;;
   handler)
     MODE=handler
     shift
