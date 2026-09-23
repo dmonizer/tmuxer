@@ -4,7 +4,7 @@
 set -euo pipefail
 
 repo="https://raw.githubusercontent.com/dmonizer/tmuxer"
-ref="${TMUXER_REF:-main}"
+ref="${TMUXER_REF:-master}"
 install_dir="${TMUXER_INSTALL_DIR:-$HOME/.local/bin}"
 destination="$install_dir/tmuxer"
 temporary_file=""

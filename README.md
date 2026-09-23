@@ -10,7 +10,7 @@ Pentester toolkit built around tmux. Opens each incoming reverse shell in a dedi
 ## Install
 
 ~~~bash
-curl -fsSL https://raw.githubusercontent.com/dmonizer/tmuxer/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dmonizer/tmuxer/master/install.sh | bash
 ~~~
 
 This installs `tmuxer` at `~/.local/bin/tmuxer` and creates
@@ -20,7 +20,7 @@ It reports if required dependencies (`tmux`, `socat`) are missing.
 To install a specific tag or commit, set `TMUXER_REF`:
 
 ~~~bash
-curl -fsSL https://raw.githubusercontent.com/dmonizer/tmuxer/main/install.sh | TMUXER_REF=v1.0.0 bash
+curl -fsSL https://raw.githubusercontent.com/dmonizer/tmuxer/master/install.sh | TMUXER_REF=v1.0.0 bash
 ~~~
 
 For a checkout-based system-wide installation, run:
