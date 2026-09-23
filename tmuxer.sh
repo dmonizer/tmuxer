@@ -275,6 +275,11 @@ enforce_tmux() {
   fi
   if [[ -z "$TMUX" ]]; then
     if tmux has-session -t tmuxer 2>/dev/null; then
+      # Re-running tmuxer is also the lightweight way to refresh bindings in
+      # an existing session before attaching to it.
+      apply_tmux_settings
+      store_tmux_options
+      bind_keys
       exec tmux attach-session -t tmuxer
     fi
     exec tmux new-session -s tmuxer -e TMUXER_OWNED_SESSION=1 -- "$0" "${ORIG_ARGS[@]}"
@@ -309,6 +314,7 @@ store_tmux_options() {
   tmux set-option -g @tmuxer_pid_file "$LISTENER_PID_FILE"
   tmux set-option -g @tmuxer_self "$SELF"
   tmux set-option -g @tmuxer_gs_hosts_file "$GSOCKET_HOSTS"
+  tmux set-option -g @ctrlc_confirm 1
 
   # S7: warn on old tmux when fzf is absent
   if [[ -z "$(type -P fzf 2>/dev/null)" ]]; then
@@ -323,14 +329,44 @@ store_tmux_options() {
 
 # ── popup handlers (called via $SELF --popup <action>) ────────────────────────
 
+# Read a single keypress and output its identity.
+# Outputs: "ESC" / "ENTER" / "F1".."F10" / the raw character otherwise
+_read_key() {
+  local key rest
+  IFS= read -rsn1 key
+  if [[ "$key" == $'\033' ]]; then
+    IFS= read -rsn3 -t 0.01 rest 2>/dev/null || true
+    case "$rest" in
+      OP) echo "F1" ;;
+      OQ) echo "F2" ;;
+      OR) echo "F3" ;;
+      OS) echo "F4" ;;
+      '[15~') echo "F5" ;;
+      '[17~') echo "F6" ;;
+      '[18~') echo "F7" ;;
+      '[19~') echo "F8" ;;
+      '[20~') echo "F9" ;;
+      '[21~') echo "F10" ;;
+      '') echo "ESC" ;;
+      *) echo "ESC" ;;
+    esac
+  elif [[ -z "$key" ]]; then
+    echo "ENTER"
+  else
+    printf '%s' "$key"
+  fi
+}
+
 _help_banner() {
   cat <<'HELPEOF'
 ┌─ tmuxer shortcuts ───────────────────────────────────────────────────────────┐
 │  F1   show this help                                                         │
 │  F2   window list (choose-tree)                                                │
 │  F3   host connector (SSH + GSocket) — type to filter, Enter to connect      │
-│  F4   open session notes (~/.tmuxer/notes/<session>-notes.md) in $EDITOR    │
+│  F4   open/hide last file (~/.tmuxer/notes/)                                 │
+│  Shift-F4  choose the file for the next F4                                   │
 │  F5   send commands (config-defined) — type to filter, Enter to send         │
+│  F8   toggle Ctrl-C confirmation for remote shells                           │
 │  F9   toggle reverse shell listener on/off                                   │
 │  F10  toggle raw mode (pty.spawn connections)                                │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -346,8 +382,14 @@ HELPEOF
 popup_f1() {
   _help_banner
   _print_revshells
-  printf '\nPress Enter to close...'
-  read -r _
+  printf '\nPress Enter/ESC/F1 to close...'
+  local key
+  while true; do
+    key=$(_read_key)
+    case "$key" in
+      ENTER|ESC|F1) break ;;
+    esac
+  done
 }
 
 _add_gsocket_host() {
@@ -442,8 +484,11 @@ popup_f3() {
       [[ -s "$hosts_file" ]] && awk -F'|' '{print $1}' "$hosts_file"
       printf '%s\n' "$ADD_NEW"
     } |
-      fzf --color=dark --header='Hosts (type to filter, Enter=connect, Esc=cancel)' --height=20 --border)
-    [[ -z "$sel" ]] && return
+      fzf --expect=esc,f3 --color=dark --header='Hosts (type to filter, Enter=connect, Esc/F3=cancel)' --height=20 --border)
+    local fzf_key
+    fzf_key=$(echo "$sel" | head -1)
+    sel=$(echo "$sel" | tail -n +2)
+    [[ "$fzf_key" == "esc" || "$fzf_key" == "f3" || -z "$sel" ]] && return
     if [[ "$sel" == "$ADD_NEW" ]]; then
       _add_gsocket_host
       return
@@ -460,9 +505,19 @@ popup_f3() {
     actions+=("ADD_NEW")
     echo "Hosts:"
     for i in "${!labels[@]}"; do printf '  %d) %s\n' $((i + 1)) "${labels[$i]}"; done
-    printf '\nSelect (1-%d, Enter=cancel): ' ${#labels[@]}
-    read -r choice
-    [[ -z "$choice" || ! "$choice" =~ ^[0-9]+$ ]] && return
+    printf '\nSelect (1-%d, Esc/F3=cancel): ' ${#labels[@]}
+    local choice=""
+    local key
+    while true; do
+      key=$(_read_key)
+      case "$key" in
+        ENTER) break ;;
+        ESC|F3) echo; return ;;
+        [0-9]) choice+="$key"; printf '%s' "$key" ;;
+      esac
+    done
+    echo
+    [[ -z "$choice" ]] && return
     local idx=$((choice - 1))
     [[ $idx -ge 0 && $idx -lt ${#labels[@]} ]] || return
     action="${actions[$idx]}"
@@ -499,17 +554,20 @@ popup_f5() {
 
   if [[ -n "$fzf_bin" ]]; then
     sel=$({
-      [[ -s "$cmds_file" ]] && awk -F'|' '{print $1}' "$cmds_file"
+      [[ -s "$cmds_file" ]] && awk -F'|' '{printf "%-25s → %s\n", $1, $2}' "$cmds_file"
       printf '%s\n' "$ADD_NEW"
     } |
-      fzf --color=dark --header='Commands (type to filter, Enter=send, Esc=cancel)' --height=20 --border)
-    [[ -z "$sel" ]] && return
+      fzf --expect=esc,f5 --color=dark --header='Commands (type to filter, Enter=send, Esc/F5=cancel)' --height=20 --border)
+    local fzf_key
+    fzf_key=$(echo "$sel" | head -1)
+    sel=$(echo "$sel" | tail -n +2)
+    [[ "$fzf_key" == "esc" || "$fzf_key" == "f5" || -z "$sel" ]] && return
     if [[ "$sel" == "$ADD_NEW" ]]; then
       _add_command
       return
     fi
-    cmd_val=$(grep -m1 -F "$sel|" "$cmds_file" | cut -d'|' -f2-)
-    cmd_name="$sel"
+    cmd_name="${sel%% → *}"
+    cmd_val=$(grep -m1 -F "$cmd_name|" "$cmds_file" | cut -d'|' -f2-)
   else
     declare -a names vals
     [[ -s "$cmds_file" ]] && while IFS='|' read -r name val; do
@@ -520,10 +578,26 @@ popup_f5() {
     names+=("$ADD_NEW")
     vals+=("ADD_NEW")
     echo "Commands:"
-    for i in "${!names[@]}"; do printf '  %d) %s\n' $((i + 1)) "${names[$i]}"; done
-    printf '\nSelect (1-%d, Enter=cancel): ' ${#names[@]}
-    read -r choice
-    [[ -z "$choice" || ! "$choice" =~ ^[0-9]+$ ]] && return
+    for i in "${!names[@]}"; do
+      if [[ "${vals[$i]}" == "ADD_NEW" ]]; then
+        printf '  %d) %s\n' $((i + 1)) "${names[$i]}"
+      else
+        printf '  %d) %-25s → %s\n' $((i + 1)) "${names[$i]}" "${vals[$i]}"
+      fi
+    done
+    printf '\nSelect (1-%d, Esc/F5=cancel): ' ${#names[@]}
+    local choice=""
+    local key
+    while true; do
+      key=$(_read_key)
+      case "$key" in
+        ENTER) break ;;
+        ESC|F5) echo; return ;;
+        [0-9]) choice+="$key"; printf '%s' "$key" ;;
+      esac
+    done
+    echo
+    [[ -z "$choice" ]] && return
     local idx=$((choice - 1))
     [[ $idx -ge 0 && $idx -lt ${#names[@]} ]] || return
     cmd_val="${vals[$idx]}"
@@ -541,6 +615,89 @@ popup_f5() {
     [[ "$prepend_space" == "1" ]] && tmux send-keys " $cmd_val" Enter || tmux send-keys "$cmd_val" Enter
     tmux display-message "Sent (keys): $cmd_name"
   fi
+}
+
+# F4: open/hide editor; Shift-F4 selects the file for the next plain F4.
+popup_f4() {
+  local choose_only="${1:-0}" notes_pane notes_file fzf_bin notes_dir other_pane
+
+  # Keep the editor alive while hidden by zooming the other pane. Selecting an
+  # editor pane from a display-popup is ineffective: popup teardown restores
+  # focus to the original pane, which looks like a flicker.
+  notes_pane=$(tmux show-options -wv @notes_pane 2>/dev/null)
+  if [[ -n "$notes_pane" ]] && tmux list-panes -F '#{pane_id}' | grep -qF "$notes_pane"; then
+    if [[ "$choose_only" != "1" ]]; then
+      if [[ "$(tmux show-options -wv @notes_hidden 2>/dev/null)" == "1" ]]; then
+        tmux resize-pane -Z -t "$notes_pane"
+        tmux select-pane -t "$notes_pane"
+        tmux set-option -w @notes_hidden 0
+      else
+        other_pane=$(tmux list-panes -F '#{pane_id}' | grep -vFx "$notes_pane" | head -n1)
+        if [[ -n "$other_pane" ]]; then
+          tmux select-pane -t "$other_pane"
+          tmux resize-pane -Z -t "$other_pane"
+          tmux set-option -w @notes_hidden 1
+        fi
+      fi
+      return
+    fi
+  fi
+
+  notes_file=$(tmux show-options -wv @notes_file 2>/dev/null)
+
+  # First plain F4, or every Shift-F4: file browser to pick or create a file.
+  if [[ "$choose_only" == "1" || -z "$notes_file" ]]; then
+    notes_dir="$HOME/.tmuxer/notes"
+    mkdir -p "$notes_dir"
+    fzf_bin=$(type -P fzf 2>/dev/null) || fzf_bin=""
+
+    if [[ -n "$fzf_bin" ]]; then
+      local sel query match
+      sel=$( (find "$notes_dir" -type f 2>/dev/null; printf '\n') |
+        fzf --print-query --header='Select existing file or type new name (Enter=open, Esc=cancel)' --height=20 --border)
+      query=$(echo "$sel" | head -1)
+      match=$(echo "$sel" | tail -n +2)
+      if [[ -n "$match" ]]; then
+        notes_file="$match"
+      elif [[ -n "$query" ]]; then
+        # New file: if query is a bare name, place it in notes_dir
+        if [[ "$query" == */* ]]; then
+          notes_file="$query"
+        else
+          notes_file="$notes_dir/$query"
+        fi
+        mkdir -p "$(dirname "$notes_file")"
+        touch "$notes_file"
+      else
+        return
+      fi
+    else
+      printf '\n── Notes file ─────────────────────────────\n'
+      printf 'File to open/create in %s: ' "$notes_dir"
+      read -r query
+      [[ -z "$query" ]] && return
+      if [[ "$query" == */* ]]; then
+        notes_file="$query"
+      else
+        notes_file="$notes_dir/$query"
+      fi
+      mkdir -p "$(dirname "$notes_file")"
+      [[ ! -f "$notes_file" ]] && touch "$notes_file"
+    fi
+
+    tmux set-option -w @notes_file "$notes_file"
+
+    # Shift-F4 is intentionally picker-only. It never disrupts an editor
+    # already running in its pane; its selection becomes the next F4 target.
+    [[ "$choose_only" == "1" ]] && return
+  fi
+
+  # Open the file; clear pane tracker when editor exits
+  local pane_id
+  pane_id=$(tmux split-window -h -P -F '#{pane_id}' \
+    "\${EDITOR:-vi} '${notes_file//\'/\'\\\'\'}'; tmux set-option -w @notes_pane ''")
+  tmux set-option -w @notes_pane "$pane_id"
+  tmux set-option -w @notes_hidden 0
 }
 
 popup_f9() {
@@ -600,6 +757,19 @@ popup_f10() {
   fi
 }
 
+# F8: toggle the Ctrl-C prompt globally for remote-shell windows.
+popup_f8() {
+  local ctrlc_confirm
+  ctrlc_confirm=$(tmux_gopt @ctrlc_confirm)
+  if [[ "$ctrlc_confirm" == "1" ]]; then
+    tmux set-option -g @ctrlc_confirm 0
+    tmux display-message "Ctrl-C confirmation OFF"
+  else
+    tmux set-option -g @ctrlc_confirm 1
+    tmux display-message "Ctrl-C confirmation ON"
+  fi
+}
+
 popup_ctrlc() {
   local fifo
   fifo=$(tmux show-options -wv @out_fifo 2>/dev/null)
@@ -616,8 +786,10 @@ popup_listener() {
 │  F1   full help & shortcuts                                                  │
 │  F2   window list (choose-tree)                                                │
 │  F3   host connector (SSH + GSocket)                                         │
-│  F4   open session notes in $EDITOR                                          │
+│  F4   open/hide last file                                                     │
+│  Shift-F4  choose the file for the next F4                                    │
 │  F5   send commands to active connection                                     │
+│  F8   toggle Ctrl-C confirmation                                              │
 │  F9   stop this listener                                                     │
 │  F10  toggle raw mode (pty.spawn connections)                                │
 ├──────────────────────────────────────────────────────────────────────────────┤
@@ -657,30 +829,31 @@ build_data_files() {
 bind_keys() {
   tmux bind-key -n F1 display-popup -E -w 90% -h 90% "$SELF --popup f1"
   tmux bind-key -n F2 choose-tree -w
+  tmux bind-key -T tree-mode F2 send-keys -X cancel
 
   # F3: host connector (SSH + GSocket)
   tmux bind-key -n F3 display-popup -E -w 80% -h 80% "$SELF --popup f3"
 
-  # F4: open host notes pane; if already open, focus it instead of splitting again
-  # ##{ escapes format expansion so inner tmux commands expand #{pane_id} themselves
-  tmux bind-key -n F4 run-shell \
-    'np=$(tmux show-options -wv @notes_pane 2>/dev/null); \
-     if [ -n "$np" ] && tmux list-panes -F "##{pane_id}" | grep -qF "$np"; then \
-       tmux select-pane -t "$np"; \
-     else \
-       np=$(tmux split-window -h -P -F "##{pane_id}" "mkdir -p ~/.tmuxer/notes && \${EDITOR:-vi} ~/.tmuxer/notes/#{window_name}-notes.md"); \
-       tmux set-option -w @notes_pane "$np"; \
-     fi'
+  # Only the initial file choice needs a popup.  Once a file is saved, run F4
+  # directly so opening, hiding, and restoring the editor does not flash one.
+  tmux bind-key -n F4 if-shell -F '#{==:#{@notes_file},}' \
+    "display-popup -E -w 90% -h 90% '$SELF --popup f4'" \
+    "run-shell -b '$SELF --popup f4'"
+  tmux bind-key -n S-F4 display-popup -E -w 90% -h 90% "$SELF --popup f4-select"
 
   tmux bind-key -n F5 display-popup -E -w 80% -h 80% "$SELF --popup f5"
+  tmux bind-key -n F8 run-shell -b "$SELF --popup f8"
   tmux bind-key -n F9 run-shell -b "$SELF --popup f9"
   tmux bind-key -n F10 run-shell "$SELF --popup f10"
 
-  tmux bind-key -n C-c if-shell -F '#{==:#{window_index},0}' \
+  # Local windows have no tmuxer remote-output FIFO, regardless of index.
+  tmux bind-key -n C-c if-shell -F '#{==:#{@out_fifo},}' \
     'send-keys C-c' \
     "if-shell -F '#{==:#{@raw_mode},1}' \
       'run-shell \"$SELF --popup ctrlc\"' \
-      'confirm-before -p \"Ctrl-C → remote? (y/n)\" \"run-shell \\\"$SELF --popup ctrlc\\\"\"'"
+      \"if-shell -F '#{==:#{@ctrlc_confirm},1}' \\
+        'confirm-before -p \\\"Ctrl-C → remote? (y/n)\\\" \\\"run-shell \\\\\\\"$SELF --popup ctrlc\\\\\\\"\\\"' \\
+        'run-shell \\\"$SELF --popup ctrlc\\\"'\""
 
   # C1: kill listener before removing PID file so socat can still read it
   tmux set-hook session-closed "run-shell 'kill \$(cat $LISTENER_PID_FILE 2>/dev/null) 2>/dev/null; sleep 0.2; rm -f $LISTENER_PID_FILE $HOSTS_FILE $CMDS_FILE'"
@@ -803,18 +976,26 @@ start_tmuxer() {
   echo "[*] tmuxer ready — port :$PORT — F1 help | F9 listen"
   [[ -n "$LOGDIR" ]] && echo "[*] this session logging to $local_log"
 
+  # Inject a DEBUG trap so the window title reflects the currently running
+  # command. Uses 'tmux rename-window' (talks directly to the tmux socket) so
+  # it works even through the 'script' logging wrapper's PTY.
+  local bash_init="$HOME/.tmuxer/bash-init"
+  mkdir -p "$HOME/.tmuxer"
+  printf 'trap '\''[[ -n "$TMUX" ]] && tmux rename-window "$BASH_COMMAND" 2>/dev/null'\'' DEBUG\n' >"$bash_init"
+  printf '[[ -f ~/.bashrc ]] && source ~/.bashrc\n' >>"$bash_init"
+
   # M5: use canonical GNU script argument order; N5: drop 2>/dev/null so
   # failures are visible
   if command -v script &>/dev/null; then
     if script /dev/null -c true >/dev/null 2>&1; then
-      exec script -q -c bash "$local_log"
+      exec script -q -c "bash --rcfile $bash_init" "$local_log"
     else
-      exec script -q "$local_log" bash
+      exec script -q "$local_log" bash --rcfile "$bash_init"
     fi
     echo "script exec failed, log: $local_log" >>/tmp/tmuxer_script_err.log
-    exec bash
+    exec bash --rcfile "$bash_init"
   else
-    exec bash
+    exec bash --rcfile "$bash_init"
   fi
 }
 
@@ -868,7 +1049,10 @@ popup)
   case "$POPUP_ACTION" in
   f1) popup_f1 ;;
   f3) popup_f3 ;;
+  f4) popup_f4 ;;
+  f4-select) popup_f4 1 ;;
   f5) popup_f5 ;;
+  f8) popup_f8 ;;
   f9) popup_f9 ;;
   f10) popup_f10 ;;
   ctrlc) popup_ctrlc ;;

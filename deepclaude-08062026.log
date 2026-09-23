@@ -1,0 +1,1286 @@
+2026-06-08T09:34:30.468Z [INFO] [MODEL-PROXY] Listening on 127.0.0.1:3200 → https://api.deepseek.com/anthropic (mode: deepseek)
+2026-06-08T09:35:47.154Z [INFO] [MODEL-PROXY] #2 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:35:47.155Z [INFO] [MODEL-PROXY] #2 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:35:47.162Z [INFO] [MODEL-PROXY] #3 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:35:47.164Z [INFO] [MODEL-PROXY] #3 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:35:47.821Z [INFO] [MODEL-PROXY] #2 TTFB 667ms (status 200)
+2026-06-08T09:35:48.618Z [INFO] [MODEL-PROXY] #3 TTFB 1456ms (status 200)
+2026-06-08T09:35:52.806Z [INFO] [MODEL-PROXY] #2 done in 5.7s (603in/432out)
+2026-06-08T09:35:57.805Z [INFO] [MODEL-PROXY] #3 done in 10.6s (37958in/391out)
+2026-06-08T09:36:00.521Z [INFO] [MODEL-PROXY] #4 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:36:00.524Z [INFO] [MODEL-PROXY] #4 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:36:01.729Z [INFO] [MODEL-PROXY] #4 TTFB 1208ms (status 200)
+2026-06-08T09:36:04.017Z [INFO] [MODEL-PROXY] #4 done in 3.5s (1958in/73out)
+2026-06-08T09:36:04.191Z [INFO] [MODEL-PROXY] #5 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:36:04.194Z [INFO] [MODEL-PROXY] #5 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:36:05.215Z [INFO] [MODEL-PROXY] #5 TTFB 1024ms (status 200)
+2026-06-08T09:36:37.728Z [INFO] [MODEL-PROXY] #5 done in 33.5s (4850in/1399out)
+2026-06-08T09:36:37.896Z [INFO] [MODEL-PROXY] #6 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:36:37.897Z [INFO] [MODEL-PROXY] #6 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:36:38.944Z [INFO] [MODEL-PROXY] #6 TTFB 1048ms (status 200)
+2026-06-08T09:37:14.017Z [INFO] [MODEL-PROXY] #6 done in 36.1s (823in/1497out)
+2026-06-08T09:37:14.048Z [INFO] [MODEL-PROXY] #7 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:37:14.051Z [INFO] [MODEL-PROXY] #7 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:37:15.428Z [INFO] [MODEL-PROXY] #7 TTFB 1380ms (status 200)
+2026-06-08T09:37:21.918Z [INFO] [MODEL-PROXY] #7 done in 7.9s (338in/203out)
+2026-06-08T09:54:44.144Z [INFO] [MODEL-PROXY] #8 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:54:44.146Z [INFO] [MODEL-PROXY] #8 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:54:45.479Z [INFO] [MODEL-PROXY] #8 TTFB 1335ms (status 200)
+2026-06-08T09:55:21.560Z [INFO] [MODEL-PROXY] #8 done in 37.4s (402in/1527out)
+2026-06-08T09:55:21.657Z [INFO] [MODEL-PROXY] #9 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:55:21.658Z [INFO] [MODEL-PROXY] #9 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:55:22.533Z [INFO] [MODEL-PROXY] #9 TTFB 876ms (status 200)
+2026-06-08T09:56:41.027Z [INFO] [MODEL-PROXY] #9 done in 79.4s (2704in/3482out)
+2026-06-08T09:56:41.151Z [INFO] [MODEL-PROXY] #10 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T09:56:41.152Z [INFO] [MODEL-PROXY] #10 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T09:56:42.141Z [INFO] [MODEL-PROXY] #10 TTFB 990ms (status 200)
+2026-06-08T09:56:47.831Z [INFO] [MODEL-PROXY] #10 done in 6.7s (191in/329out)
+2026-06-08T10:09:06.302Z [INFO] [MODEL-PROXY] #11 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:09:06.302Z [INFO] [MODEL-PROXY] #11 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:09:06.382Z [INFO] [MODEL-PROXY] #12 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:09:06.384Z [INFO] [MODEL-PROXY] #12 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:09:06.997Z [INFO] [MODEL-PROXY] #11 TTFB 695ms (status 200)
+2026-06-08T10:09:07.834Z [INFO] [MODEL-PROXY] #12 TTFB 1452ms (status 200)
+2026-06-08T10:09:13.695Z [INFO] [MODEL-PROXY] #12 done in 7.3s (2256in/206out)
+2026-06-08T10:09:13.811Z [INFO] [MODEL-PROXY] #13 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:09:13.813Z [INFO] [MODEL-PROXY] #13 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:09:14.233Z [INFO] [MODEL-PROXY] #11 done in 7.9s (465in/680out)
+2026-06-08T10:09:14.852Z [INFO] [MODEL-PROXY] #13 TTFB 1041ms (status 200)
+2026-06-08T10:09:26.995Z [INFO] [MODEL-PROXY] #13 done in 13.2s (63in/721out)
+2026-06-08T10:09:27.106Z [INFO] [MODEL-PROXY] #14 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:09:27.108Z [INFO] [MODEL-PROXY] #14 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:09:28.238Z [INFO] [MODEL-PROXY] #14 TTFB 1132ms (status 200)
+2026-06-08T10:09:31.059Z [INFO] [MODEL-PROXY] #14 done in 4.0s (192in/142out)
+2026-06-08T10:09:31.185Z [INFO] [MODEL-PROXY] #15 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:09:31.188Z [INFO] [MODEL-PROXY] #15 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:09:32.309Z [INFO] [MODEL-PROXY] #15 TTFB 1124ms (status 200)
+2026-06-08T10:12:16.656Z [INFO] [MODEL-PROXY] #15 done in 165.5s (95in/8320out)
+2026-06-08T10:12:16.780Z [INFO] [MODEL-PROXY] #16 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:12:16.783Z [INFO] [MODEL-PROXY] #16 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:12:17.754Z [INFO] [MODEL-PROXY] #16 TTFB 974ms (status 200)
+2026-06-08T10:12:17.831Z [INFO] [MODEL-PROXY] #18 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:12:17.832Z [INFO] [MODEL-PROXY] #18 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"83dcf33d-17c3-40e8-93a9-3f047dfb377e"}
+2026-06-08T10:12:19.198Z [INFO] [MODEL-PROXY] #18 TTFB 1367ms (status 200)
+2026-06-08T10:12:24.632Z [INFO] [MODEL-PROXY] #18 done in 6.8s (28185in/389out)
+2026-06-08T10:13:51.636Z [INFO] [MODEL-PROXY] #16 done in 94.9s (125in/7147out)
+2026-06-08T10:13:51.835Z [INFO] [MODEL-PROXY] #19 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:13:51.838Z [INFO] [MODEL-PROXY] #19 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:13:52.969Z [INFO] [MODEL-PROXY] #19 TTFB 1134ms (status 200)
+2026-06-08T10:14:01.304Z [INFO] [MODEL-PROXY] #19 done in 9.5s (154in/410out)
+2026-06-08T10:14:01.482Z [INFO] [MODEL-PROXY] #20 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:14:01.484Z [INFO] [MODEL-PROXY] #20 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:14:02.592Z [INFO] [MODEL-PROXY] #20 TTFB 1110ms (status 200)
+2026-06-08T10:15:08.842Z [INFO] [MODEL-PROXY] #20 done in 67.4s (204in/3308out)
+2026-06-08T10:15:09.015Z [INFO] [MODEL-PROXY] #21 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:15:09.017Z [INFO] [MODEL-PROXY] #21 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:15:10.327Z [INFO] [MODEL-PROXY] #21 TTFB 1312ms (status 200)
+2026-06-08T10:15:18.004Z [INFO] [MODEL-PROXY] #21 done in 9.0s (3451in/310out)
+2026-06-08T10:15:18.140Z [INFO] [MODEL-PROXY] #22 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:15:18.142Z [INFO] [MODEL-PROXY] #22 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:15:19.491Z [INFO] [MODEL-PROXY] #22 TTFB 1351ms (status 200)
+2026-06-08T10:15:35.435Z [INFO] [MODEL-PROXY] #22 done in 17.3s (483in/768out)
+2026-06-08T10:28:04.386Z [INFO] [MODEL-PROXY] #23 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:28:04.388Z [INFO] [MODEL-PROXY] #23 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:28:05.785Z [INFO] [MODEL-PROXY] #23 TTFB 1399ms (status 200)
+2026-06-08T10:28:09.897Z [INFO] [MODEL-PROXY] #23 done in 5.5s (894in/246out)
+2026-06-08T10:28:10.054Z [INFO] [MODEL-PROXY] #24 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:28:10.057Z [INFO] [MODEL-PROXY] #24 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:28:11.185Z [INFO] [MODEL-PROXY] #24 TTFB 1131ms (status 200)
+2026-06-08T10:28:35.732Z [INFO] [MODEL-PROXY] #24 done in 25.7s (439in/1363out)
+2026-06-08T10:28:35.954Z [INFO] [MODEL-PROXY] #25 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:28:35.956Z [INFO] [MODEL-PROXY] #25 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:28:37.287Z [INFO] [MODEL-PROXY] #25 TTFB 1333ms (status 200)
+2026-06-08T10:28:48.304Z [INFO] [MODEL-PROXY] #25 done in 12.3s (1450in/763out)
+2026-06-08T10:28:48.400Z [INFO] [MODEL-PROXY] #26 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T10:28:48.402Z [INFO] [MODEL-PROXY] #26 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T10:28:49.538Z [INFO] [MODEL-PROXY] #26 TTFB 1138ms (status 200)
+2026-06-08T10:28:54.096Z [INFO] [MODEL-PROXY] #26 done in 5.7s (171in/225out)
+2026-06-08T12:37:19.437Z [INFO] [MODEL-PROXY] #27 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:37:19.440Z [INFO] [MODEL-PROXY] #27 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:37:21.127Z [INFO] [MODEL-PROXY] #27 TTFB 1690ms (status 200)
+2026-06-08T12:37:30.114Z [INFO] [MODEL-PROXY] #27 done in 10.7s (289in/405out)
+2026-06-08T12:41:55.682Z [INFO] [MODEL-PROXY] #28 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:41:55.685Z [INFO] [MODEL-PROXY] #28 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:41:57.350Z [INFO] [MODEL-PROXY] #28 TTFB 1668ms (status 200)
+2026-06-08T12:42:02.818Z [INFO] [MODEL-PROXY] #28 done in 7.1s (82in/310out)
+2026-06-08T12:42:03.030Z [INFO] [MODEL-PROXY] #29 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:42:03.032Z [INFO] [MODEL-PROXY] #29 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:42:04.517Z [INFO] [MODEL-PROXY] #29 TTFB 1487ms (status 200)
+2026-06-08T12:42:06.623Z [INFO] [MODEL-PROXY] #29 done in 3.6s (823in/90out)
+2026-06-08T12:42:06.764Z [INFO] [MODEL-PROXY] #30 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:42:06.766Z [INFO] [MODEL-PROXY] #30 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:42:08.144Z [INFO] [MODEL-PROXY] #30 TTFB 1380ms (status 200)
+2026-06-08T12:42:13.315Z [INFO] [MODEL-PROXY] #30 done in 6.6s (614in/286out)
+2026-06-08T12:42:13.438Z [INFO] [MODEL-PROXY] #31 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:42:13.442Z [INFO] [MODEL-PROXY] #31 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:42:14.749Z [INFO] [MODEL-PROXY] #31 TTFB 1311ms (status 200)
+2026-06-08T12:42:17.722Z [INFO] [MODEL-PROXY] #31 done in 4.3s (455in/151out)
+2026-06-08T12:42:17.897Z [INFO] [MODEL-PROXY] #32 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:42:17.900Z [INFO] [MODEL-PROXY] #32 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:42:19.120Z [INFO] [MODEL-PROXY] #32 TTFB 1223ms (status 200)
+2026-06-08T12:42:25.137Z [INFO] [MODEL-PROXY] #32 done in 7.2s (111in/321out)
+2026-06-08T12:42:39.459Z [INFO] [MODEL-PROXY] #33 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:42:39.461Z [INFO] [MODEL-PROXY] #33 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:42:41.137Z [INFO] [MODEL-PROXY] #33 TTFB 1678ms (status 200)
+2026-06-08T12:42:43.621Z [INFO] [MODEL-PROXY] #33 done in 4.2s (172in/142out)
+2026-06-08T12:42:52.138Z [INFO] [MODEL-PROXY] #34 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:42:52.140Z [INFO] [MODEL-PROXY] #34 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:42:53.679Z [INFO] [MODEL-PROXY] #34 TTFB 1541ms (status 200)
+2026-06-08T12:42:58.914Z [INFO] [MODEL-PROXY] #34 done in 6.8s (83in/267out)
+2026-06-08T12:43:15.368Z [INFO] [MODEL-PROXY] #35 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:43:15.372Z [INFO] [MODEL-PROXY] #35 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:43:21.390Z [INFO] [MODEL-PROXY] #35 TTFB 6022ms (status 200)
+2026-06-08T12:43:43.222Z [INFO] [MODEL-PROXY] #35 done in 27.9s (119in/1389out)
+2026-06-08T12:43:43.372Z [INFO] [MODEL-PROXY] #36 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:43:43.375Z [INFO] [MODEL-PROXY] #36 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:43:44.814Z [INFO] [MODEL-PROXY] #36 TTFB 1442ms (status 200)
+2026-06-08T12:43:49.457Z [INFO] [MODEL-PROXY] #36 done in 6.1s (1558in/234out)
+2026-06-08T12:43:49.663Z [INFO] [MODEL-PROXY] #37 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:43:49.666Z [INFO] [MODEL-PROXY] #37 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:43:50.962Z [INFO] [MODEL-PROXY] #37 TTFB 1299ms (status 200)
+2026-06-08T12:43:53.050Z [INFO] [MODEL-PROXY] #37 done in 3.4s (17in/113out)
+2026-06-08T12:43:54.852Z [INFO] [MODEL-PROXY] #38 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:43:54.855Z [INFO] [MODEL-PROXY] #38 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:43:56.243Z [INFO] [MODEL-PROXY] #38 TTFB 1391ms (status 200)
+2026-06-08T12:43:58.239Z [INFO] [MODEL-PROXY] #38 done in 3.4s (41in/58out)
+2026-06-08T12:43:58.264Z [INFO] [MODEL-PROXY] #39 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:43:58.267Z [INFO] [MODEL-PROXY] #39 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:43:59.659Z [INFO] [MODEL-PROXY] #39 TTFB 1395ms (status 200)
+2026-06-08T12:44:00.916Z [INFO] [MODEL-PROXY] #39 done in 2.7s (421in/8out)
+2026-06-08T12:47:52.945Z [INFO] [MODEL-PROXY] #40 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:47:52.949Z [INFO] [MODEL-PROXY] #40 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:47:54.442Z [INFO] [MODEL-PROXY] #40 TTFB 1497ms (status 200)
+2026-06-08T12:49:28.608Z [INFO] [MODEL-PROXY] #40 done in 95.7s (179in/5438out)
+2026-06-08T12:49:28.795Z [INFO] [MODEL-PROXY] #41 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:49:28.799Z [INFO] [MODEL-PROXY] #41 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:49:30.196Z [INFO] [MODEL-PROXY] #41 TTFB 1401ms (status 200)
+2026-06-08T12:50:24.508Z [INFO] [MODEL-PROXY] #41 done in 55.7s (8030in/2851out)
+2026-06-08T12:52:04.163Z [INFO] [MODEL-PROXY] #42 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T12:52:04.166Z [INFO] [MODEL-PROXY] #42 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T12:52:06.045Z [INFO] [MODEL-PROXY] #42 TTFB 1882ms (status 200)
+2026-06-08T12:53:27.037Z [INFO] [MODEL-PROXY] #42 done in 82.9s (3994in/4499out)
+2026-06-08T13:03:54.751Z [INFO] [MODEL-PROXY] #43 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:03:54.754Z [INFO] [MODEL-PROXY] #43 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:03:56.509Z [INFO] [MODEL-PROXY] #43 TTFB 1758ms (status 200)
+2026-06-08T13:04:04.384Z [INFO] [MODEL-PROXY] #43 done in 9.6s (77in/444out)
+2026-06-08T13:04:04.463Z [INFO] [MODEL-PROXY] #44 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:04:04.466Z [INFO] [MODEL-PROXY] #44 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:04:05.900Z [INFO] [MODEL-PROXY] #44 TTFB 1437ms (status 200)
+2026-06-08T13:04:10.049Z [INFO] [MODEL-PROXY] #44 done in 5.6s (691in/109out)
+2026-06-08T13:04:10.240Z [INFO] [MODEL-PROXY] #45 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:04:10.243Z [INFO] [MODEL-PROXY] #45 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:04:11.582Z [INFO] [MODEL-PROXY] #45 TTFB 1342ms (status 200)
+2026-06-08T13:04:29.808Z [INFO] [MODEL-PROXY] #45 done in 19.6s (208in/921out)
+2026-06-08T13:05:24.922Z [INFO] [MODEL-PROXY] #46 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:05:24.926Z [INFO] [MODEL-PROXY] #46 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:05:26.646Z [INFO] [MODEL-PROXY] #46 TTFB 1724ms (status 200)
+2026-06-08T13:05:31.019Z [INFO] [MODEL-PROXY] #46 done in 6.1s (148in/267out)
+2026-06-08T13:05:37.563Z [INFO] [MODEL-PROXY] #47 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:05:37.568Z [INFO] [MODEL-PROXY] #47 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:05:39.328Z [INFO] [MODEL-PROXY] #47 TTFB 1765ms (status 200)
+2026-06-08T13:05:44.899Z [INFO] [MODEL-PROXY] #47 done in 7.3s (76in/345out)
+2026-06-08T13:05:54.973Z [INFO] [MODEL-PROXY] #48 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:05:54.976Z [INFO] [MODEL-PROXY] #48 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:05:56.678Z [INFO] [MODEL-PROXY] #48 TTFB 1705ms (status 200)
+2026-06-08T13:06:03.018Z [INFO] [MODEL-PROXY] #48 done in 8.0s (73in/298out)
+2026-06-08T13:06:13.882Z [INFO] [MODEL-PROXY] #49 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:06:13.886Z [INFO] [MODEL-PROXY] #49 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:06:15.700Z [INFO] [MODEL-PROXY] #49 TTFB 1818ms (status 200)
+2026-06-08T13:06:19.030Z [INFO] [MODEL-PROXY] #49 done in 5.1s (229in/213out)
+2026-06-08T13:06:21.188Z [INFO] [MODEL-PROXY] #50 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:06:21.191Z [INFO] [MODEL-PROXY] #50 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:06:22.645Z [INFO] [MODEL-PROXY] #50 TTFB 1457ms (status 200)
+2026-06-08T13:08:04.104Z [INFO] [MODEL-PROXY] #50 done in 102.9s (1973in/5743out)
+2026-06-08T13:08:04.214Z [INFO] [MODEL-PROXY] #51 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:04.215Z [INFO] [MODEL-PROXY] #51 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:08:05.020Z [INFO] [MODEL-PROXY] #51 TTFB 806ms (status 200)
+2026-06-08T13:08:07.401Z [INFO] [MODEL-PROXY] #51 done in 3.2s (json, 245b)
+2026-06-08T13:08:07.417Z [INFO] [MODEL-PROXY] #52 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:07.419Z [INFO] [MODEL-PROXY] #52 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:08:08.283Z [INFO] [MODEL-PROXY] #52 TTFB 866ms (status 200)
+2026-06-08T13:08:22.201Z [INFO] [MODEL-PROXY] #52 done in 14.8s (json, 1660b)
+2026-06-08T13:08:22.347Z [INFO] [MODEL-PROXY] #53 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:22.351Z [INFO] [MODEL-PROXY] #53 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:08:23.820Z [INFO] [MODEL-PROXY] #53 TTFB 1473ms (status 200)
+2026-06-08T13:08:26.329Z [INFO] [MODEL-PROXY] #53 done in 4.0s (234in/121out)
+2026-06-08T13:08:26.497Z [INFO] [MODEL-PROXY] #54 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:26.501Z [INFO] [MODEL-PROXY] #54 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:08:28.067Z [INFO] [MODEL-PROXY] #54 TTFB 1570ms (status 200)
+2026-06-08T13:08:33.499Z [INFO] [MODEL-PROXY] #54 done in 7.0s (257in/330out)
+2026-06-08T13:08:33.567Z [INFO] [MODEL-PROXY] #55 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:33.570Z [INFO] [MODEL-PROXY] #55 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:08:35.101Z [INFO] [MODEL-PROXY] #55 TTFB 1534ms (status 200)
+2026-06-08T13:08:38.314Z [INFO] [MODEL-PROXY] #55 done in 4.7s (141in/165out)
+2026-06-08T13:08:38.498Z [INFO] [MODEL-PROXY] #56 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:38.504Z [INFO] [MODEL-PROXY] #56 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:08:40.111Z [INFO] [MODEL-PROXY] #56 TTFB 1613ms (status 200)
+2026-06-08T13:08:44.198Z [INFO] [MODEL-PROXY] #56 done in 5.7s (96in/257out)
+2026-06-08T13:08:44.358Z [INFO] [MODEL-PROXY] #57 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:44.364Z [INFO] [MODEL-PROXY] #57 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:08:46.133Z [INFO] [MODEL-PROXY] #57 TTFB 1775ms (status 200)
+2026-06-08T13:08:56.099Z [INFO] [MODEL-PROXY] #57 done in 11.7s (420in/477out)
+2026-06-08T13:08:56.252Z [INFO] [MODEL-PROXY] #58 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:56.253Z [INFO] [MODEL-PROXY] #58 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:08:57.027Z [INFO] [MODEL-PROXY] #58 TTFB 775ms (status 200)
+2026-06-08T13:08:57.908Z [INFO] [MODEL-PROXY] #58 done in 1.7s (json, 248b)
+2026-06-08T13:08:59.390Z [INFO] [MODEL-PROXY] #59 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:08:59.393Z [INFO] [MODEL-PROXY] #59 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:09:00.883Z [INFO] [MODEL-PROXY] #59 TTFB 1493ms (status 200)
+2026-06-08T13:09:05.447Z [INFO] [MODEL-PROXY] #59 done in 6.1s (61in/246out)
+2026-06-08T13:09:05.538Z [INFO] [MODEL-PROXY] #60 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:09:05.539Z [INFO] [MODEL-PROXY] #60 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:09:06.314Z [INFO] [MODEL-PROXY] #60 TTFB 776ms (status 200)
+2026-06-08T13:09:07.552Z [INFO] [MODEL-PROXY] #60 done in 2.0s (json, 247b)
+2026-06-08T13:09:07.685Z [INFO] [MODEL-PROXY] #61 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:09:07.689Z [INFO] [MODEL-PROXY] #61 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:09:08.999Z [INFO] [MODEL-PROXY] #61 TTFB 1314ms (status 200)
+2026-06-08T13:09:30.051Z [INFO] [MODEL-PROXY] #61 done in 22.4s (388in/1132out)
+2026-06-08T13:09:30.191Z [INFO] [MODEL-PROXY] #62 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:09:30.196Z [INFO] [MODEL-PROXY] #62 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:09:31.399Z [INFO] [MODEL-PROXY] #62 TTFB 1208ms (status 200)
+2026-06-08T13:09:33.330Z [INFO] [MODEL-PROXY] #62 done in 3.1s (162in/96out)
+2026-06-08T13:09:33.463Z [INFO] [MODEL-PROXY] #63 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:09:33.467Z [INFO] [MODEL-PROXY] #63 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:09:35.226Z [INFO] [MODEL-PROXY] #63 TTFB 1763ms (status 200)
+2026-06-08T13:09:38.499Z [INFO] [MODEL-PROXY] #63 done in 5.0s (19in/225out)
+2026-06-08T13:09:38.579Z [INFO] [MODEL-PROXY] #64 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:09:38.579Z [INFO] [MODEL-PROXY] #64 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:09:39.313Z [INFO] [MODEL-PROXY] #64 TTFB 734ms (status 200)
+2026-06-08T13:09:40.402Z [INFO] [MODEL-PROXY] #64 done in 1.8s (json, 249b)
+2026-06-08T13:09:40.413Z [INFO] [MODEL-PROXY] #65 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:09:40.415Z [INFO] [MODEL-PROXY] #65 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:09:41.301Z [INFO] [MODEL-PROXY] #65 TTFB 888ms (status 200)
+2026-06-08T13:10:40.909Z [INFO] [MODEL-PROXY] #66 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:10:40.911Z [INFO] [MODEL-PROXY] #66 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:10:41.923Z [INFO] [MODEL-PROXY] #66 TTFB 1014ms (status 200)
+2026-06-08T13:10:42.713Z [INFO] [MODEL-PROXY] #66 done in 1.8s (json, 244b)
+2026-06-08T13:10:44.194Z [INFO] [MODEL-PROXY] #67 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:10:44.200Z [INFO] [MODEL-PROXY] #67 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:10:45.634Z [INFO] [MODEL-PROXY] #67 TTFB 1440ms (status 200)
+2026-06-08T13:10:51.042Z [INFO] [MODEL-PROXY] #67 done in 6.8s (168in/290out)
+2026-06-08T13:10:51.173Z [INFO] [MODEL-PROXY] #68 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:10:51.174Z [INFO] [MODEL-PROXY] #68 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:10:52.016Z [INFO] [MODEL-PROXY] #68 TTFB 843ms (status 200)
+2026-06-08T13:10:53.101Z [INFO] [MODEL-PROXY] #68 done in 1.9s (json, 248b)
+2026-06-08T13:10:53.247Z [INFO] [MODEL-PROXY] #69 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:10:53.251Z [INFO] [MODEL-PROXY] #69 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:10:54.764Z [INFO] [MODEL-PROXY] #69 TTFB 1517ms (status 200)
+2026-06-08T13:11:04.613Z [INFO] [MODEL-PROXY] #69 done in 11.4s (191in/428out)
+2026-06-08T13:11:04.698Z [INFO] [MODEL-PROXY] #70 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:11:04.699Z [INFO] [MODEL-PROXY] #70 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:11:05.502Z [INFO] [MODEL-PROXY] #70 TTFB 804ms (status 200)
+2026-06-08T13:11:06.542Z [INFO] [MODEL-PROXY] #70 done in 1.8s (json, 248b)
+2026-06-08T13:11:06.668Z [INFO] [MODEL-PROXY] #71 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:11:06.672Z [INFO] [MODEL-PROXY] #71 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:11:08.246Z [INFO] [MODEL-PROXY] #71 TTFB 1578ms (status 200)
+2026-06-08T13:11:13.999Z [INFO] [MODEL-PROXY] #71 done in 7.3s (122in/247out)
+2026-06-08T13:11:24.711Z [INFO] [MODEL-PROXY] #65 done in 104.3s (json, 1558b)
+2026-06-08T13:15:30.445Z [INFO] [MODEL-PROXY] #72 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:15:30.449Z [INFO] [MODEL-PROXY] #72 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:15:32.503Z [INFO] [MODEL-PROXY] #72 TTFB 2058ms (status 200)
+2026-06-08T13:16:37.297Z [INFO] [MODEL-PROXY] #72 done in 66.9s (187in/3334out)
+2026-06-08T13:16:37.476Z [INFO] [MODEL-PROXY] #73 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:16:37.480Z [INFO] [MODEL-PROXY] #73 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:16:38.091Z [INFO] [MODEL-PROXY] #75 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:16:38.092Z [INFO] [MODEL-PROXY] #75 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"8cd56987-4450-4aea-95d7-3c2fe89f5729"}
+2026-06-08T13:16:39.497Z [INFO] [MODEL-PROXY] #75 TTFB 1406ms (status 200)
+2026-06-08T13:16:39.823Z [INFO] [MODEL-PROXY] #73 TTFB 2347ms (status 200)
+2026-06-08T13:16:44.850Z [INFO] [MODEL-PROXY] #75 done in 6.8s (28638in/260out)
+2026-06-08T13:16:46.144Z [INFO] [MODEL-PROXY] #77 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:16:46.145Z [INFO] [MODEL-PROXY] #77 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"6d49b98d-d850-4301-a5a4-24546e7c4563"}
+2026-06-08T13:16:47.213Z [INFO] [MODEL-PROXY] #77 TTFB 1069ms (status 200)
+2026-06-08T13:16:47.905Z [INFO] [MODEL-PROXY] #73 done in 10.4s (641in/277out)
+2026-06-08T13:16:47.967Z [INFO] [MODEL-PROXY] #78 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:16:47.971Z [INFO] [MODEL-PROXY] #78 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:16:49.542Z [INFO] [MODEL-PROXY] #78 TTFB 1575ms (status 200)
+2026-06-08T13:16:51.897Z [INFO] [MODEL-PROXY] #78 done in 3.9s (95in/120out)
+2026-06-08T13:16:52.094Z [INFO] [MODEL-PROXY] #79 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:16:52.097Z [INFO] [MODEL-PROXY] #79 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:16:53.899Z [INFO] [MODEL-PROXY] #79 TTFB 1805ms (status 200)
+2026-06-08T13:16:56.320Z [INFO] [MODEL-PROXY] #77 done in 10.2s (25638in/945out)
+2026-06-08T13:16:58.198Z [INFO] [MODEL-PROXY] #79 done in 6.1s (141in/256out)
+2026-06-08T13:16:58.299Z [INFO] [MODEL-PROXY] #80 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:16:58.300Z [INFO] [MODEL-PROXY] #80 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:16:59.197Z [INFO] [MODEL-PROXY] #80 TTFB 898ms (status 200)
+2026-06-08T13:17:00.307Z [INFO] [MODEL-PROXY] #80 done in 2.0s (json, 249b)
+2026-06-08T13:17:00.404Z [INFO] [MODEL-PROXY] #81 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:17:00.409Z [INFO] [MODEL-PROXY] #81 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:17:02.063Z [INFO] [MODEL-PROXY] #81 TTFB 1659ms (status 200)
+2026-06-08T13:17:05.344Z [INFO] [MODEL-PROXY] #81 done in 4.9s (97in/211out)
+2026-06-08T13:17:05.438Z [INFO] [MODEL-PROXY] #82 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:17:05.438Z [INFO] [MODEL-PROXY] #82 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:17:06.296Z [INFO] [MODEL-PROXY] #82 TTFB 858ms (status 200)
+2026-06-08T13:17:07.332Z [INFO] [MODEL-PROXY] #82 done in 1.9s (json, 248b)
+2026-06-08T13:17:07.457Z [INFO] [MODEL-PROXY] #83 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:17:07.461Z [INFO] [MODEL-PROXY] #83 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:17:08.900Z [INFO] [MODEL-PROXY] #83 TTFB 1443ms (status 200)
+2026-06-08T13:17:10.797Z [INFO] [MODEL-PROXY] #83 done in 3.3s (85in/100out)
+2026-06-08T13:17:10.985Z [INFO] [MODEL-PROXY] #84 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:17:10.989Z [INFO] [MODEL-PROXY] #84 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:17:12.592Z [INFO] [MODEL-PROXY] #84 TTFB 1607ms (status 200)
+2026-06-08T13:17:21.233Z [INFO] [MODEL-PROXY] #84 done in 10.2s (74in/509out)
+2026-06-08T13:17:21.317Z [INFO] [MODEL-PROXY] #85 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:17:21.318Z [INFO] [MODEL-PROXY] #85 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:17:22.211Z [INFO] [MODEL-PROXY] #85 TTFB 894ms (status 200)
+2026-06-08T13:17:23.295Z [INFO] [MODEL-PROXY] #85 done in 2.0s (json, 246b)
+2026-06-08T13:17:27.298Z [INFO] [MODEL-PROXY] #86 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:17:27.302Z [INFO] [MODEL-PROXY] #86 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:17:28.912Z [INFO] [MODEL-PROXY] #86 TTFB 1614ms (status 200)
+2026-06-08T13:19:04.397Z [INFO] [MODEL-PROXY] #86 done in 97.1s (218in/4942out)
+2026-06-08T13:19:04.563Z [INFO] [MODEL-PROXY] #87 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:19:04.567Z [INFO] [MODEL-PROXY] #87 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:19:06.189Z [INFO] [MODEL-PROXY] #87 TTFB 1626ms (status 200)
+2026-06-08T13:19:12.699Z [INFO] [MODEL-PROXY] #87 done in 8.1s (215in/324out)
+2026-06-08T13:43:31.870Z [INFO] [MODEL-PROXY] #88 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:43:31.875Z [INFO] [MODEL-PROXY] #88 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:43:33.802Z [INFO] [MODEL-PROXY] #88 TTFB 1932ms (status 200)
+2026-06-08T13:44:21.406Z [INFO] [MODEL-PROXY] #88 done in 49.5s (165in/2542out)
+2026-06-08T13:44:21.616Z [INFO] [MODEL-PROXY] #89 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:44:21.619Z [INFO] [MODEL-PROXY] #89 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:44:23.447Z [INFO] [MODEL-PROXY] #89 TTFB 1831ms (status 200)
+2026-06-08T13:44:25.822Z [INFO] [MODEL-PROXY] #89 done in 4.2s (78in/127out)
+2026-06-08T13:44:25.988Z [INFO] [MODEL-PROXY] #90 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:44:25.993Z [INFO] [MODEL-PROXY] #90 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:44:27.624Z [INFO] [MODEL-PROXY] #90 TTFB 1636ms (status 200)
+2026-06-08T13:45:26.464Z [INFO] [MODEL-PROXY] #90 done in 60.5s (733in/346out)
+2026-06-08T13:45:26.630Z [INFO] [MODEL-PROXY] #91 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:45:26.635Z [INFO] [MODEL-PROXY] #91 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:45:28.321Z [INFO] [MODEL-PROXY] #91 TTFB 1691ms (status 200)
+2026-06-08T13:45:36.811Z [INFO] [MODEL-PROXY] #91 done in 10.2s (489in/544out)
+2026-06-08T13:45:36.862Z [INFO] [MODEL-PROXY] #92 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:45:36.866Z [INFO] [MODEL-PROXY] #92 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:45:38.265Z [INFO] [MODEL-PROXY] #92 TTFB 1403ms (status 200)
+2026-06-08T13:45:41.228Z [INFO] [MODEL-PROXY] #92 done in 4.4s (747in/108out)
+2026-06-08T13:45:41.443Z [INFO] [MODEL-PROXY] #93 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:45:41.447Z [INFO] [MODEL-PROXY] #93 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:45:43.124Z [INFO] [MODEL-PROXY] #93 TTFB 1681ms (status 200)
+2026-06-08T13:45:53.452Z [INFO] [MODEL-PROXY] #93 done in 12.0s (625in/669out)
+2026-06-08T13:45:53.556Z [INFO] [MODEL-PROXY] #94 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:45:53.557Z [INFO] [MODEL-PROXY] #94 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:45:54.431Z [INFO] [MODEL-PROXY] #94 TTFB 875ms (status 200)
+2026-06-08T13:45:56.049Z [INFO] [MODEL-PROXY] #94 done in 2.5s (json, 243b)
+2026-06-08T13:45:56.060Z [INFO] [MODEL-PROXY] #95 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:45:56.062Z [INFO] [MODEL-PROXY] #95 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:45:56.862Z [INFO] [MODEL-PROXY] #95 TTFB 802ms (status 200)
+2026-06-08T13:46:07.528Z [INFO] [MODEL-PROXY] #95 done in 11.5s (json, 1601b)
+2026-06-08T13:46:07.669Z [INFO] [MODEL-PROXY] #96 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:46:07.675Z [INFO] [MODEL-PROXY] #96 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:46:09.162Z [INFO] [MODEL-PROXY] #96 TTFB 1493ms (status 200)
+2026-06-08T13:46:13.823Z [INFO] [MODEL-PROXY] #96 done in 6.2s (145in/206out)
+2026-06-08T13:46:13.940Z [INFO] [MODEL-PROXY] #97 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:46:13.941Z [INFO] [MODEL-PROXY] #97 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:46:14.824Z [INFO] [MODEL-PROXY] #97 TTFB 884ms (status 200)
+2026-06-08T13:46:15.875Z [INFO] [MODEL-PROXY] #97 done in 1.9s (json, 247b)
+2026-06-08T13:46:16.043Z [INFO] [MODEL-PROXY] #98 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:46:16.047Z [INFO] [MODEL-PROXY] #98 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:46:17.415Z [INFO] [MODEL-PROXY] #98 TTFB 1372ms (status 200)
+2026-06-08T13:47:55.900Z [INFO] [MODEL-PROXY] #98 done in 99.9s (3073in/8251out)
+2026-06-08T13:47:56.351Z [INFO] [MODEL-PROXY] #99 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:47:56.355Z [INFO] [MODEL-PROXY] #99 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:47:57.648Z [INFO] [MODEL-PROXY] #99 TTFB 1297ms (status 200)
+2026-06-08T13:47:59.970Z [INFO] [MODEL-PROXY] #99 done in 3.6s (110in/132out)
+2026-06-08T13:48:00.166Z [INFO] [MODEL-PROXY] #100 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:48:00.170Z [INFO] [MODEL-PROXY] #100 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:48:01.664Z [INFO] [MODEL-PROXY] #100 TTFB 1498ms (status 200)
+2026-06-08T13:48:09.122Z [INFO] [MODEL-PROXY] #100 done in 9.0s (150in/467out)
+2026-06-08T13:48:09.245Z [INFO] [MODEL-PROXY] #101 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:48:09.246Z [INFO] [MODEL-PROXY] #101 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:48:10.157Z [INFO] [MODEL-PROXY] #101 TTFB 912ms (status 200)
+2026-06-08T13:48:11.725Z [INFO] [MODEL-PROXY] #101 done in 2.5s (json, 248b)
+2026-06-08T13:48:11.731Z [INFO] [MODEL-PROXY] #102 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:48:11.732Z [INFO] [MODEL-PROXY] #102 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:48:12.699Z [INFO] [MODEL-PROXY] #102 TTFB 968ms (status 200)
+2026-06-08T13:48:14.776Z [INFO] [MODEL-PROXY] #102 done in 3.0s (json, 248b)
+2026-06-08T13:48:17.273Z [INFO] [MODEL-PROXY] #103 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:48:17.278Z [INFO] [MODEL-PROXY] #103 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:48:18.670Z [INFO] [MODEL-PROXY] #103 TTFB 1397ms (status 200)
+2026-06-08T13:48:39.424Z [INFO] [MODEL-PROXY] #103 done in 22.2s (316in/1101out)
+2026-06-08T13:48:39.576Z [INFO] [MODEL-PROXY] #104 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:48:39.577Z [INFO] [MODEL-PROXY] #104 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:48:40.517Z [INFO] [MODEL-PROXY] #104 TTFB 941ms (status 200)
+2026-06-08T13:48:41.447Z [INFO] [MODEL-PROXY] #104 done in 1.9s (json, 248b)
+2026-06-08T13:48:41.456Z [INFO] [MODEL-PROXY] #105 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:48:41.460Z [INFO] [MODEL-PROXY] #105 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:48:42.376Z [INFO] [MODEL-PROXY] #105 TTFB 920ms (status 200)
+2026-06-08T13:48:54.261Z [INFO] [MODEL-PROXY] #105 done in 12.8s (json, 1641b)
+2026-06-08T13:48:56.751Z [INFO] [MODEL-PROXY] #106 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:48:56.757Z [INFO] [MODEL-PROXY] #106 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:48:58.417Z [INFO] [MODEL-PROXY] #106 TTFB 1666ms (status 200)
+2026-06-08T13:49:09.239Z [INFO] [MODEL-PROXY] #106 done in 12.5s (50in/656out)
+2026-06-08T13:49:09.312Z [INFO] [MODEL-PROXY] #107 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:49:09.312Z [INFO] [MODEL-PROXY] #107 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:49:10.147Z [INFO] [MODEL-PROXY] #107 TTFB 835ms (status 200)
+2026-06-08T13:49:11.224Z [INFO] [MODEL-PROXY] #107 done in 1.9s (json, 248b)
+2026-06-08T13:49:14.715Z [INFO] [MODEL-PROXY] #108 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:49:14.721Z [INFO] [MODEL-PROXY] #108 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:49:16.036Z [INFO] [MODEL-PROXY] #108 TTFB 1321ms (status 200)
+2026-06-08T13:49:57.925Z [INFO] [MODEL-PROXY] #108 done in 43.2s (441in/2201out)
+2026-06-08T13:49:58.049Z [INFO] [MODEL-PROXY] #109 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:49:58.051Z [INFO] [MODEL-PROXY] #109 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:49:59.068Z [INFO] [MODEL-PROXY] #109 TTFB 1019ms (status 200)
+2026-06-08T13:49:59.945Z [INFO] [MODEL-PROXY] #109 done in 1.9s (json, 249b)
+2026-06-08T13:50:03.447Z [INFO] [MODEL-PROXY] #110 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:50:03.453Z [INFO] [MODEL-PROXY] #110 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:50:05.035Z [INFO] [MODEL-PROXY] #110 TTFB 1588ms (status 200)
+2026-06-08T13:50:11.761Z [INFO] [MODEL-PROXY] #110 done in 8.3s (657in/386out)
+2026-06-08T13:50:11.866Z [INFO] [MODEL-PROXY] #111 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:50:11.867Z [INFO] [MODEL-PROXY] #111 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:50:12.761Z [INFO] [MODEL-PROXY] #111 TTFB 895ms (status 200)
+2026-06-08T13:50:13.822Z [INFO] [MODEL-PROXY] #111 done in 2.0s (json, 247b)
+2026-06-08T13:50:13.840Z [INFO] [MODEL-PROXY] #112 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:50:13.844Z [INFO] [MODEL-PROXY] #112 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:50:14.745Z [INFO] [MODEL-PROXY] #112 TTFB 905ms (status 200)
+2026-06-08T13:50:15.832Z [INFO] [MODEL-PROXY] #112 done in 2.0s (json, 246b)
+2026-06-08T13:50:17.903Z [INFO] [MODEL-PROXY] #113 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:50:17.907Z [INFO] [MODEL-PROXY] #113 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:50:19.556Z [INFO] [MODEL-PROXY] #113 TTFB 1653ms (status 200)
+2026-06-08T13:50:25.543Z [INFO] [MODEL-PROXY] #113 done in 7.6s (104in/403out)
+2026-06-08T13:50:25.673Z [INFO] [MODEL-PROXY] #114 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:50:25.673Z [INFO] [MODEL-PROXY] #114 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:50:26.601Z [INFO] [MODEL-PROXY] #114 TTFB 928ms (status 200)
+2026-06-08T13:50:28.174Z [INFO] [MODEL-PROXY] #114 done in 2.5s (json, 249b)
+2026-06-08T13:50:28.200Z [INFO] [MODEL-PROXY] #115 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:50:28.202Z [INFO] [MODEL-PROXY] #115 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:50:29.096Z [INFO] [MODEL-PROXY] #115 TTFB 896ms (status 200)
+2026-06-08T13:50:47.424Z [INFO] [MODEL-PROXY] #115 done in 19.2s (json, 2377b)
+2026-06-08T13:50:52.628Z [INFO] [MODEL-PROXY] #116 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:50:52.633Z [INFO] [MODEL-PROXY] #116 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:50:54.917Z [INFO] [MODEL-PROXY] #116 TTFB 2289ms (status 200)
+2026-06-08T13:51:24.482Z [INFO] [MODEL-PROXY] #116 done in 31.9s (290in/1497out)
+2026-06-08T13:51:24.711Z [INFO] [MODEL-PROXY] #117 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:51:24.715Z [INFO] [MODEL-PROXY] #117 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:51:26.342Z [INFO] [MODEL-PROXY] #117 TTFB 1631ms (status 200)
+2026-06-08T13:51:29.273Z [INFO] [MODEL-PROXY] #117 done in 4.6s (667in/109out)
+2026-06-08T13:51:29.487Z [INFO] [MODEL-PROXY] #118 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:51:29.492Z [INFO] [MODEL-PROXY] #118 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:51:31.242Z [INFO] [MODEL-PROXY] #118 TTFB 1755ms (status 200)
+2026-06-08T13:51:34.072Z [INFO] [MODEL-PROXY] #118 done in 4.6s (40in/113out)
+2026-06-08T13:51:34.260Z [INFO] [MODEL-PROXY] #119 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:51:34.264Z [INFO] [MODEL-PROXY] #119 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:51:35.848Z [INFO] [MODEL-PROXY] #119 TTFB 1588ms (status 200)
+2026-06-08T13:51:49.930Z [INFO] [MODEL-PROXY] #119 done in 15.7s (619in/982out)
+2026-06-08T13:51:50.009Z [INFO] [MODEL-PROXY] #120 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:51:50.013Z [INFO] [MODEL-PROXY] #120 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:51:51.725Z [INFO] [MODEL-PROXY] #120 TTFB 1716ms (status 200)
+2026-06-08T13:51:58.824Z [INFO] [MODEL-PROXY] #120 done in 8.8s (1377in/495out)
+2026-06-08T13:51:58.933Z [INFO] [MODEL-PROXY] #121 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:51:58.935Z [INFO] [MODEL-PROXY] #121 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:00.023Z [INFO] [MODEL-PROXY] #121 TTFB 1090ms (status 200)
+2026-06-08T13:52:00.949Z [INFO] [MODEL-PROXY] #121 done in 2.0s (json, 248b)
+2026-06-08T13:52:00.958Z [INFO] [MODEL-PROXY] #122 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:00.962Z [INFO] [MODEL-PROXY] #122 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:01.922Z [INFO] [MODEL-PROXY] #122 TTFB 964ms (status 200)
+2026-06-08T13:52:04.559Z [INFO] [MODEL-PROXY] #122 done in 3.6s (json, 249b)
+2026-06-08T13:52:04.682Z [INFO] [MODEL-PROXY] #123 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:04.687Z [INFO] [MODEL-PROXY] #123 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:06.222Z [INFO] [MODEL-PROXY] #123 TTFB 1540ms (status 200)
+2026-06-08T13:52:11.162Z [INFO] [MODEL-PROXY] #123 done in 6.5s (119in/253out)
+2026-06-08T13:52:11.253Z [INFO] [MODEL-PROXY] #124 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:11.254Z [INFO] [MODEL-PROXY] #124 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:12.282Z [INFO] [MODEL-PROXY] #124 TTFB 1029ms (status 200)
+2026-06-08T13:52:13.223Z [INFO] [MODEL-PROXY] #124 done in 2.0s (json, 249b)
+2026-06-08T13:52:13.229Z [INFO] [MODEL-PROXY] #125 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:13.232Z [INFO] [MODEL-PROXY] #125 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:14.222Z [INFO] [MODEL-PROXY] #125 TTFB 993ms (status 200)
+2026-06-08T13:52:19.037Z [INFO] [MODEL-PROXY] #125 done in 5.8s (json, 801b)
+2026-06-08T13:52:19.157Z [INFO] [MODEL-PROXY] #126 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:19.162Z [INFO] [MODEL-PROXY] #126 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:20.871Z [INFO] [MODEL-PROXY] #126 TTFB 1714ms (status 200)
+2026-06-08T13:52:32.222Z [INFO] [MODEL-PROXY] #126 done in 13.1s (157in/828out)
+2026-06-08T13:52:32.281Z [INFO] [MODEL-PROXY] #127 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:32.282Z [INFO] [MODEL-PROXY] #127 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:33.249Z [INFO] [MODEL-PROXY] #127 TTFB 968ms (status 200)
+2026-06-08T13:52:34.337Z [INFO] [MODEL-PROXY] #127 done in 2.1s (json, 245b)
+2026-06-08T13:52:34.341Z [INFO] [MODEL-PROXY] #128 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:34.342Z [INFO] [MODEL-PROXY] #128 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:35.256Z [INFO] [MODEL-PROXY] #128 TTFB 915ms (status 200)
+2026-06-08T13:52:49.130Z [INFO] [MODEL-PROXY] #128 done in 14.8s (json, 1944b)
+2026-06-08T13:52:49.275Z [INFO] [MODEL-PROXY] #129 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:49.280Z [INFO] [MODEL-PROXY] #129 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:51.041Z [INFO] [MODEL-PROXY] #129 TTFB 1766ms (status 200)
+2026-06-08T13:52:57.460Z [INFO] [MODEL-PROXY] #129 done in 8.2s (874in/500out)
+2026-06-08T13:52:57.595Z [INFO] [MODEL-PROXY] #130 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:57.596Z [INFO] [MODEL-PROXY] #130 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:52:58.493Z [INFO] [MODEL-PROXY] #130 TTFB 898ms (status 200)
+2026-06-08T13:52:59.739Z [INFO] [MODEL-PROXY] #130 done in 2.1s (json, 250b)
+2026-06-08T13:52:59.745Z [INFO] [MODEL-PROXY] #131 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:52:59.746Z [INFO] [MODEL-PROXY] #131 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:53:00.837Z [INFO] [MODEL-PROXY] #131 TTFB 1092ms (status 200)
+2026-06-08T13:53:19.022Z [INFO] [MODEL-PROXY] #131 done in 19.3s (json, 2157b)
+2026-06-08T13:53:26.541Z [INFO] [MODEL-PROXY] #132 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:53:26.546Z [INFO] [MODEL-PROXY] #132 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:53:28.835Z [INFO] [MODEL-PROXY] #132 TTFB 2294ms (status 200)
+2026-06-08T13:53:33.923Z [INFO] [MODEL-PROXY] #132 done in 7.4s (181in/265out)
+2026-06-08T13:53:34.038Z [INFO] [MODEL-PROXY] #133 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:53:34.039Z [INFO] [MODEL-PROXY] #133 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:53:35.123Z [INFO] [MODEL-PROXY] #133 TTFB 1085ms (status 200)
+2026-06-08T13:53:36.456Z [INFO] [MODEL-PROXY] #133 done in 2.4s (json, 247b)
+2026-06-08T13:53:36.483Z [INFO] [MODEL-PROXY] #134 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:53:36.485Z [INFO] [MODEL-PROXY] #134 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:53:37.439Z [INFO] [MODEL-PROXY] #134 TTFB 956ms (status 200)
+2026-06-08T13:53:44.552Z [INFO] [MODEL-PROXY] #134 done in 8.1s (json, 995b)
+2026-06-08T13:53:44.622Z [INFO] [MODEL-PROXY] #135 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T13:53:44.627Z [INFO] [MODEL-PROXY] #135 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T13:53:46.462Z [INFO] [MODEL-PROXY] #135 TTFB 1840ms (status 200)
+2026-06-08T13:53:52.021Z [INFO] [MODEL-PROXY] #135 done in 7.4s (183in/221out)
+2026-06-08T14:06:52.489Z [INFO] [MODEL-PROXY] #136 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:06:52.494Z [INFO] [MODEL-PROXY] #136 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:06:54.677Z [INFO] [MODEL-PROXY] #136 TTFB 2188ms (status 200)
+2026-06-08T14:07:03.317Z [INFO] [MODEL-PROXY] #136 done in 10.8s (48in/398out)
+2026-06-08T14:07:03.414Z [INFO] [MODEL-PROXY] #137 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:03.415Z [INFO] [MODEL-PROXY] #137 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:04.308Z [INFO] [MODEL-PROXY] #137 TTFB 894ms (status 200)
+2026-06-08T14:07:05.808Z [INFO] [MODEL-PROXY] #137 done in 2.4s (json, 248b)
+2026-06-08T14:07:05.947Z [INFO] [MODEL-PROXY] #138 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:05.956Z [INFO] [MODEL-PROXY] #138 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:07.829Z [INFO] [MODEL-PROXY] #138 TTFB 1882ms (status 200)
+2026-06-08T14:07:11.654Z [INFO] [MODEL-PROXY] #138 done in 5.7s (78in/183out)
+2026-06-08T14:07:11.764Z [INFO] [MODEL-PROXY] #139 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:11.765Z [INFO] [MODEL-PROXY] #139 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:12.807Z [INFO] [MODEL-PROXY] #139 TTFB 1043ms (status 200)
+2026-06-08T14:07:14.039Z [INFO] [MODEL-PROXY] #139 done in 2.3s (json, 250b)
+2026-06-08T14:07:14.053Z [INFO] [MODEL-PROXY] #140 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:14.057Z [INFO] [MODEL-PROXY] #140 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:15.044Z [INFO] [MODEL-PROXY] #140 TTFB 991ms (status 200)
+2026-06-08T14:07:23.416Z [INFO] [MODEL-PROXY] #140 done in 9.4s (json, 1245b)
+2026-06-08T14:07:23.833Z [INFO] [MODEL-PROXY] #141 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:23.839Z [INFO] [MODEL-PROXY] #141 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:25.908Z [INFO] [MODEL-PROXY] #141 TTFB 2075ms (status 200)
+2026-06-08T14:07:30.708Z [INFO] [MODEL-PROXY] #141 done in 6.9s (140in/215out)
+2026-06-08T14:07:30.938Z [INFO] [MODEL-PROXY] #142 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:30.942Z [INFO] [MODEL-PROXY] #142 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:33.009Z [INFO] [MODEL-PROXY] #142 TTFB 2071ms (status 200)
+2026-06-08T14:07:35.012Z [INFO] [MODEL-PROXY] #142 done in 4.1s (283in/115out)
+2026-06-08T14:07:35.213Z [INFO] [MODEL-PROXY] #143 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:35.220Z [INFO] [MODEL-PROXY] #143 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:37.110Z [INFO] [MODEL-PROXY] #143 TTFB 1897ms (status 200)
+2026-06-08T14:07:41.229Z [INFO] [MODEL-PROXY] #143 done in 6.0s (58in/243out)
+2026-06-08T14:07:41.415Z [INFO] [MODEL-PROXY] #144 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:41.419Z [INFO] [MODEL-PROXY] #144 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:43.207Z [INFO] [MODEL-PROXY] #144 TTFB 1792ms (status 200)
+2026-06-08T14:07:55.308Z [INFO] [MODEL-PROXY] #144 done in 13.9s (351in/472out)
+2026-06-08T14:07:55.523Z [INFO] [MODEL-PROXY] #145 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:07:55.528Z [INFO] [MODEL-PROXY] #145 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:07:57.508Z [INFO] [MODEL-PROXY] #145 TTFB 1985ms (status 200)
+2026-06-08T14:08:01.030Z [INFO] [MODEL-PROXY] #145 done in 5.5s (224in/184out)
+2026-06-08T14:08:01.212Z [INFO] [MODEL-PROXY] #146 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:08:01.218Z [INFO] [MODEL-PROXY] #146 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:08:02.944Z [INFO] [MODEL-PROXY] #146 TTFB 1732ms (status 200)
+2026-06-08T14:08:07.807Z [INFO] [MODEL-PROXY] #146 done in 6.6s (74in/270out)
+2026-06-08T14:08:07.935Z [INFO] [MODEL-PROXY] #147 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:08:07.936Z [INFO] [MODEL-PROXY] #147 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:08:08.836Z [INFO] [MODEL-PROXY] #147 TTFB 901ms (status 200)
+2026-06-08T14:08:09.807Z [INFO] [MODEL-PROXY] #147 done in 1.9s (json, 248b)
+2026-06-08T14:08:09.960Z [INFO] [MODEL-PROXY] #148 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:08:09.965Z [INFO] [MODEL-PROXY] #148 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:08:11.626Z [INFO] [MODEL-PROXY] #148 TTFB 1666ms (status 200)
+2026-06-08T14:08:18.008Z [INFO] [MODEL-PROXY] #148 done in 8.0s (125in/363out)
+2026-06-08T14:08:18.138Z [INFO] [MODEL-PROXY] #149 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:08:18.139Z [INFO] [MODEL-PROXY] #149 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:08:19.035Z [INFO] [MODEL-PROXY] #149 TTFB 897ms (status 200)
+2026-06-08T14:08:20.013Z [INFO] [MODEL-PROXY] #149 done in 1.9s (json, 246b)
+2026-06-08T14:08:21.444Z [INFO] [MODEL-PROXY] #150 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:08:21.451Z [INFO] [MODEL-PROXY] #150 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:08:23.247Z [INFO] [MODEL-PROXY] #150 TTFB 1803ms (status 200)
+2026-06-08T14:08:25.309Z [INFO] [MODEL-PROXY] #150 done in 3.9s (270in/57out)
+2026-06-08T14:08:25.340Z [INFO] [MODEL-PROXY] #151 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:08:25.346Z [INFO] [MODEL-PROXY] #151 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:08:26.920Z [INFO] [MODEL-PROXY] #151 TTFB 1580ms (status 200)
+2026-06-08T14:08:29.241Z [INFO] [MODEL-PROXY] #151 done in 3.9s (393in/3out)
+2026-06-08T14:13:54.032Z [INFO] [MODEL-PROXY] #152 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:13:54.036Z [INFO] [MODEL-PROXY] #152 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:13:56.378Z [INFO] [MODEL-PROXY] #152 TTFB 2346ms (status 200)
+2026-06-08T14:13:59.001Z [INFO] [MODEL-PROXY] #152 done in 5.0s (81in/150out)
+2026-06-08T14:13:59.205Z [INFO] [MODEL-PROXY] #153 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:13:59.210Z [INFO] [MODEL-PROXY] #153 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:13:59.864Z [INFO] [MODEL-PROXY] #155 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:13:59.866Z [INFO] [MODEL-PROXY] #155 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"93ade00a-3ad0-4fc1-b138-d7dfc2bda7b2"}
+2026-06-08T14:14:01.117Z [INFO] [MODEL-PROXY] #153 TTFB 1912ms (status 200)
+2026-06-08T14:14:01.212Z [INFO] [MODEL-PROXY] #155 TTFB 1348ms (status 200)
+2026-06-08T14:14:06.332Z [INFO] [MODEL-PROXY] #155 done in 6.5s (27831in/286out)
+2026-06-08T14:14:22.406Z [INFO] [MODEL-PROXY] #153 done in 23.2s (224in/1412out)
+2026-06-08T14:14:22.532Z [INFO] [MODEL-PROXY] #156 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:14:22.533Z [INFO] [MODEL-PROXY] #156 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:14:23.506Z [INFO] [MODEL-PROXY] #156 TTFB 974ms (status 200)
+2026-06-08T14:14:24.760Z [INFO] [MODEL-PROXY] #156 done in 2.2s (json, 249b)
+2026-06-08T14:14:26.294Z [INFO] [MODEL-PROXY] #157 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:14:26.299Z [INFO] [MODEL-PROXY] #157 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:14:28.140Z [INFO] [MODEL-PROXY] #157 TTFB 1846ms (status 200)
+2026-06-08T14:14:51.604Z [INFO] [MODEL-PROXY] #157 done in 25.3s (320in/1396out)
+2026-06-08T14:14:51.786Z [INFO] [MODEL-PROXY] #158 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:14:51.791Z [INFO] [MODEL-PROXY] #158 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:14:53.472Z [INFO] [MODEL-PROXY] #158 TTFB 1686ms (status 200)
+2026-06-08T14:15:03.436Z [INFO] [MODEL-PROXY] #158 done in 11.7s (125in/628out)
+2026-06-08T14:15:03.495Z [INFO] [MODEL-PROXY] #159 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:15:03.499Z [INFO] [MODEL-PROXY] #159 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:15:05.108Z [INFO] [MODEL-PROXY] #159 TTFB 1613ms (status 200)
+2026-06-08T14:15:09.505Z [INFO] [MODEL-PROXY] #159 done in 6.0s (204in/257out)
+2026-06-08T14:15:09.636Z [INFO] [MODEL-PROXY] #160 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:15:09.637Z [INFO] [MODEL-PROXY] #160 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:15:10.634Z [INFO] [MODEL-PROXY] #160 TTFB 998ms (status 200)
+2026-06-08T14:15:11.606Z [INFO] [MODEL-PROXY] #160 done in 2.0s (json, 245b)
+2026-06-08T14:15:11.744Z [INFO] [MODEL-PROXY] #161 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:15:11.751Z [INFO] [MODEL-PROXY] #161 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:15:13.605Z [INFO] [MODEL-PROXY] #161 TTFB 1861ms (status 200)
+2026-06-08T14:15:21.065Z [INFO] [MODEL-PROXY] #161 done in 9.3s (155in/436out)
+2026-06-08T14:15:21.268Z [INFO] [MODEL-PROXY] #162 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:15:21.273Z [INFO] [MODEL-PROXY] #162 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:15:22.899Z [INFO] [MODEL-PROXY] #162 TTFB 1631ms (status 200)
+2026-06-08T14:15:30.706Z [INFO] [MODEL-PROXY] #162 done in 9.4s (278in/419out)
+2026-06-08T14:15:30.836Z [INFO] [MODEL-PROXY] #163 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:15:30.838Z [INFO] [MODEL-PROXY] #163 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:15:31.744Z [INFO] [MODEL-PROXY] #163 TTFB 908ms (status 200)
+2026-06-08T14:15:32.835Z [INFO] [MODEL-PROXY] #163 done in 2.0s (json, 248b)
+2026-06-08T14:15:34.281Z [INFO] [MODEL-PROXY] #164 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:15:34.286Z [INFO] [MODEL-PROXY] #164 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:15:35.770Z [INFO] [MODEL-PROXY] #164 TTFB 1489ms (status 200)
+2026-06-08T14:15:41.705Z [INFO] [MODEL-PROXY] #164 done in 7.4s (136in/354out)
+2026-06-08T14:17:09.300Z [INFO] [MODEL-PROXY] #165 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:17:09.305Z [INFO] [MODEL-PROXY] #165 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:17:11.635Z [INFO] [MODEL-PROXY] #165 TTFB 2335ms (status 200)
+2026-06-08T14:17:17.808Z [INFO] [MODEL-PROXY] #165 done in 8.5s (149in/458out)
+2026-06-08T14:17:17.952Z [INFO] [MODEL-PROXY] #166 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:17:17.953Z [INFO] [MODEL-PROXY] #166 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:17:18.935Z [INFO] [MODEL-PROXY] #166 TTFB 983ms (status 200)
+2026-06-08T14:17:19.707Z [INFO] [MODEL-PROXY] #166 done in 1.8s (json, 247b)
+2026-06-08T14:17:21.171Z [INFO] [MODEL-PROXY] #167 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:17:21.177Z [INFO] [MODEL-PROXY] #167 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:17:23.113Z [INFO] [MODEL-PROXY] #167 TTFB 1942ms (status 200)
+2026-06-08T14:18:07.304Z [INFO] [MODEL-PROXY] #167 done in 46.1s (466in/2594out)
+2026-06-08T14:18:07.403Z [INFO] [MODEL-PROXY] #168 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:18:07.404Z [INFO] [MODEL-PROXY] #168 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:18:08.442Z [INFO] [MODEL-PROXY] #168 TTFB 1039ms (status 200)
+2026-06-08T14:18:09.906Z [INFO] [MODEL-PROXY] #168 done in 2.5s (json, 247b)
+2026-06-08T14:18:11.401Z [INFO] [MODEL-PROXY] #169 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:18:11.407Z [INFO] [MODEL-PROXY] #169 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:18:13.231Z [INFO] [MODEL-PROXY] #169 TTFB 1830ms (status 200)
+2026-06-08T14:18:29.400Z [INFO] [MODEL-PROXY] #169 done in 18.0s (641in/950out)
+2026-06-08T14:18:29.617Z [INFO] [MODEL-PROXY] #170 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:18:29.624Z [INFO] [MODEL-PROXY] #170 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:18:31.330Z [INFO] [MODEL-PROXY] #170 TTFB 1713ms (status 200)
+2026-06-08T14:18:39.905Z [INFO] [MODEL-PROXY] #170 done in 10.3s (240in/433out)
+2026-06-08T14:18:40.114Z [INFO] [MODEL-PROXY] #171 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:18:40.119Z [INFO] [MODEL-PROXY] #171 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:18:41.913Z [INFO] [MODEL-PROXY] #171 TTFB 1799ms (status 200)
+2026-06-08T14:18:51.105Z [INFO] [MODEL-PROXY] #171 done in 11.0s (93in/647out)
+2026-06-08T14:18:51.201Z [INFO] [MODEL-PROXY] #172 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:18:51.202Z [INFO] [MODEL-PROXY] #172 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:18:52.251Z [INFO] [MODEL-PROXY] #172 TTFB 1050ms (status 200)
+2026-06-08T14:18:53.306Z [INFO] [MODEL-PROXY] #172 done in 2.1s (json, 248b)
+2026-06-08T14:18:53.309Z [INFO] [MODEL-PROXY] #173 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:18:53.310Z [INFO] [MODEL-PROXY] #173 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:18:54.364Z [INFO] [MODEL-PROXY] #173 TTFB 1055ms (status 200)
+2026-06-08T14:18:59.723Z [INFO] [MODEL-PROXY] #173 done in 6.4s (json, 879b)
+2026-06-08T14:18:59.805Z [INFO] [MODEL-PROXY] #174 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:18:59.810Z [INFO] [MODEL-PROXY] #174 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:19:01.735Z [INFO] [MODEL-PROXY] #174 TTFB 1930ms (status 200)
+2026-06-08T14:19:08.310Z [INFO] [MODEL-PROXY] #174 done in 8.5s (230in/339out)
+2026-06-08T14:19:08.423Z [INFO] [MODEL-PROXY] #175 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:19:08.424Z [INFO] [MODEL-PROXY] #175 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:19:09.503Z [INFO] [MODEL-PROXY] #175 TTFB 1080ms (status 200)
+2026-06-08T14:19:10.168Z [INFO] [MODEL-PROXY] #175 done in 1.7s (json, 248b)
+2026-06-08T14:19:10.277Z [INFO] [MODEL-PROXY] #176 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:19:10.282Z [INFO] [MODEL-PROXY] #176 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:19:11.931Z [INFO] [MODEL-PROXY] #176 TTFB 1654ms (status 200)
+2026-06-08T14:19:37.621Z [INFO] [MODEL-PROXY] #176 done in 27.3s (179in/1384out)
+2026-06-08T14:19:37.873Z [INFO] [MODEL-PROXY] #177 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:19:37.878Z [INFO] [MODEL-PROXY] #177 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:19:39.625Z [INFO] [MODEL-PROXY] #177 TTFB 1752ms (status 200)
+2026-06-08T14:20:11.638Z [INFO] [MODEL-PROXY] #178 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:20:11.643Z [INFO] [MODEL-PROXY] #178 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:20:14.251Z [INFO] [MODEL-PROXY] #178 TTFB 2613ms (status 200)
+2026-06-08T14:21:34.408Z [INFO] [MODEL-PROXY] #178 done in 82.8s (581in/7743out)
+2026-06-08T14:21:34.444Z [INFO] [MODEL-PROXY] #179 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:21:34.450Z [INFO] [MODEL-PROXY] #179 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:21:36.419Z [INFO] [MODEL-PROXY] #179 TTFB 1975ms (status 200)
+2026-06-08T14:21:38.105Z [INFO] [MODEL-PROXY] #179 done in 3.7s (51in/98out)
+2026-06-08T14:21:38.325Z [INFO] [MODEL-PROXY] #180 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:21:38.330Z [INFO] [MODEL-PROXY] #180 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:21:38.989Z [INFO] [MODEL-PROXY] #182 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:21:38.990Z [INFO] [MODEL-PROXY] #182 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"72bca600-ba4b-4aee-8aba-08f49ca21967"}
+2026-06-08T14:21:40.114Z [INFO] [MODEL-PROXY] #180 TTFB 1789ms (status 200)
+2026-06-08T14:21:40.308Z [INFO] [MODEL-PROXY] #182 TTFB 1319ms (status 200)
+2026-06-08T14:21:45.113Z [INFO] [MODEL-PROXY] #182 done in 6.1s (26590in/308out)
+2026-06-08T14:21:46.352Z [INFO] [MODEL-PROXY] #184 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:21:46.353Z [INFO] [MODEL-PROXY] #184 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"7509f7fa-4f9f-4a99-9acf-1069977ab511"}
+2026-06-08T14:21:47.404Z [INFO] [MODEL-PROXY] #184 TTFB 1051ms (status 200)
+2026-06-08T14:21:51.511Z [INFO] [MODEL-PROXY] #184 done in 5.2s (25564in/396out)
+2026-06-08T14:22:55.931Z [INFO] [MODEL-PROXY] #180 done in 77.6s (77in/7531out)
+2026-06-08T14:22:56.146Z [INFO] [MODEL-PROXY] #185 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:22:56.151Z [INFO] [MODEL-PROXY] #185 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:22:58.067Z [INFO] [MODEL-PROXY] #185 TTFB 1921ms (status 200)
+2026-06-08T14:23:02.004Z [INFO] [MODEL-PROXY] #185 done in 5.9s (7658in/124out)
+2026-06-08T14:23:02.149Z [INFO] [MODEL-PROXY] #186 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:23:02.158Z [INFO] [MODEL-PROXY] #186 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:23:04.105Z [INFO] [MODEL-PROXY] #186 TTFB 1956ms (status 200)
+2026-06-08T14:23:31.903Z [INFO] [MODEL-PROXY] #186 done in 29.8s (225in/1326out)
+2026-06-08T14:23:32.077Z [INFO] [MODEL-PROXY] #187 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:23:32.085Z [INFO] [MODEL-PROXY] #187 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:23:33.803Z [INFO] [MODEL-PROXY] #187 TTFB 1726ms (status 200)
+2026-06-08T14:23:50.804Z [INFO] [MODEL-PROXY] #187 done in 18.7s (774in/1194out)
+2026-06-08T14:23:50.991Z [INFO] [MODEL-PROXY] #188 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:23:50.998Z [INFO] [MODEL-PROXY] #188 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:23:52.622Z [INFO] [MODEL-PROXY] #188 TTFB 1631ms (status 200)
+2026-06-08T14:23:54.904Z [INFO] [MODEL-PROXY] #188 done in 3.9s (98in/124out)
+2026-06-08T14:23:55.106Z [INFO] [MODEL-PROXY] #189 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:23:55.112Z [INFO] [MODEL-PROXY] #189 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:23:56.752Z [INFO] [MODEL-PROXY] #189 TTFB 1646ms (status 200)
+2026-06-08T14:23:59.408Z [INFO] [MODEL-PROXY] #189 done in 4.3s (214in/92out)
+2026-06-08T14:23:59.610Z [INFO] [MODEL-PROXY] #190 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:23:59.616Z [INFO] [MODEL-PROXY] #190 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:24:01.553Z [INFO] [MODEL-PROXY] #190 TTFB 1943ms (status 200)
+2026-06-08T14:24:18.445Z [INFO] [MODEL-PROXY] #190 done in 18.8s (568in/1051out)
+2026-06-08T14:24:18.630Z [INFO] [MODEL-PROXY] #191 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:24:18.637Z [INFO] [MODEL-PROXY] #191 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:24:20.525Z [INFO] [MODEL-PROXY] #191 TTFB 1895ms (status 200)
+2026-06-08T14:24:22.304Z [INFO] [MODEL-PROXY] #191 done in 3.7s (133in/97out)
+2026-06-08T14:24:22.494Z [INFO] [MODEL-PROXY] #192 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:24:22.500Z [INFO] [MODEL-PROXY] #192 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:24:24.140Z [INFO] [MODEL-PROXY] #192 TTFB 1646ms (status 200)
+2026-06-08T14:24:31.221Z [INFO] [MODEL-PROXY] #192 done in 8.7s (119in/539out)
+2026-06-08T14:24:31.321Z [INFO] [MODEL-PROXY] #193 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:24:31.322Z [INFO] [MODEL-PROXY] #193 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:24:32.404Z [INFO] [MODEL-PROXY] #193 TTFB 1083ms (status 200)
+2026-06-08T14:24:34.626Z [INFO] [MODEL-PROXY] #193 done in 3.3s (json, 248b)
+2026-06-08T14:24:34.636Z [INFO] [MODEL-PROXY] #194 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:24:34.641Z [INFO] [MODEL-PROXY] #194 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:24:35.803Z [INFO] [MODEL-PROXY] #194 TTFB 1167ms (status 200)
+2026-06-08T14:24:50.442Z [INFO] [MODEL-PROXY] #194 done in 15.8s (json, 1900b)
+2026-06-08T14:24:55.959Z [INFO] [MODEL-PROXY] #195 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:24:55.964Z [INFO] [MODEL-PROXY] #195 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:24:58.209Z [INFO] [MODEL-PROXY] #195 TTFB 2250ms (status 200)
+2026-06-08T14:25:07.403Z [INFO] [MODEL-PROXY] #195 done in 11.4s (457in/423out)
+2026-06-08T14:25:28.359Z [ERROR] [MODEL-PROXY] #177 TIMEOUT after 300s
+2026-06-08T14:25:28.368Z [ERROR] [MODEL-PROXY] #177 ERROR after 350.5s: Request timeout
+2026-06-08T14:29:41.573Z [INFO] [MODEL-PROXY] #196 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:29:41.579Z [INFO] [MODEL-PROXY] #196 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:29:43.987Z [INFO] [MODEL-PROXY] #196 TTFB 2414ms (status 200)
+2026-06-08T14:29:58.145Z [INFO] [MODEL-PROXY] #196 done in 16.6s (155in/750out)
+2026-06-08T14:29:58.299Z [INFO] [MODEL-PROXY] #197 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:29:58.300Z [INFO] [MODEL-PROXY] #197 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:29:59.208Z [INFO] [MODEL-PROXY] #197 TTFB 909ms (status 200)
+2026-06-08T14:30:00.309Z [INFO] [MODEL-PROXY] #197 done in 2.0s (json, 249b)
+2026-06-08T14:30:00.328Z [INFO] [MODEL-PROXY] #198 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:30:00.331Z [INFO] [MODEL-PROXY] #198 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:30:01.509Z [INFO] [MODEL-PROXY] #198 TTFB 1181ms (status 200)
+2026-06-08T14:30:13.712Z [INFO] [MODEL-PROXY] #198 done in 13.4s (json, 1646b)
+2026-06-08T14:30:15.210Z [INFO] [MODEL-PROXY] #199 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:30:15.219Z [INFO] [MODEL-PROXY] #199 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:30:17.328Z [INFO] [MODEL-PROXY] #199 TTFB 2118ms (status 200)
+2026-06-08T14:30:28.411Z [INFO] [MODEL-PROXY] #199 done in 13.2s (410in/533out)
+2026-06-08T14:30:28.581Z [INFO] [MODEL-PROXY] #200 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:30:28.590Z [INFO] [MODEL-PROXY] #200 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:30:30.417Z [INFO] [MODEL-PROXY] #200 TTFB 1836ms (status 200)
+2026-06-08T14:30:34.829Z [INFO] [MODEL-PROXY] #200 done in 6.2s (102in/197out)
+2026-06-08T14:30:34.983Z [INFO] [MODEL-PROXY] #201 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:30:34.988Z [INFO] [MODEL-PROXY] #201 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:30:36.912Z [INFO] [MODEL-PROXY] #201 TTFB 1929ms (status 200)
+2026-06-08T14:30:39.460Z [INFO] [MODEL-PROXY] #201 done in 4.5s (451in/94out)
+2026-06-08T14:30:39.681Z [INFO] [MODEL-PROXY] #202 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:30:39.688Z [INFO] [MODEL-PROXY] #202 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:30:41.403Z [INFO] [MODEL-PROXY] #202 TTFB 1722ms (status 200)
+2026-06-08T14:30:43.709Z [INFO] [MODEL-PROXY] #202 done in 4.0s (50in/57out)
+2026-06-08T14:30:43.733Z [INFO] [MODEL-PROXY] #203 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:30:43.740Z [INFO] [MODEL-PROXY] #203 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:30:45.474Z [INFO] [MODEL-PROXY] #203 TTFB 1741ms (status 200)
+2026-06-08T14:30:47.051Z [INFO] [MODEL-PROXY] #203 done in 3.3s (429in/5out)
+2026-06-08T14:31:34.443Z [INFO] [MODEL-PROXY] #204 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:31:34.448Z [INFO] [MODEL-PROXY] #204 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:31:37.008Z [INFO] [MODEL-PROXY] #204 TTFB 2565ms (status 200)
+2026-06-08T14:32:15.410Z [INFO] [MODEL-PROXY] #204 done in 41.0s (120in/2176out)
+2026-06-08T14:32:15.525Z [INFO] [MODEL-PROXY] #205 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:32:15.526Z [INFO] [MODEL-PROXY] #205 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:32:16.713Z [INFO] [MODEL-PROXY] #205 TTFB 1188ms (status 200)
+2026-06-08T14:32:18.152Z [INFO] [MODEL-PROXY] #205 done in 2.6s (json, 247b)
+2026-06-08T14:32:19.610Z [INFO] [MODEL-PROXY] #206 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:32:19.617Z [INFO] [MODEL-PROXY] #206 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:32:21.717Z [INFO] [MODEL-PROXY] #206 TTFB 2107ms (status 200)
+2026-06-08T14:32:54.213Z [INFO] [MODEL-PROXY] #206 done in 34.6s (304in/1621out)
+2026-06-08T14:32:54.448Z [INFO] [MODEL-PROXY] #207 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:32:54.454Z [INFO] [MODEL-PROXY] #207 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:32:56.487Z [INFO] [MODEL-PROXY] #207 TTFB 2039ms (status 200)
+2026-06-08T14:33:05.312Z [INFO] [MODEL-PROXY] #207 done in 10.9s (342in/539out)
+2026-06-08T14:33:05.480Z [INFO] [MODEL-PROXY] #208 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:33:05.488Z [INFO] [MODEL-PROXY] #208 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:33:07.396Z [INFO] [MODEL-PROXY] #208 TTFB 1916ms (status 200)
+2026-06-08T14:33:12.473Z [INFO] [MODEL-PROXY] #208 done in 7.0s (163in/330out)
+2026-06-08T14:33:12.627Z [INFO] [MODEL-PROXY] #209 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:33:12.633Z [INFO] [MODEL-PROXY] #209 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:33:14.460Z [INFO] [MODEL-PROXY] #209 TTFB 1833ms (status 200)
+2026-06-08T14:33:22.097Z [INFO] [MODEL-PROXY] #209 done in 9.5s (159in/341out)
+2026-06-08T14:33:22.326Z [INFO] [MODEL-PROXY] #210 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:33:22.334Z [INFO] [MODEL-PROXY] #210 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:33:24.077Z [INFO] [MODEL-PROXY] #210 TTFB 1751ms (status 200)
+2026-06-08T14:33:28.108Z [INFO] [MODEL-PROXY] #210 done in 5.8s (230in/226out)
+2026-06-08T14:33:28.259Z [INFO] [MODEL-PROXY] #211 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:33:28.260Z [INFO] [MODEL-PROXY] #211 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:33:29.167Z [INFO] [MODEL-PROXY] #211 TTFB 908ms (status 200)
+2026-06-08T14:33:30.415Z [INFO] [MODEL-PROXY] #211 done in 2.2s (json, 249b)
+2026-06-08T14:33:30.425Z [INFO] [MODEL-PROXY] #212 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:33:30.431Z [INFO] [MODEL-PROXY] #212 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:33:31.566Z [INFO] [MODEL-PROXY] #212 TTFB 1141ms (status 200)
+2026-06-08T14:33:45.484Z [INFO] [MODEL-PROXY] #212 done in 15.1s (json, 1726b)
+2026-06-08T14:33:46.949Z [INFO] [MODEL-PROXY] #213 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:33:46.955Z [INFO] [MODEL-PROXY] #213 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:33:48.774Z [INFO] [MODEL-PROXY] #213 TTFB 1825ms (status 200)
+2026-06-08T14:33:54.912Z [INFO] [MODEL-PROXY] #213 done in 8.0s (655in/224out)
+2026-06-08T14:33:54.956Z [INFO] [MODEL-PROXY] #214 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:33:54.962Z [INFO] [MODEL-PROXY] #214 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:33:56.841Z [INFO] [MODEL-PROXY] #214 TTFB 1885ms (status 200)
+2026-06-08T14:33:57.942Z [INFO] [MODEL-PROXY] #214 done in 3.0s (433in/4out)
+2026-06-08T14:34:50.397Z [INFO] [MODEL-PROXY] #215 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:34:50.402Z [INFO] [MODEL-PROXY] #215 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:34:52.848Z [INFO] [MODEL-PROXY] #215 TTFB 2451ms (status 200)
+2026-06-08T14:34:57.012Z [INFO] [MODEL-PROXY] #215 done in 6.6s (195in/216out)
+2026-06-08T14:34:57.212Z [INFO] [MODEL-PROXY] #216 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:34:57.222Z [INFO] [MODEL-PROXY] #216 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:34:57.870Z [INFO] [MODEL-PROXY] #218 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:34:57.871Z [INFO] [MODEL-PROXY] #218 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"f3c865e3-734e-4c9a-9724-23476ad6753d"}
+2026-06-08T14:34:59.123Z [INFO] [MODEL-PROXY] #218 TTFB 1252ms (status 200)
+2026-06-08T14:34:59.343Z [INFO] [MODEL-PROXY] #216 TTFB 2131ms (status 200)
+2026-06-08T14:35:01.714Z [INFO] [MODEL-PROXY] #216 done in 4.5s (207in/121out)
+2026-06-08T14:35:01.919Z [INFO] [MODEL-PROXY] #219 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:01.925Z [INFO] [MODEL-PROXY] #219 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:03.962Z [INFO] [MODEL-PROXY] #219 TTFB 2043ms (status 200)
+2026-06-08T14:35:04.261Z [INFO] [MODEL-PROXY] #218 done in 6.4s (26932in/446out)
+2026-06-08T14:35:10.303Z [INFO] [MODEL-PROXY] #219 done in 8.4s (201in/378out)
+2026-06-08T14:35:10.449Z [INFO] [MODEL-PROXY] #220 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:10.453Z [INFO] [MODEL-PROXY] #220 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:12.198Z [INFO] [MODEL-PROXY] #220 TTFB 1749ms (status 200)
+2026-06-08T14:35:21.889Z [INFO] [MODEL-PROXY] #220 done in 11.4s (117in/660out)
+2026-06-08T14:35:22.064Z [INFO] [MODEL-PROXY] #221 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:22.069Z [INFO] [MODEL-PROXY] #221 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:24.117Z [INFO] [MODEL-PROXY] #221 TTFB 2053ms (status 200)
+2026-06-08T14:35:28.714Z [INFO] [MODEL-PROXY] #221 done in 6.7s (59in/301out)
+2026-06-08T14:35:28.881Z [INFO] [MODEL-PROXY] #222 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:28.886Z [INFO] [MODEL-PROXY] #222 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:30.718Z [INFO] [MODEL-PROXY] #222 TTFB 1837ms (status 200)
+2026-06-08T14:35:36.319Z [INFO] [MODEL-PROXY] #222 done in 7.4s (154in/348out)
+2026-06-08T14:35:36.491Z [INFO] [MODEL-PROXY] #223 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:36.498Z [INFO] [MODEL-PROXY] #223 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:38.465Z [INFO] [MODEL-PROXY] #223 TTFB 1974ms (status 200)
+2026-06-08T14:35:43.933Z [INFO] [MODEL-PROXY] #223 done in 7.4s (265in/274out)
+2026-06-08T14:35:44.114Z [INFO] [MODEL-PROXY] #224 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:44.120Z [INFO] [MODEL-PROXY] #224 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:46.025Z [INFO] [MODEL-PROXY] #224 TTFB 1911ms (status 200)
+2026-06-08T14:35:47.970Z [INFO] [MODEL-PROXY] #224 done in 3.9s (77in/97out)
+2026-06-08T14:35:48.180Z [INFO] [MODEL-PROXY] #225 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:48.186Z [INFO] [MODEL-PROXY] #225 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:49.955Z [INFO] [MODEL-PROXY] #225 TTFB 1775ms (status 200)
+2026-06-08T14:35:53.614Z [INFO] [MODEL-PROXY] #225 done in 5.4s (63in/222out)
+2026-06-08T14:35:53.746Z [INFO] [MODEL-PROXY] #226 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:53.747Z [INFO] [MODEL-PROXY] #226 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:54.885Z [INFO] [MODEL-PROXY] #226 TTFB 1139ms (status 200)
+2026-06-08T14:35:55.896Z [INFO] [MODEL-PROXY] #226 done in 2.1s (json, 249b)
+2026-06-08T14:35:55.971Z [INFO] [MODEL-PROXY] #227 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:35:55.977Z [INFO] [MODEL-PROXY] #227 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:35:57.414Z [INFO] [MODEL-PROXY] #227 TTFB 1443ms (status 200)
+2026-06-08T14:36:10.159Z [INFO] [MODEL-PROXY] #227 done in 14.2s (101in/1059out)
+2026-06-08T14:36:10.344Z [INFO] [MODEL-PROXY] #228 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:36:10.354Z [INFO] [MODEL-PROXY] #228 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:36:12.322Z [INFO] [MODEL-PROXY] #228 TTFB 1978ms (status 200)
+2026-06-08T14:36:18.814Z [INFO] [MODEL-PROXY] #228 done in 8.5s (58in/293out)
+2026-06-08T14:36:19.025Z [INFO] [MODEL-PROXY] #229 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:36:19.031Z [INFO] [MODEL-PROXY] #229 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:36:20.914Z [INFO] [MODEL-PROXY] #229 TTFB 1889ms (status 200)
+2026-06-08T14:36:24.534Z [INFO] [MODEL-PROXY] #229 done in 5.5s (112in/229out)
+2026-06-08T14:36:24.686Z [INFO] [MODEL-PROXY] #230 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:36:24.687Z [INFO] [MODEL-PROXY] #230 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:36:25.687Z [INFO] [MODEL-PROXY] #230 TTFB 1001ms (status 200)
+2026-06-08T14:36:27.689Z [INFO] [MODEL-PROXY] #230 done in 3.0s (json, 250b)
+2026-06-08T14:36:27.696Z [INFO] [MODEL-PROXY] #231 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:36:27.697Z [INFO] [MODEL-PROXY] #231 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:36:28.705Z [INFO] [MODEL-PROXY] #231 TTFB 1009ms (status 200)
+2026-06-08T14:36:39.316Z [INFO] [MODEL-PROXY] #231 done in 11.6s (json, 1288b)
+2026-06-08T14:36:39.464Z [INFO] [MODEL-PROXY] #232 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:36:39.473Z [INFO] [MODEL-PROXY] #232 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:36:41.057Z [INFO] [MODEL-PROXY] #232 TTFB 1593ms (status 200)
+2026-06-08T14:36:56.413Z [INFO] [MODEL-PROXY] #232 done in 16.9s (379in/798out)
+2026-06-08T14:36:56.543Z [INFO] [MODEL-PROXY] #233 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:36:56.549Z [INFO] [MODEL-PROXY] #233 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:36:58.564Z [INFO] [MODEL-PROXY] #233 TTFB 2021ms (status 200)
+2026-06-08T14:37:03.522Z [INFO] [MODEL-PROXY] #233 done in 7.0s (172in/327out)
+2026-06-08T14:37:03.714Z [INFO] [MODEL-PROXY] #234 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:37:03.722Z [INFO] [MODEL-PROXY] #234 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:37:05.378Z [INFO] [MODEL-PROXY] #234 TTFB 1664ms (status 200)
+2026-06-08T14:37:07.753Z [INFO] [MODEL-PROXY] #234 done in 4.0s (165in/99out)
+2026-06-08T14:37:07.975Z [INFO] [MODEL-PROXY] #235 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:37:07.980Z [INFO] [MODEL-PROXY] #235 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:37:09.814Z [INFO] [MODEL-PROXY] #235 TTFB 1839ms (status 200)
+2026-06-08T14:37:16.414Z [INFO] [MODEL-PROXY] #235 done in 8.4s (25in/396out)
+2026-06-08T14:37:16.572Z [INFO] [MODEL-PROXY] #236 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:37:16.573Z [INFO] [MODEL-PROXY] #236 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:37:17.714Z [INFO] [MODEL-PROXY] #236 TTFB 1142ms (status 200)
+2026-06-08T14:37:18.517Z [INFO] [MODEL-PROXY] #236 done in 1.9s (json, 249b)
+2026-06-08T14:37:18.523Z [INFO] [MODEL-PROXY] #237 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:37:18.525Z [INFO] [MODEL-PROXY] #237 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:37:19.757Z [INFO] [MODEL-PROXY] #237 TTFB 1234ms (status 200)
+2026-06-08T14:37:36.219Z [INFO] [MODEL-PROXY] #237 done in 17.7s (json, 1973b)
+2026-06-08T14:37:37.729Z [INFO] [MODEL-PROXY] #238 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:37:37.735Z [INFO] [MODEL-PROXY] #238 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:37:39.535Z [INFO] [MODEL-PROXY] #238 TTFB 1806ms (status 200)
+2026-06-08T14:37:42.877Z [INFO] [MODEL-PROXY] #238 done in 5.1s (143in/115out)
+2026-06-08T14:37:42.901Z [INFO] [MODEL-PROXY] #239 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:37:42.909Z [INFO] [MODEL-PROXY] #239 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:37:44.744Z [INFO] [MODEL-PROXY] #239 TTFB 1843ms (status 200)
+2026-06-08T14:37:52.014Z [INFO] [MODEL-PROXY] #239 done in 9.1s (324in/244out)
+2026-06-08T14:39:28.672Z [INFO] [MODEL-PROXY] #240 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:39:28.678Z [INFO] [MODEL-PROXY] #240 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:39:31.236Z [INFO] [MODEL-PROXY] #240 TTFB 2564ms (status 200)
+2026-06-08T14:39:33.817Z [INFO] [MODEL-PROXY] #240 done in 5.1s (8in/127out)
+2026-06-08T14:39:34.059Z [INFO] [MODEL-PROXY] #241 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:39:34.065Z [INFO] [MODEL-PROXY] #241 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:39:36.232Z [INFO] [MODEL-PROXY] #241 TTFB 2173ms (status 200)
+2026-06-08T14:39:45.116Z [INFO] [MODEL-PROXY] #241 done in 11.1s (383in/433out)
+2026-06-08T14:39:45.210Z [INFO] [MODEL-PROXY] #242 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:39:45.211Z [INFO] [MODEL-PROXY] #242 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:39:46.358Z [INFO] [MODEL-PROXY] #242 TTFB 1148ms (status 200)
+2026-06-08T14:39:47.476Z [INFO] [MODEL-PROXY] #242 done in 2.3s (json, 249b)
+2026-06-08T14:39:47.619Z [INFO] [MODEL-PROXY] #243 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:39:47.625Z [INFO] [MODEL-PROXY] #243 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:39:49.463Z [INFO] [MODEL-PROXY] #243 TTFB 1844ms (status 200)
+2026-06-08T14:39:50.916Z [INFO] [MODEL-PROXY] #243 done in 3.3s (101in/21out)
+2026-06-08T14:39:50.946Z [INFO] [MODEL-PROXY] #244 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:39:50.952Z [INFO] [MODEL-PROXY] #244 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:39:52.819Z [INFO] [MODEL-PROXY] #244 TTFB 1873ms (status 200)
+2026-06-08T14:39:54.342Z [INFO] [MODEL-PROXY] #244 done in 3.4s (444in/4out)
+2026-06-08T14:40:35.314Z [INFO] [MODEL-PROXY] #245 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:40:35.320Z [INFO] [MODEL-PROXY] #245 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:40:38.230Z [INFO] [MODEL-PROXY] #245 TTFB 2916ms (status 200)
+2026-06-08T14:40:54.017Z [INFO] [MODEL-PROXY] #245 done in 18.7s (165in/765out)
+2026-06-08T14:40:54.242Z [INFO] [MODEL-PROXY] #246 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:40:54.250Z [INFO] [MODEL-PROXY] #246 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:40:56.325Z [INFO] [MODEL-PROXY] #246 TTFB 2083ms (status 200)
+2026-06-08T14:40:59.825Z [INFO] [MODEL-PROXY] #246 done in 5.6s (331in/151out)
+2026-06-08T14:41:00.011Z [INFO] [MODEL-PROXY] #247 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:00.018Z [INFO] [MODEL-PROXY] #247 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:02.066Z [INFO] [MODEL-PROXY] #247 TTFB 2055ms (status 200)
+2026-06-08T14:41:04.535Z [INFO] [MODEL-PROXY] #247 done in 4.5s (279in/119out)
+2026-06-08T14:41:04.723Z [INFO] [MODEL-PROXY] #248 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:04.732Z [INFO] [MODEL-PROXY] #248 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:06.645Z [INFO] [MODEL-PROXY] #248 TTFB 1922ms (status 200)
+2026-06-08T14:41:17.240Z [INFO] [MODEL-PROXY] #248 done in 12.5s (533in/679out)
+2026-06-08T14:41:17.325Z [INFO] [MODEL-PROXY] #249 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:17.330Z [INFO] [MODEL-PROXY] #249 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:19.165Z [INFO] [MODEL-PROXY] #249 TTFB 1840ms (status 200)
+2026-06-08T14:41:24.524Z [INFO] [MODEL-PROXY] #249 done in 7.2s (876in/297out)
+2026-06-08T14:41:24.602Z [INFO] [MODEL-PROXY] #250 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:24.604Z [INFO] [MODEL-PROXY] #250 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:25.518Z [INFO] [MODEL-PROXY] #250 TTFB 916ms (status 200)
+2026-06-08T14:41:27.256Z [INFO] [MODEL-PROXY] #250 done in 2.7s (json, 246b)
+2026-06-08T14:41:27.403Z [INFO] [MODEL-PROXY] #251 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:27.412Z [INFO] [MODEL-PROXY] #251 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:29.347Z [INFO] [MODEL-PROXY] #251 TTFB 1944ms (status 200)
+2026-06-08T14:41:33.165Z [INFO] [MODEL-PROXY] #251 done in 5.8s (38in/174out)
+2026-06-08T14:41:33.379Z [INFO] [MODEL-PROXY] #252 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:33.388Z [INFO] [MODEL-PROXY] #252 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:35.520Z [INFO] [MODEL-PROXY] #252 TTFB 2141ms (status 200)
+2026-06-08T14:41:40.230Z [INFO] [MODEL-PROXY] #252 done in 6.9s (366in/177out)
+2026-06-08T14:41:40.504Z [INFO] [MODEL-PROXY] #253 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:40.511Z [INFO] [MODEL-PROXY] #253 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:42.858Z [INFO] [MODEL-PROXY] #253 TTFB 2354ms (status 200)
+2026-06-08T14:41:44.924Z [INFO] [MODEL-PROXY] #253 done in 4.4s (52in/103out)
+2026-06-08T14:41:45.105Z [INFO] [MODEL-PROXY] #254 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:45.111Z [INFO] [MODEL-PROXY] #254 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:47.617Z [INFO] [MODEL-PROXY] #254 TTFB 2512ms (status 200)
+2026-06-08T14:41:54.619Z [INFO] [MODEL-PROXY] #254 done in 9.5s (477in/537out)
+2026-06-08T14:41:54.697Z [INFO] [MODEL-PROXY] #255 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:41:54.703Z [INFO] [MODEL-PROXY] #255 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:41:57.196Z [INFO] [MODEL-PROXY] #255 TTFB 2499ms (status 200)
+2026-06-08T14:42:03.068Z [INFO] [MODEL-PROXY] #255 done in 8.4s (281in/321out)
+2026-06-08T14:42:03.165Z [INFO] [MODEL-PROXY] #256 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:42:03.166Z [INFO] [MODEL-PROXY] #256 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:42:04.318Z [INFO] [MODEL-PROXY] #256 TTFB 1153ms (status 200)
+2026-06-08T14:42:05.032Z [INFO] [MODEL-PROXY] #256 done in 1.9s (json, 249b)
+2026-06-08T14:42:05.184Z [INFO] [MODEL-PROXY] #257 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:42:05.192Z [INFO] [MODEL-PROXY] #257 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:42:07.366Z [INFO] [MODEL-PROXY] #257 TTFB 2182ms (status 200)
+2026-06-08T14:42:11.556Z [INFO] [MODEL-PROXY] #257 done in 6.4s (107in/209out)
+2026-06-08T14:42:11.670Z [INFO] [MODEL-PROXY] #258 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:42:11.671Z [INFO] [MODEL-PROXY] #258 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:42:12.619Z [INFO] [MODEL-PROXY] #258 TTFB 949ms (status 200)
+2026-06-08T14:42:14.219Z [INFO] [MODEL-PROXY] #258 done in 2.5s (json, 249b)
+2026-06-08T14:42:14.227Z [INFO] [MODEL-PROXY] #259 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:42:14.229Z [INFO] [MODEL-PROXY] #259 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:42:15.219Z [INFO] [MODEL-PROXY] #259 TTFB 992ms (status 200)
+2026-06-08T14:42:28.624Z [INFO] [MODEL-PROXY] #259 done in 14.4s (json, 1792b)
+2026-06-08T14:42:30.141Z [INFO] [MODEL-PROXY] #260 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:42:30.147Z [INFO] [MODEL-PROXY] #260 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:42:32.239Z [INFO] [MODEL-PROXY] #260 TTFB 2098ms (status 200)
+2026-06-08T14:42:35.438Z [INFO] [MODEL-PROXY] #260 done in 5.3s (430in/84out)
+2026-06-08T14:44:52.856Z [INFO] [MODEL-PROXY] #261 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:44:52.865Z [INFO] [MODEL-PROXY] #261 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:44:55.730Z [INFO] [MODEL-PROXY] #261 TTFB 2874ms (status 200)
+2026-06-08T14:44:58.620Z [INFO] [MODEL-PROXY] #261 done in 5.8s (20in/119out)
+2026-06-08T14:44:58.836Z [INFO] [MODEL-PROXY] #262 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:44:58.846Z [INFO] [MODEL-PROXY] #262 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:44:59.484Z [INFO] [MODEL-PROXY] #264 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:44:59.485Z [INFO] [MODEL-PROXY] #264 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"d7284ef9-0b52-499b-a297-f35230c18356"}
+2026-06-08T14:45:00.840Z [INFO] [MODEL-PROXY] #264 TTFB 1356ms (status 200)
+2026-06-08T14:45:01.032Z [INFO] [MODEL-PROXY] #262 TTFB 2196ms (status 200)
+2026-06-08T14:45:03.828Z [INFO] [MODEL-PROXY] #262 done in 5.0s (159in/73out)
+2026-06-08T14:45:03.847Z [INFO] [MODEL-PROXY] #265 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:45:03.853Z [INFO] [MODEL-PROXY] #265 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:45:05.271Z [INFO] [MODEL-PROXY] #264 done in 5.8s (27124in/328out)
+2026-06-08T14:45:05.819Z [INFO] [MODEL-PROXY] #265 TTFB 1972ms (status 200)
+2026-06-08T14:45:08.819Z [INFO] [MODEL-PROXY] #265 done in 5.0s (426in/49out)
+2026-06-08T14:46:28.789Z [INFO] [MODEL-PROXY] #266 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:46:28.795Z [INFO] [MODEL-PROXY] #266 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:46:31.647Z [INFO] [MODEL-PROXY] #266 TTFB 2858ms (status 200)
+2026-06-08T14:46:48.651Z [INFO] [MODEL-PROXY] #266 done in 19.9s (143in/740out)
+2026-06-08T14:46:48.841Z [INFO] [MODEL-PROXY] #267 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:46:48.847Z [INFO] [MODEL-PROXY] #267 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:46:51.125Z [INFO] [MODEL-PROXY] #267 TTFB 2284ms (status 200)
+2026-06-08T14:47:10.932Z [INFO] [MODEL-PROXY] #267 done in 22.1s (257in/1214out)
+2026-06-08T14:47:10.992Z [INFO] [MODEL-PROXY] #268 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:47:10.993Z [INFO] [MODEL-PROXY] #268 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:47:12.159Z [INFO] [MODEL-PROXY] #268 TTFB 1167ms (status 200)
+2026-06-08T14:47:13.679Z [INFO] [MODEL-PROXY] #268 done in 2.7s (json, 247b)
+2026-06-08T14:47:13.818Z [INFO] [MODEL-PROXY] #269 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:47:13.825Z [INFO] [MODEL-PROXY] #269 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:47:15.881Z [INFO] [MODEL-PROXY] #269 TTFB 2063ms (status 200)
+2026-06-08T14:47:23.122Z [INFO] [MODEL-PROXY] #269 done in 9.3s (152in/438out)
+2026-06-08T14:47:23.195Z [INFO] [MODEL-PROXY] #270 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:47:23.197Z [INFO] [MODEL-PROXY] #270 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:47:24.306Z [INFO] [MODEL-PROXY] #270 TTFB 1111ms (status 200)
+2026-06-08T14:47:25.744Z [INFO] [MODEL-PROXY] #270 done in 2.5s (json, 248b)
+2026-06-08T14:47:25.766Z [INFO] [MODEL-PROXY] #271 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:47:25.771Z [INFO] [MODEL-PROXY] #271 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:47:26.919Z [INFO] [MODEL-PROXY] #271 TTFB 1153ms (status 200)
+2026-06-08T14:47:44.692Z [INFO] [MODEL-PROXY] #271 done in 18.9s (json, 2187b)
+2026-06-08T14:47:44.850Z [INFO] [MODEL-PROXY] #272 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:47:44.857Z [INFO] [MODEL-PROXY] #272 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:47:46.850Z [INFO] [MODEL-PROXY] #272 TTFB 2000ms (status 200)
+2026-06-08T14:48:36.813Z [INFO] [MODEL-PROXY] Listening on 127.0.0.1:3200 → https://api.deepseek.com/anthropic (mode: deepseek)
+2026-06-08T14:48:41.917Z [INFO] [MODEL-PROXY] #3 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:48:41.920Z [INFO] [MODEL-PROXY] #3 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"173610df-9a8b-42e9-8167-576057a78e35"}
+2026-06-08T14:48:43.120Z [INFO] [MODEL-PROXY] #3 TTFB 1203ms (status 200)
+2026-06-08T14:48:48.423Z [INFO] [MODEL-PROXY] #3 done in 6.5s (40892in/326out)
+2026-06-08T14:48:48.648Z [INFO] [MODEL-PROXY] #4 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:48:48.662Z [INFO] [MODEL-PROXY] #4 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:48:51.125Z [INFO] [MODEL-PROXY] #4 TTFB 2477ms (status 200)
+2026-06-08T14:49:23.144Z [INFO] [MODEL-PROXY] #4 done in 34.5s (231655in/276out)
+2026-06-08T14:49:23.463Z [INFO] [MODEL-PROXY] #5 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:49:23.473Z [INFO] [MODEL-PROXY] #5 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:49:25.620Z [INFO] [MODEL-PROXY] #5 TTFB 2157ms (status 200)
+2026-06-08T14:49:37.725Z [INFO] [MODEL-PROXY] #5 done in 14.3s (281in/893out)
+2026-06-08T14:51:19.807Z [INFO] [MODEL-PROXY] #6 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:51:19.818Z [INFO] [MODEL-PROXY] #6 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:51:20.449Z [INFO] [MODEL-PROXY] #8 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:51:20.450Z [INFO] [MODEL-PROXY] #8 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"8a566458-8b64-4a3c-bf24-c3a808fd4d52"}
+2026-06-08T14:51:21.922Z [INFO] [MODEL-PROXY] #8 TTFB 1473ms (status 200)
+2026-06-08T14:51:22.940Z [INFO] [MODEL-PROXY] #6 TTFB 3133ms (status 200)
+2026-06-08T14:51:27.233Z [INFO] [MODEL-PROXY] #6 done in 7.4s (3149in/167out)
+2026-06-08T14:51:27.492Z [INFO] [MODEL-PROXY] #9 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:51:27.499Z [INFO] [MODEL-PROXY] #9 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:51:29.470Z [INFO] [MODEL-PROXY] #8 done in 9.0s (37607in/635out)
+2026-06-08T14:51:29.723Z [INFO] [MODEL-PROXY] #9 TTFB 2231ms (status 200)
+2026-06-08T14:51:32.461Z [INFO] [MODEL-PROXY] #9 done in 5.0s (276in/145out)
+2026-06-08T14:51:32.701Z [INFO] [MODEL-PROXY] #10 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:51:32.708Z [INFO] [MODEL-PROXY] #10 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:51:34.728Z [INFO] [MODEL-PROXY] #10 TTFB 2027ms (status 200)
+2026-06-08T14:51:40.440Z [INFO] [MODEL-PROXY] #10 done in 7.7s (142in/372out)
+2026-06-08T14:51:40.507Z [INFO] [MODEL-PROXY] #11 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:51:40.513Z [INFO] [MODEL-PROXY] #11 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:51:42.433Z [INFO] [MODEL-PROXY] #11 TTFB 1926ms (status 200)
+2026-06-08T14:51:45.387Z [INFO] [MODEL-PROXY] #11 done in 4.9s (89in/127out)
+2026-06-08T14:51:45.629Z [INFO] [MODEL-PROXY] #12 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:51:45.636Z [INFO] [MODEL-PROXY] #12 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:51:47.728Z [INFO] [MODEL-PROXY] #12 TTFB 2099ms (status 200)
+2026-06-08T14:51:50.644Z [INFO] [MODEL-PROXY] #12 done in 5.0s (140in/117out)
+2026-06-08T14:51:50.876Z [INFO] [MODEL-PROXY] #13 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:51:50.882Z [INFO] [MODEL-PROXY] #13 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:51:52.577Z [INFO] [MODEL-PROXY] #13 TTFB 1701ms (status 200)
+2026-06-08T14:51:57.521Z [INFO] [MODEL-PROXY] #13 done in 6.6s (61in/289out)
+2026-06-08T14:52:02.772Z [INFO] [MODEL-PROXY] #14 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:52:02.778Z [INFO] [MODEL-PROXY] #14 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:52:04.993Z [INFO] [MODEL-PROXY] #14 TTFB 2221ms (status 200)
+2026-06-08T14:52:11.465Z [INFO] [MODEL-PROXY] #14 done in 8.7s (367in/323out)
+2026-06-08T14:52:17.003Z [INFO] [MODEL-PROXY] #15 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:52:17.010Z [INFO] [MODEL-PROXY] #15 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:52:19.545Z [INFO] [MODEL-PROXY] #15 TTFB 2542ms (status 200)
+2026-06-08T14:52:25.440Z [INFO] [MODEL-PROXY] #15 done in 8.4s (508in/305out)
+2026-06-08T14:52:25.655Z [INFO] [MODEL-PROXY] #16 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:52:25.661Z [INFO] [MODEL-PROXY] #16 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:52:27.724Z [INFO] [MODEL-PROXY] #16 TTFB 2069ms (status 200)
+2026-06-08T14:52:34.321Z [INFO] [MODEL-PROXY] #16 done in 8.7s (210in/191out)
+2026-06-08T14:52:34.354Z [INFO] [MODEL-PROXY] #17 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:52:34.362Z [INFO] [MODEL-PROXY] #17 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:52:36.425Z [INFO] [MODEL-PROXY] #17 TTFB 2071ms (status 200)
+2026-06-08T14:52:38.022Z [INFO] [MODEL-PROXY] #17 done in 3.7s (578in/4out)
+2026-06-08T14:54:18.629Z [INFO] [MODEL-PROXY] #18 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:54:18.635Z [INFO] [MODEL-PROXY] #18 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:54:21.422Z [INFO] [MODEL-PROXY] #18 TTFB 2793ms (status 200)
+2026-06-08T14:54:30.848Z [INFO] [MODEL-PROXY] #18 done in 12.2s (373in/730out)
+2026-06-08T14:54:30.973Z [INFO] [MODEL-PROXY] #19 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:54:30.975Z [INFO] [MODEL-PROXY] #19 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:54:32.014Z [INFO] [MODEL-PROXY] #19 TTFB 1041ms (status 200)
+2026-06-08T14:54:38.823Z [INFO] [MODEL-PROXY] #19 done in 7.8s (json, 244b)
+2026-06-08T14:54:38.991Z [INFO] [MODEL-PROXY] #20 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:54:38.999Z [INFO] [MODEL-PROXY] #20 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:54:41.322Z [INFO] [MODEL-PROXY] #20 TTFB 2331ms (status 200)
+2026-06-08T14:54:43.328Z [INFO] [MODEL-PROXY] #20 done in 4.3s (99in/100out)
+2026-06-08T14:54:43.577Z [INFO] [MODEL-PROXY] #21 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:54:43.584Z [INFO] [MODEL-PROXY] #21 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:54:45.557Z [INFO] [MODEL-PROXY] #21 TTFB 1980ms (status 200)
+2026-06-08T14:54:51.324Z [INFO] [MODEL-PROXY] #21 done in 7.7s (295in/238out)
+2026-06-08T14:54:51.555Z [INFO] [MODEL-PROXY] #22 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:54:51.562Z [INFO] [MODEL-PROXY] #22 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:54:53.627Z [INFO] [MODEL-PROXY] #22 TTFB 2072ms (status 200)
+2026-06-08T14:55:05.350Z [INFO] [MODEL-PROXY] #22 done in 13.8s (98in/760out)
+2026-06-08T14:55:05.460Z [INFO] [MODEL-PROXY] #23 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:05.461Z [INFO] [MODEL-PROXY] #23 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:06.626Z [INFO] [MODEL-PROXY] #23 TTFB 1166ms (status 200)
+2026-06-08T14:55:08.771Z [INFO] [MODEL-PROXY] #23 done in 3.3s (json, 249b)
+2026-06-08T14:55:08.963Z [INFO] [MODEL-PROXY] #24 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:08.970Z [INFO] [MODEL-PROXY] #24 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:11.530Z [INFO] [MODEL-PROXY] #24 TTFB 2567ms (status 200)
+2026-06-08T14:55:18.263Z [INFO] [MODEL-PROXY] #24 done in 9.3s (328in/330out)
+2026-06-08T14:55:18.524Z [INFO] [MODEL-PROXY] #25 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:18.533Z [INFO] [MODEL-PROXY] #25 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:20.335Z [INFO] [MODEL-PROXY] #25 TTFB 1811ms (status 200)
+2026-06-08T14:55:33.935Z [INFO] [MODEL-PROXY] #25 done in 15.4s (265in/736out)
+2026-06-08T14:55:34.040Z [INFO] [MODEL-PROXY] #26 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:34.041Z [INFO] [MODEL-PROXY] #26 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:35.304Z [INFO] [MODEL-PROXY] #26 TTFB 1264ms (status 200)
+2026-06-08T14:55:36.256Z [INFO] [MODEL-PROXY] #26 done in 2.2s (json, 246b)
+2026-06-08T14:55:36.412Z [INFO] [MODEL-PROXY] #27 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:36.420Z [INFO] [MODEL-PROXY] #27 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:38.221Z [INFO] [MODEL-PROXY] #27 TTFB 1809ms (status 200)
+2026-06-08T14:55:44.456Z [INFO] [MODEL-PROXY] #27 done in 8.0s (122in/195out)
+2026-06-08T14:55:44.566Z [INFO] [MODEL-PROXY] #28 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:44.567Z [INFO] [MODEL-PROXY] #28 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:45.750Z [INFO] [MODEL-PROXY] #28 TTFB 1184ms (status 200)
+2026-06-08T14:55:46.824Z [INFO] [MODEL-PROXY] #28 done in 2.3s (json, 247b)
+2026-06-08T14:55:46.835Z [INFO] [MODEL-PROXY] #29 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:46.840Z [INFO] [MODEL-PROXY] #29 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:47.756Z [INFO] [MODEL-PROXY] #29 TTFB 921ms (status 200)
+2026-06-08T14:55:49.023Z [INFO] [MODEL-PROXY] #29 done in 2.2s (json, 250b)
+2026-06-08T14:55:49.190Z [INFO] [MODEL-PROXY] #30 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:49.198Z [INFO] [MODEL-PROXY] #30 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:51.026Z [INFO] [MODEL-PROXY] #30 TTFB 1836ms (status 200)
+2026-06-08T14:55:52.662Z [INFO] [MODEL-PROXY] #30 done in 3.5s (467in/39out)
+2026-06-08T14:55:52.711Z [INFO] [MODEL-PROXY] #31 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:55:52.717Z [INFO] [MODEL-PROXY] #31 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:55:55.423Z [INFO] [MODEL-PROXY] #31 TTFB 2712ms (status 200)
+2026-06-08T14:55:57.156Z [INFO] [MODEL-PROXY] #31 done in 4.4s (444in/3out)
+2026-06-08T14:56:53.924Z [INFO] [MODEL-PROXY] #32 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:56:53.933Z [INFO] [MODEL-PROXY] #32 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:56:56.262Z [INFO] [MODEL-PROXY] #32 TTFB 2338ms (status 200)
+2026-06-08T14:57:07.124Z [INFO] [MODEL-PROXY] #32 done in 13.2s (150in/566out)
+2026-06-08T14:57:07.231Z [INFO] [MODEL-PROXY] #33 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:07.232Z [INFO] [MODEL-PROXY] #33 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:08.523Z [INFO] [MODEL-PROXY] #33 TTFB 1292ms (status 200)
+2026-06-08T14:57:09.825Z [INFO] [MODEL-PROXY] #33 done in 2.6s (json, 247b)
+2026-06-08T14:57:09.989Z [INFO] [MODEL-PROXY] #34 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:09.996Z [INFO] [MODEL-PROXY] #34 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:12.023Z [INFO] [MODEL-PROXY] #34 TTFB 2034ms (status 200)
+2026-06-08T14:57:15.646Z [INFO] [MODEL-PROXY] #34 done in 5.7s (130in/174out)
+2026-06-08T14:57:15.907Z [INFO] [MODEL-PROXY] #35 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:15.916Z [INFO] [MODEL-PROXY] #35 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:17.659Z [INFO] [MODEL-PROXY] #35 TTFB 1752ms (status 200)
+2026-06-08T14:57:20.757Z [INFO] [MODEL-PROXY] #35 done in 4.8s (300in/105out)
+2026-06-08T14:57:20.990Z [INFO] [MODEL-PROXY] #36 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:20.997Z [INFO] [MODEL-PROXY] #36 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:22.854Z [INFO] [MODEL-PROXY] #36 TTFB 1864ms (status 200)
+2026-06-08T14:57:25.837Z [INFO] [MODEL-PROXY] #36 done in 4.8s (137in/156out)
+2026-06-08T14:57:25.901Z [INFO] [MODEL-PROXY] #37 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:25.907Z [INFO] [MODEL-PROXY] #37 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:27.726Z [INFO] [MODEL-PROXY] #37 TTFB 1825ms (status 200)
+2026-06-08T14:57:32.724Z [INFO] [MODEL-PROXY] #37 done in 6.8s (247in/237out)
+2026-06-08T14:57:32.850Z [INFO] [MODEL-PROXY] #38 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:32.852Z [INFO] [MODEL-PROXY] #38 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:34.134Z [INFO] [MODEL-PROXY] #38 TTFB 1284ms (status 200)
+2026-06-08T14:57:36.025Z [INFO] [MODEL-PROXY] #38 done in 3.2s (json, 248b)
+2026-06-08T14:57:36.193Z [INFO] [MODEL-PROXY] #39 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:36.200Z [INFO] [MODEL-PROXY] #39 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:38.294Z [INFO] [MODEL-PROXY] #39 TTFB 2101ms (status 200)
+2026-06-08T14:57:49.523Z [INFO] [MODEL-PROXY] #39 done in 13.3s (187in/599out)
+2026-06-08T14:57:49.663Z [INFO] [MODEL-PROXY] #40 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:49.664Z [INFO] [MODEL-PROXY] #40 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:50.882Z [INFO] [MODEL-PROXY] #40 TTFB 1219ms (status 200)
+2026-06-08T14:57:52.042Z [INFO] [MODEL-PROXY] #40 done in 2.4s (json, 248b)
+2026-06-08T14:57:52.215Z [INFO] [MODEL-PROXY] #41 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:57:52.227Z [INFO] [MODEL-PROXY] #41 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:57:54.270Z [INFO] [MODEL-PROXY] #41 TTFB 2055ms (status 200)
+2026-06-08T14:58:04.328Z [INFO] [MODEL-PROXY] #41 done in 12.1s (64in/513out)
+2026-06-08T14:58:04.557Z [INFO] [MODEL-PROXY] #42 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:58:04.563Z [INFO] [MODEL-PROXY] #42 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:58:06.537Z [INFO] [MODEL-PROXY] #42 TTFB 1980ms (status 200)
+2026-06-08T14:58:09.972Z [INFO] [MODEL-PROXY] #42 done in 5.4s (276in/112out)
+2026-06-08T14:58:10.005Z [INFO] [MODEL-PROXY] #43 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:58:10.011Z [INFO] [MODEL-PROXY] #43 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:58:12.028Z [INFO] [MODEL-PROXY] #43 TTFB 2023ms (status 200)
+2026-06-08T14:58:15.441Z [INFO] [MODEL-PROXY] #43 done in 5.4s (326in/91out)
+2026-06-08T14:58:44.742Z [INFO] [MODEL-PROXY] #44 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:58:44.748Z [INFO] [MODEL-PROXY] #44 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:58:47.230Z [INFO] [MODEL-PROXY] #44 TTFB 2488ms (status 200)
+2026-06-08T14:59:24.524Z [INFO] [MODEL-PROXY] #44 done in 39.8s (22in/2097out)
+2026-06-08T14:59:24.743Z [INFO] [MODEL-PROXY] #45 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:59:24.751Z [INFO] [MODEL-PROXY] #45 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:59:25.435Z [INFO] [MODEL-PROXY] #47 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:59:25.436Z [INFO] [MODEL-PROXY] #47 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"bb03566d-f767-471e-8857-63d1c314a2ba"}
+2026-06-08T14:59:26.786Z [INFO] [MODEL-PROXY] #47 TTFB 1351ms (status 200)
+2026-06-08T14:59:26.822Z [INFO] [MODEL-PROXY] #45 TTFB 2079ms (status 200)
+2026-06-08T14:59:32.145Z [INFO] [MODEL-PROXY] #47 done in 6.7s (27100in/448out)
+2026-06-08T14:59:34.160Z [INFO] [MODEL-PROXY] #45 done in 9.4s (149in/428out)
+2026-06-08T14:59:34.410Z [INFO] [MODEL-PROXY] #48 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:59:34.417Z [INFO] [MODEL-PROXY] #48 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:59:36.236Z [INFO] [MODEL-PROXY] #48 TTFB 1826ms (status 200)
+2026-06-08T14:59:40.081Z [INFO] [MODEL-PROXY] #48 done in 5.7s (82in/185out)
+2026-06-08T14:59:40.307Z [INFO] [MODEL-PROXY] #49 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:59:40.314Z [INFO] [MODEL-PROXY] #49 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:59:42.274Z [INFO] [MODEL-PROXY] #49 TTFB 1967ms (status 200)
+2026-06-08T14:59:49.224Z [INFO] [MODEL-PROXY] #49 done in 8.9s (198in/494out)
+2026-06-08T14:59:49.341Z [INFO] [MODEL-PROXY] #50 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:59:49.343Z [INFO] [MODEL-PROXY] #50 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:59:50.565Z [INFO] [MODEL-PROXY] #50 TTFB 1223ms (status 200)
+2026-06-08T14:59:52.146Z [INFO] [MODEL-PROXY] #50 done in 2.8s (json, 249b)
+2026-06-08T14:59:52.327Z [INFO] [MODEL-PROXY] #51 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:59:52.332Z [INFO] [MODEL-PROXY] #51 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:59:54.274Z [INFO] [MODEL-PROXY] #51 TTFB 1947ms (status 200)
+2026-06-08T14:59:58.543Z [INFO] [MODEL-PROXY] #51 done in 6.2s (139in/271out)
+2026-06-08T14:59:58.675Z [INFO] [MODEL-PROXY] #52 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T14:59:58.676Z [INFO] [MODEL-PROXY] #52 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T14:59:59.830Z [INFO] [MODEL-PROXY] #52 TTFB 1155ms (status 200)
+2026-06-08T15:00:02.655Z [INFO] [MODEL-PROXY] #52 done in 4.0s (json, 363b)
+2026-06-08T15:00:02.665Z [INFO] [MODEL-PROXY] #53 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:02.668Z [INFO] [MODEL-PROXY] #53 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:03.885Z [INFO] [MODEL-PROXY] #53 TTFB 1220ms (status 200)
+2026-06-08T15:00:08.146Z [INFO] [MODEL-PROXY] #53 done in 5.5s (json, 665b)
+2026-06-08T15:00:08.322Z [INFO] [MODEL-PROXY] #54 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:08.334Z [INFO] [MODEL-PROXY] #54 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:10.966Z [INFO] [MODEL-PROXY] #54 TTFB 2644ms (status 200)
+2026-06-08T15:00:14.747Z [INFO] [MODEL-PROXY] #54 done in 6.4s (106in/163out)
+2026-06-08T15:00:14.978Z [INFO] [MODEL-PROXY] #55 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:14.985Z [INFO] [MODEL-PROXY] #55 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:16.832Z [INFO] [MODEL-PROXY] #55 TTFB 1854ms (status 200)
+2026-06-08T15:00:21.231Z [INFO] [MODEL-PROXY] #55 done in 6.3s (89in/263out)
+2026-06-08T15:00:21.354Z [INFO] [MODEL-PROXY] #56 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:21.356Z [INFO] [MODEL-PROXY] #56 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:22.427Z [INFO] [MODEL-PROXY] #56 TTFB 1073ms (status 200)
+2026-06-08T15:00:23.560Z [INFO] [MODEL-PROXY] #56 done in 2.2s (json, 249b)
+2026-06-08T15:00:23.571Z [INFO] [MODEL-PROXY] #57 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:23.577Z [INFO] [MODEL-PROXY] #57 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:25.025Z [INFO] [MODEL-PROXY] #57 TTFB 1454ms (status 200)
+2026-06-08T15:00:26.224Z [INFO] [MODEL-PROXY] #57 done in 2.7s (json, 248b)
+2026-06-08T15:00:26.394Z [INFO] [MODEL-PROXY] #58 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:26.404Z [INFO] [MODEL-PROXY] #58 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:28.381Z [INFO] [MODEL-PROXY] #58 TTFB 1987ms (status 200)
+2026-06-08T15:00:34.333Z [INFO] [MODEL-PROXY] #58 done in 7.9s (182in/239out)
+2026-06-08T15:00:34.549Z [INFO] [MODEL-PROXY] #59 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:34.556Z [INFO] [MODEL-PROXY] #59 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:36.526Z [INFO] [MODEL-PROXY] #59 TTFB 1977ms (status 200)
+2026-06-08T15:00:44.031Z [INFO] [MODEL-PROXY] #59 done in 9.5s (72in/322out)
+2026-06-08T15:00:44.140Z [INFO] [MODEL-PROXY] #60 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:44.142Z [INFO] [MODEL-PROXY] #60 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:45.327Z [INFO] [MODEL-PROXY] #60 TTFB 1187ms (status 200)
+2026-06-08T15:00:46.625Z [INFO] [MODEL-PROXY] #60 done in 2.5s (json, 248b)
+2026-06-08T15:00:46.788Z [INFO] [MODEL-PROXY] #61 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:46.795Z [INFO] [MODEL-PROXY] #61 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:48.530Z [INFO] [MODEL-PROXY] #61 TTFB 1742ms (status 200)
+2026-06-08T15:00:51.955Z [INFO] [MODEL-PROXY] #61 done in 5.2s (64in/90out)
+2026-06-08T15:00:52.005Z [INFO] [MODEL-PROXY] #62 → api.deepseek.com/anthropic/v1/messages
+2026-06-08T15:00:52.012Z [INFO] [MODEL-PROXY] #62 user_id={"device_id":"47bdac5be035b5f3a6648389e4ec84b8e293e5d74e46bdb3b3bca02e59f555f0","account_uuid":"","session_id":"26af4308-6116-45a3-98ef-0a3d350a267c"}
+2026-06-08T15:00:53.819Z [INFO] [MODEL-PROXY] #62 TTFB 1814ms (status 200)
+2026-06-08T15:00:55.025Z [INFO] [MODEL-PROXY] #62 done in 3.0s (348in/3out)

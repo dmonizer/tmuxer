@@ -43,10 +43,12 @@ my-box|home desktop|mysecretkey
 | F1  | Help + reverse shell one-liners for current IP:port |
 | F2  | Host connector — SSH and GSocket hosts (fzf or numbered) |
 | F3  | Toggle raw mode (for pty.spawn connections) |
-| F4  | Open host notes (`~/.tmuxer/notes/<window-name>-notes.md`) in `$EDITOR` — splits vertically, pane closes on exit |
+| F4  | Open or hide the selected notes file in `$EDITOR` |
+| Shift-F4 | Choose the notes file that the next F4 opens |
 | F5  | Send command from config to active shell |
+| F8  | Toggle Ctrl-C confirmation for remote shells |
 | F9  | Toggle reverse shell listener on/off |
-| Ctrl-C | Send to remote (with confirmation) or kill local shell on window 0 |
+| Ctrl-C | Send to remote (confirmation is on by default; F8 toggles it) or pass through in any local window |
 
 F2 and F5 include a **[ + Add new ... ]** entry to add hosts/commands on the fly — persisted to config immediately.
 
@@ -69,7 +71,7 @@ The local shell is also logged on startup. Override the directory with `--logdir
 
 ## Session notes
 
-F4 splits the window vertically and opens `~/.tmuxer/notes/<window-name>-notes.md` in `$EDITOR`. Since each connection window is named after the host (e.g. `my-box`, `192.168.1.5`), notes are per-host and reopen the same file each time you connect. The notes directory is created automatically. The pane closes when the editor exits.
+F4 opens the last selected file in `$EDITOR` in a vertical pane. Press F4 again to hide that pane without stopping the editor; press it once more to restore and focus it. On the first use, F4 presents a file browser rooted at `~/.tmuxer/notes/`. Shift-F4 always presents that browser and saves the chosen file for the next plain F4, without interrupting an editor already open.
 
 ## encode / revshell
 
